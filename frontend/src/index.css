@@ -1,0 +1,232 @@
+/* Temporarily disable Tailwind to get app running */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+/* ChatGPT-style custom CSS variables */
+:root {
+  --header-height: 60px;
+  --composer-overlap-px: 28px;
+  --thread-content-margin: 1rem;
+  --thread-content-max-width: 40rem;
+  --spacing: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --thread-content-margin: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --thread-content-margin: 4rem;
+    --thread-content-max-width: 48rem;
+  }
+}
+
+/* Dark mode token colors */
+.dark {
+  --token-text-primary: #ececec;
+  --token-text-secondary: #9ca3af;
+  --token-bg-primary: #212121;
+  --token-bg-secondary: #2f2f2f;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* ChatGPT component styles */
+.composer-btn {
+  display: flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  color: var(--token-text-secondary, #6b7280);
+}
+
+.composer-btn:hover {
+  background-color: var(--token-bg-secondary, #f8f9fa);
+}
+
+.composer-secondary-button-color {
+  background-color: black;
+  color: white;
+}
+
+.composer-secondary-button-color:hover {
+  background-color: #1f2937;
+}
+
+.user-message-bubble-color {
+  background-color: #f3f4f6;
+}
+
+.text-token-text-primary {
+  color: var(--token-text-primary, #2d333a);
+}
+
+.text-token-text-secondary {
+  color: var(--token-text-secondary, #6b7280);
+}
+
+.bg-token-bg-primary {
+  background-color: var(--token-bg-primary, #ffffff);
+}
+
+.bg-token-bg-secondary {
+  background-color: var(--token-bg-secondary, #f8f9fa);
+}
+
+/* Grid layout for new structure: left half (LLM chat) + right half (transcript + writing) */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.section-chat {
+  grid-area: 1 / 1 / 2 / 2;
+}
+
+.section-right {
+  grid-area: 1 / 2 / 2 / 3;
+  display: grid;
+  grid-template-rows: 0.6fr 1fr;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.section-transcript {
+  grid-area: 1 / 1 / 2 / 2;
+  overflow: hidden;
+}
+
+.section-writing {
+  grid-area: 2 / 1 / 3 / 2;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ProseMirror styles for composer */
+.ProseMirror {
+  outline: none;
+  min-height: 1.5rem;
+}
+
+.ProseMirror p.placeholder:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--token-text-secondary);
+  pointer-events: none;
+  height: 0;
+  float: left;
+}
+
+/* Scroll fade mask */
+.vertical-scroll-fade-mask {
+  mask-image: linear-gradient(180deg, transparent 0%, black 16px, black calc(100% - 16px), transparent 100%);
+}
+
+/* Message thread styles */
+.markdown.prose {
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.markdown.prose p {
+  margin-bottom: 0.75rem;
+}
+
+.markdown.prose ol, .markdown.prose ul {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+}
+
+.markdown.prose li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown.prose strong {
+  font-weight: 600;
+}
+
+/* Button hover effects */
+.group-hover\/turn-messages\:opacity-100 {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.group:hover .group-hover\/turn-messages\:opacity-100 {
+  opacity: 1;
+}
+
+/* Action button styles */
+.shadow-short {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .section-chat {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .section-right {
+    grid-area: 2 / 1 / 4 / 2;
+    grid-template-rows: auto auto;
+  }
+
+  .section-transcript {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+
+  .section-writing {
+    grid-area: 2 / 1 / 3 / 2;
+  }
+}

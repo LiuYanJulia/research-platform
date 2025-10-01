@@ -1,0 +1,411 @@
+import express from 'express';
+import OpenAI from 'openai';
+
+const router = express.Router();
+
+// Lazy initialize OpenAI client to ensure .env is loaded
+function getOpenAI() {
+  return new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+}
+
+// POST /api/chat/send - Send message to LLM and get response (placeholder)
+router.post('/send', async (req, res) => {
+  try {
+    const { sessionId, message, conversationHistory = [] } = req.body;
+    const db = (req as any).db;
+
+    if (!sessionId || !message) {
+      return res.status(400).json({ error: 'Session ID and message are required' });
+    }
+
+    // Ensure session exists
+    if (db) {
+      await db.execute(
+        'INSERT IGNORE INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+        [sessionId, 'current_user', 'active']
+      );
+    }
+
+    // Save user message to database
+    if (db) {
+      await db.execute(
+        'INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)',
+        [sessionId, 'user', message]
+      );
+    }
+
+    // Get conversation history from database
+    let messages = [];
+    if (db) {
+      const [rows] = await db.execute(
+        'SELECT role, content FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+        [sessionId]
+      );
+      messages = (rows as any[]).map(row => ({
+        role: row.role,
+        content: row.content
+      }));
+    }
+
+    // Use provided conversation history as fallback
+    if (messages.length === 0 && conversationHistory.length > 0) {
+      messages = conversationHistory;
+    }
+
+    // Add current user message to conversation
+    messages.push({ role: 'user', content: message });
+
+    // Call OpenAI API with conversation context
+    const openai = getOpenAI();
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant. Provide clear, helpful responses to user questions.' },
+        ...messages
+      ],
+      max_tokens: 1000,
+      temperature: 0.7,
+    });
+
+    const assistantMessage = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+
+    // Save assistant message to database
+    if (db) {
+      await db.execute(
+        'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
+        [sessionId, 'assistant', assistantMessage, 'gpt-4o-mini']
+      );
+    }
+
+    res.json({
+      message: assistantMessage,
+      model: 'gpt-4o-mini',
+      timestamp: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    console.error('Chat error:', error);
+    res.status(500).json({
+      error: 'Failed to get LLM response',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// POST /api/chat - Main chat endpoint (alias for /send)
+router.post('/', async (req, res) => {
+  try {
+    const { sessionId, message, conversationHistory = [] } = req.body;
+    const db = (req as any).db;
+
+    if (!sessionId || !message) {
+      return res.status(400).json({ error: 'Session ID and message are required' });
+    }
+
+    // Ensure session exists
+    if (db) {
+      await db.execute(
+        'INSERT IGNORE INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+        [sessionId, 'current_user', 'active']
+      );
+    }
+
+    // Save user message to database
+    if (db) {
+      await db.execute(
+        'INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)',
+        [sessionId, 'user', message]
+      );
+    }
+
+    // Get conversation history from database
+    let messages = [];
+    if (db) {
+      const [rows] = await db.execute(
+        'SELECT role, content FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+        [sessionId]
+      );
+      messages = (rows as any[]).map(row => ({
+        role: row.role,
+        content: row.content
+      }));
+    }
+
+    // Use provided conversation history as fallback
+    if (messages.length === 0 && conversationHistory.length > 0) {
+      messages = conversationHistory;
+    }
+
+    // Add current user message to conversation
+    messages.push({ role: 'user', content: message });
+
+    // Call OpenAI API with conversation context
+    const openai = getOpenAI();
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant. Provide clear, helpful responses to user questions.' },
+        ...messages
+      ],
+      max_tokens: 1000,
+      temperature: 0.7,
+    });
+
+    const assistantMessage = completion.choices[0]?.message?.content || 'Sorry, I could not generate a response.';
+
+    // Save assistant message to database
+    if (db) {
+      await db.execute(
+        'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
+        [sessionId, 'assistant', assistantMessage, 'gpt-4o-mini']
+      );
+    }
+
+    res.json({
+      message: assistantMessage,
+      model: 'gpt-4o-mini',
+      timestamp: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    console.error('Chat error:', error);
+    res.status(500).json({
+      error: 'Failed to get LLM response',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// POST /api/chat/save-message - Save individual message to database
+router.post('/save-message', async (req, res) => {
+  try {
+    const { sessionId, role, content, model } = req.body;
+    const db = (req as any).db;
+
+    if (!sessionId || !role || !content) {
+      return res.status(400).json({ error: 'Session ID, role, and content are required' });
+    }
+
+    // Ensure session exists
+    if (db) {
+      await db.execute(
+        'INSERT IGNORE INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+        [sessionId, 'current_user', 'active']
+      );
+    }
+
+    if (db) {
+      await db.execute(
+        'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
+        [sessionId, role, content, model || null]
+      );
+    }
+
+    res.json({
+      success: true,
+      timestamp: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    console.error('Save message error:', error);
+    res.status(500).json({
+      error: 'Failed to save message',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// GET /api/chat/history - Get conversation history (without sessionId param)
+router.get('/history', async (req, res) => {
+  try {
+    const sessionId = req.query.sessionId || 'current';
+    const db = (req as any).db;
+
+    if (!db) {
+      return res.json({ messages: [], sessionId });
+    }
+
+    const [rows] = await db.execute(
+      'SELECT role, content, model_slug, timestamp FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+      [sessionId]
+    );
+
+    const messages = (rows as any[]).map(row => ({
+      role: row.role,
+      content: row.content,
+      model: row.model_slug,
+      timestamp: row.timestamp,
+    }));
+
+    res.json({
+      messages,
+      sessionId,
+      timestamp: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    console.error('Get history error:', error);
+    res.status(500).json({
+      error: 'Failed to retrieve conversation history',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// POST /api/chat/generate-from-transcript - Generate chat from transcript
+router.post('/generate-from-transcript', async (req, res) => {
+  try {
+    const { transcript, sessionId = 'current' } = req.body;
+
+    if (!transcript) {
+      return res.status(400).json({ error: 'Transcript is required' });
+    }
+
+    const openai = getOpenAI();
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a helpful assistant. Based on the user\'s voice transcript, generate thoughtful questions or prompts that could help them explore their ideas further.'
+        },
+        {
+          role: 'user',
+          content: `Based on this transcript, please suggest some questions or prompts to help explore these ideas further:\n\n"${transcript}"`
+        }
+      ],
+      max_tokens: 500,
+      temperature: 0.7,
+    });
+
+    const suggestions = completion.choices[0]?.message?.content || 'Could not generate suggestions.';
+
+    res.json({
+      suggestions,
+      sessionId,
+      timestamp: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    console.error('Generate from transcript error:', error);
+    res.status(500).json({
+      error: 'Failed to generate suggestions from transcript',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// POST /api/chat/generate-prompt - Generate prompt based on transcript (placeholder)
+router.post('/generate-prompt', async (req, res) => {
+  try {
+    const { sessionId, transcript } = req.body;
+
+    if (!sessionId || !transcript) {
+      return res.status(400).json({ error: 'Session ID and transcript are required' });
+    }
+
+    // Simulate prompt generation
+    const suggestions = `Based on your transcript, here are some suggested prompts to explore:
+
+1. How can you develop the main themes you mentioned further?
+2. What are the potential challenges or obstacles you might face?
+3. What additional research or information would help strengthen your ideas?
+4. How do these concepts connect to existing knowledge in this field?
+5. What would be the next concrete steps to implement these ideas?
+
+This is a simulated response. In the real implementation, this would use OpenAI to generate personalized prompts based on your specific transcript content.`;
+
+    res.json({
+      suggestions,
+      timestamp: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    console.error('Generate prompt error:', error);
+    res.status(500).json({
+      error: 'Failed to generate prompts',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// GET /api/chat/history/:sessionId - Get conversation history
+router.get('/history/:sessionId', async (req, res) => {
+  try {
+    const { sessionId } = req.params;
+    const db = (req as any).db;
+
+    const [rows] = await db.execute(
+      'SELECT role, content, model_slug, timestamp FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+      [sessionId]
+    );
+
+    res.json({
+      messages: rows,
+      count: (rows as any[]).length,
+    });
+
+  } catch (error) {
+    console.error('Get chat history error:', error);
+    res.status(500).json({
+      error: 'Failed to retrieve chat history',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// POST /api/chat/feedback - Save feedback on LLM response
+router.post('/feedback', async (req, res) => {
+  try {
+    const { sessionId, messageId, feedback, rating } = req.body;
+    const db = (req as any).db;
+
+    if (!sessionId || !feedback) {
+      return res.status(400).json({ error: 'Session ID and feedback are required' });
+    }
+
+    // Log feedback as interaction
+    await db.execute(
+      'INSERT INTO interaction_logs (session_id, event_type, action, metadata) VALUES (?, ?, ?, ?)',
+      [
+        sessionId,
+        'ui',
+        'feedback',
+        JSON.stringify({ messageId, feedback, rating, timestamp: new Date().toISOString() })
+      ]
+    );
+
+    res.json({
+      success: true,
+      timestamp: new Date().toISOString(),
+    });
+
+  } catch (error) {
+    console.error('Feedback error:', error);
+    res.status(500).json({
+      error: 'Failed to save feedback',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// GET /api/chat/model-info - Get current model configuration
+router.get('/model-info', async (req, res) => {
+  try {
+    res.json({
+      model: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
+      provider: 'openai',
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error('Model info error:', error);
+    res.status(500).json({
+      error: 'Failed to get model info',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+export default router;
