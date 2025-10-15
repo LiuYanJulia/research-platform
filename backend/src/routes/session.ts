@@ -6,19 +6,32 @@ const router = express.Router();
 // POST /api/session/create - Create a new session
 router.post('/create', async (req, res) => {
   try {
-    const { participantId, metadata = {} } = req.body;
+    const { sessionId: customSessionId, participantId } = req.body;
     const db = (req as any).db;
 
     if (!participantId) {
       return res.status(400).json({ error: 'Participant ID is required' });
     }
 
-    const sessionId = uuidv4();
+    // Use custom sessionId if provided, otherwise generate new one
+    const sessionId = customSessionId || uuidv4();
+
+    if (!db) {
+      console.log('Demo mode: Session created but not saved to database');
+      return res.json({
+        sessionId,
+        participantId,
+        status: 'active',
+        createdAt: new Date().toISOString(),
+      });
+    }
 
     await db.execute(
-      'INSERT INTO sessions (id, participant_id, metadata) VALUES (?, ?, ?)',
-      [sessionId, participantId, JSON.stringify(metadata)]
+      'INSERT INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+      [sessionId, participantId, 'active']
     );
+
+    console.log(`Session created: ${sessionId} for user: ${participantId}`);
 
     res.json({
       sessionId,

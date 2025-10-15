@@ -2,6 +2,20 @@ import express from 'express';
 
 const router = express.Router();
 
+// Valid event types for the database ENUM
+const VALID_EVENT_TYPES = ['mouse', 'keyboard', 'ui', 'api', 'session', 'selection'];
+
+// Helper function to normalize and validate event type
+function normalizeEventType(eventType: string | undefined): string {
+  if (!eventType) return 'ui';
+
+  // Convert to lowercase to handle camelCase/PascalCase
+  const normalized = eventType.toLowerCase();
+
+  // Return if valid, otherwise default to 'ui'
+  return VALID_EVENT_TYPES.includes(normalized) ? normalized : 'ui';
+}
+
 // POST /api/logging/batch - Log multiple interactions at once
 router.post('/batch', async (req, res) => {
   try {
@@ -12,29 +26,37 @@ router.post('/batch', async (req, res) => {
       return res.status(400).json({ error: 'Session ID and logs array are required' });
     }
 
-    // Prepare bulk insert
-    const values = logs.map((log: any) => [
-      sessionId,
-      log.eventType || 'ui',
-      log.action || 'unknown',
-      log.target?.element || null,
-      log.target?.section || null,
-      log.target?.coordinates ? JSON.stringify(log.target.coordinates) : null,
-      log.target?.text || null,
-      log.metadata ? JSON.stringify(log.metadata) : null,
-      log.timestamp || new Date().toISOString(),
-    ]);
+    // Prepare bulk insert with normalized event types
+    const values = logs.map((log: any) => {
+      return [
+        sessionId,
+        normalizeEventType(log.eventType),
+        log.action || 'unknown',
+        log.target?.element || null,
+        log.target?.section || null,
+        log.target?.coordinates ? JSON.stringify(log.target.coordinates) : null,
+        log.target?.text || null,
+        log.metadata ? JSON.stringify(log.metadata) : null,
+        log.timestamp || 0, // Store relative timestamp as BIGINT (milliseconds since session start)
+      ];
+    });
 
     if (values.length > 0) {
       const placeholders = values.map(() => '(?, ?, ?, ?, ?, ?, ?, ?, ?)').join(', ');
       const flatValues = values.flat();
 
-      await db.execute(
-        `INSERT INTO interaction_logs
-         (session_id, event_type, action, target_element, target_section, coordinates, text_content, metadata, timestamp)
-         VALUES ${placeholders}`,
-        flatValues
-      );
+      try {
+        await db.execute(
+          `INSERT INTO interaction_logs
+           (session_id, event_type, action, target_element, target_section, coordinates, text_content, metadata, timestamp)
+           VALUES ${placeholders}`,
+          flatValues
+        );
+      } catch (dbError: any) {
+        console.error('Database insert error:', dbError.message);
+        console.error('Sample log entry:', logs[0]);
+        throw dbError;
+      }
     }
 
     res.json({
@@ -68,7 +90,7 @@ router.post('/single', async (req, res) => {
        VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         sessionId,
-        eventType,
+        normalizeEventType(eventType),
         action,
         target?.element || null,
         target?.section || null,

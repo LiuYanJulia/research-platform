@@ -16,9 +16,14 @@ interface Message {
 
 interface ChatInterfaceProps {
   sessionId: string;
+  sessionStartTime: number;
+  logger: {
+    logEvent: (event: any) => void;
+    sendBatch: () => void;
+  };
 }
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
+const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTime, logger }) => {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [currentModel, setCurrentModel] = useState('gpt-3.5-turbo'); // Default fallback
@@ -27,8 +32,24 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  const copyToClipboard = (text: string) => {
+  const copyToClipboard = (text: string, messageId: string, messageRole: 'user' | 'assistant') => {
     navigator.clipboard.writeText(text);
+    // Log copy action
+    logger.logEvent({
+      eventType: 'ui',
+      action: 'message_action',
+      target: {
+        element: `copy-turn-action-button-${messageRole}-${messageId}`,
+        section: 'response',
+      },
+      metadata: {
+        messageId,
+        messageRole,
+        actionType: 'copy',
+        copiedText: text, // Full text without limit
+        textLength: text.length,
+      },
+    });
     // TODO: Show toast notification
   };
 
@@ -39,6 +60,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
       console.log('messageId:', messageId);
       console.log('isGood:', isGood);
       console.log('Current messages:', messages.map(m => ({ id: m.id, role: m.role, feedbackType: m.feedbackType })));
+
+      // Log feedback action
+      logger.logEvent({
+        eventType: 'ui',
+        action: 'message_action',
+        target: {
+          element: isGood ? 'good-response-turn-action-button' : 'bad-response-turn-action-button',
+          section: 'response',
+        },
+        metadata: {
+          messageId,
+          actionType: 'feedback',
+          feedbackValue: isGood ? 'good' : 'bad',
+        },
+      });
 
       // Find the message being rated
       const message = messages.find(msg => msg.id === messageId);
@@ -158,6 +194,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
   const handleSend = async (contextMessageId?: string, customPrompt?: string, hideUserPrompt?: boolean) => {
     const messageContent = customPrompt || prompt;
     if (messageContent.trim()) {
+      // Log prompt submission
+      logger.logEvent({
+        eventType: 'ui',
+        action: 'composer_interaction',
+        target: {
+          element: 'send-button',
+          section: 'prompting',
+        },
+        metadata: {
+          promptLength: messageContent.length,
+          isCustomPrompt: !!customPrompt,
+          hasContext: !!contextMessageId,
+          contextMessageId,
+        },
+      });
+
       // Find referenced message if contextMessageId is provided
       let referencedMessage = null;
       let mergedPrompt = messageContent;
@@ -273,57 +325,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
     }
   };
 
-  const handleGenerateFromTranscript = async () => {
-    try {
-      // First, get the transcript from the transcript section
-      const transcriptResponse = await fetch('/api/transcripts/current');
-
-      if (!transcriptResponse.ok) {
-        throw new Error('Failed to fetch transcript');
-      }
-
-      const transcriptData = await transcriptResponse.json();
-
-      if (!transcriptData.content || transcriptData.content.trim() === '') {
-        setPrompt("Please record some audio first to generate a prompt from your transcript.");
-        return;
-      }
-
-      // Call the API to generate prompt from transcript
-      const response = await fetch('/api/chat/generate-from-transcript', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          transcript: transcriptData.content
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setPrompt(data.prompt || "Based on your transcript, what insights would you like to explore further?");
-
-    } catch (error) {
-      console.error('Error generating prompt from transcript:', error);
-
-      // Fallback with mock generation
-      const mockPrompts = [
-        "Based on your transcript, what are the key themes you'd like to explore further?",
-        "What insights from your transcript would you like to develop into a more detailed analysis?",
-        "How can you connect the ideas mentioned in your transcript to broader concepts?",
-        "What questions arise from the content you've transcribed?",
-        "What aspects of your transcript need further clarification or explanation?"
-      ];
-
-      const randomPrompt = mockPrompts[Math.floor(Math.random() * mockPrompts.length)];
-      setPrompt(randomPrompt);
-    }
-  };
-
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -332,6 +333,22 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
   };
 
   const handleContextualPrompt = async (messageId: string, promptText: string) => {
+    // Log contextual prompt action
+    logger.logEvent({
+      eventType: 'ui',
+      action: 'message_action',
+      target: {
+        element: 'contextual-prompt-input',
+        section: 'response',
+      },
+      metadata: {
+        messageId,
+        actionType: 'contextual_prompt',
+        promptText: promptText.substring(0, 100), // Log first 100 chars
+        promptLength: promptText.length,
+      },
+    });
+
     // Send the contextual prompt
     await handleSend(messageId, promptText, false);
     // Close the expanded section
@@ -369,6 +386,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
             onChange={(e) => setContextInput(e.target.value)}
             onKeyDown={handleContextInputKeyDown}
             placeholder="Ask to change response"
+            data-message-id={messageId}
             style={{
               width: '100%',
               minWidth: '210px',
@@ -667,7 +685,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
               }}>
                 {/* Copy Button */}
                 <button
-                  onClick={() => copyToClipboard(message.content)}
+                  onClick={() => copyToClipboard(message.content, message.id, message.role)}
                   className="text-token-text-secondary"
                   style={{
                     borderRadius: '0.5rem',
@@ -781,7 +799,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
 
                 {/* Regenerate Button - Now toggles expanded section */}
                 <button
-                  onClick={() => setExpandedMessageId(expandedMessageId === message.id ? null : message.id)}
+                  onClick={() => {
+                    const isExpanding = expandedMessageId !== message.id;
+                    logger.logEvent({
+                      eventType: 'ui',
+                      action: 'message_action',
+                      target: {
+                        element: 'regenerate-button',
+                        section: 'response',
+                      },
+                      metadata: {
+                        messageId: message.id,
+                        actionType: 'toggle_regenerate_menu',
+                        isExpanding,
+                      },
+                    });
+                    setExpandedMessageId(isExpanding ? message.id : null);
+                  }}
                   className="text-token-text-secondary"
                   style={{
                     borderRadius: '0.5rem',
@@ -844,7 +878,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
               </svg>
               <p style={{ fontSize: '0.875rem' }}>Start a conversation with the AI assistant</p>
               <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.25rem' }}>
-                Generate prompts from your transcript or ask questions directly
+                Ask any questions
               </p>
             </div>
           ) : (
@@ -855,28 +889,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId }) => {
           {/* Scroll anchor */}
           <div ref={messagesEndRef} />
         </div>
-      </div>
-
-      {/* Generate from Transcript Button */}
-      <div style={{ marginBottom: '1rem' }}>
-        <button
-          onClick={handleGenerateFromTranscript}
-          style={{
-            width: '100%',
-            padding: '0.5rem 1rem',
-            backgroundColor: '#3b82f6',
-            color: 'white',
-            borderRadius: '0.5rem',
-            border: 'none',
-            cursor: 'pointer',
-            transition: 'background-color 0.2s',
-            fontSize: '0.875rem'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563eb'}
-          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3b82f6'}
-        >
-          Want to use AI to generate potential prompt from transcript?
-        </button>
       </div>
 
       {/* Composer Interface */}

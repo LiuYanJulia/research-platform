@@ -1,0 +1,1 @@
+DESCRIBE interaction_logs;

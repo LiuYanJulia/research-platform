@@ -115,7 +115,7 @@ code {
 .section-right {
   grid-area: 1 / 2 / 2 / 3;
   display: grid;
-  grid-template-rows: 0.6fr 1fr;
+  grid-template-rows: auto 1fr;
   gap: 1rem;
   overflow: hidden;
 }

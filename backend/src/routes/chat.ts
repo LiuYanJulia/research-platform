@@ -28,15 +28,7 @@ router.post('/send', async (req, res) => {
       );
     }
 
-    // Save user message to database
-    if (db) {
-      await db.execute(
-        'INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)',
-        [sessionId, 'user', message]
-      );
-    }
-
-    // Get conversation history from database
+    // Get conversation history from database (user message already saved by frontend)
     let messages = [];
     if (db) {
       const [rows] = await db.execute(
@@ -53,9 +45,6 @@ router.post('/send', async (req, res) => {
     if (messages.length === 0 && conversationHistory.length > 0) {
       messages = conversationHistory;
     }
-
-    // Add current user message to conversation
-    messages.push({ role: 'user', content: message });
 
     // Call OpenAI API with conversation context
     const openai = getOpenAI();
@@ -112,15 +101,7 @@ router.post('/', async (req, res) => {
       );
     }
 
-    // Save user message to database
-    if (db) {
-      await db.execute(
-        'INSERT INTO messages (session_id, role, content) VALUES (?, ?, ?)',
-        [sessionId, 'user', message]
-      );
-    }
-
-    // Get conversation history from database
+    // Get conversation history from database (user message already saved by frontend)
     let messages = [];
     if (db) {
       const [rows] = await db.execute(
@@ -137,9 +118,6 @@ router.post('/', async (req, res) => {
     if (messages.length === 0 && conversationHistory.length > 0) {
       messages = conversationHistory;
     }
-
-    // Add current user message to conversation
-    messages.push({ role: 'user', content: message });
 
     // Call OpenAI API with conversation context
     const openai = getOpenAI();
@@ -228,14 +206,15 @@ router.get('/history', async (req, res) => {
     }
 
     const [rows] = await db.execute(
-      'SELECT role, content, model_slug, timestamp FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+      'SELECT id, role, content, model_slug, timestamp FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
       [sessionId]
     );
 
     const messages = (rows as any[]).map(row => ({
+      messageId: row.id,
       role: row.role,
       content: row.content,
-      model: row.model_slug,
+      modelSlug: row.model_slug,
       timestamp: row.timestamp,
     }));
 
@@ -338,7 +317,7 @@ router.get('/history/:sessionId', async (req, res) => {
     const db = (req as any).db;
 
     const [rows] = await db.execute(
-      'SELECT role, content, model_slug, timestamp FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+      'SELECT id as message_id, role, content, model_slug, timestamp FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
       [sessionId]
     );
 

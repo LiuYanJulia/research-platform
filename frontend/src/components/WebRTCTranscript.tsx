@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, forwardRef, useImperativeHandle } from 'react';
 
 interface RealtimeSession {
   id: string;
@@ -9,10 +9,22 @@ interface RealtimeSession {
   expires_at: number;
 }
 
-const WebRTCTranscript: React.FC = () => {
+export interface WebRTCTranscriptRef {
+  startRecording: () => void;
+  stopRecording: () => void;
+  getAudioData: () => {
+    audioBlob: Blob | null;
+    transcriptWithTimestamps: Array<{text: string, timestamp: number}>;
+    recordingStartTime: number;
+  };
+}
+
+const WebRTCTranscript = forwardRef<WebRTCTranscriptRef>((props, ref) => {
   const [isRecording, setIsRecording] = useState(false);
-  const [transcript, setTranscript] = useState('');
-  const [isConnecting, setIsConnecting] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [transcript, setTranscript] = useState(''); // Used in backend API, not displayed in UI
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isConnecting, setIsConnecting] = useState(false); // Used for connection state management
   const [connectionStatus, setConnectionStatus] = useState<'disconnected' | 'connecting' | 'connected'>('disconnected');
   const [error, setError] = useState<string>('');
 
@@ -20,6 +32,10 @@ const WebRTCTranscript: React.FC = () => {
   const dataChannelRef = useRef<RTCDataChannel | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
   const sessionRef = useRef<RealtimeSession | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+  const recordingStartTimeRef = useRef<number>(0);
+  const transcriptWithTimestampsRef = useRef<Array<{text: string, timestamp: number}>>([]);
 
   // Create session and establish WebRTC connection
   const createRealtimeSession = async () => {
@@ -83,7 +99,16 @@ const WebRTCTranscript: React.FC = () => {
           // Handle different transcription event types
           if (message.type === 'conversation.item.input_audio_transcription.completed') {
             console.log('Transcription completed:', message.transcript);
-            setTranscript(prev => prev + ' ' + message.transcript);
+            const transcriptText = message.transcript;
+            setTranscript(prev => prev + ' ' + transcriptText);
+
+            // Save with timestamp (milliseconds since recording started)
+            const timestamp = Date.now() - recordingStartTimeRef.current;
+            transcriptWithTimestampsRef.current.push({
+              text: transcriptText,
+              timestamp: timestamp
+            });
+            console.log(`Transcript saved with timestamp: ${timestamp}ms`);
           } else if (message.type === 'input_audio_buffer.speech_started') {
             console.log('Speech started');
           } else if (message.type === 'input_audio_buffer.speech_stopped') {
@@ -125,6 +150,26 @@ const WebRTCTranscript: React.FC = () => {
       });
 
       mediaStreamRef.current = stream;
+
+      // Start recording audio for later save
+      try {
+        const mediaRecorder = new MediaRecorder(stream, {
+          mimeType: 'audio/webm'
+        });
+
+        mediaRecorder.ondataavailable = (event) => {
+          if (event.data.size > 0) {
+            audioChunksRef.current.push(event.data);
+          }
+        };
+
+        mediaRecorder.start(1000); // Collect data every second
+        mediaRecorderRef.current = mediaRecorder;
+        recordingStartTimeRef.current = Date.now();
+        console.log('Started audio recording for file save');
+      } catch (recorderError) {
+        console.error('Failed to start MediaRecorder:', recorderError);
+      }
 
       // Step 5: Add audio track to peer connection
       stream.getAudioTracks().forEach((track) => {
@@ -172,13 +217,13 @@ const WebRTCTranscript: React.FC = () => {
     }
   };
 
-  const stopRecording = useCallback(() => {
-    console.log('Stopping recording...');
-    setIsRecording(false);
-    cleanup();
-  }, []);
-
   const cleanup = useCallback(() => {
+    // Stop media recorder
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+      mediaRecorderRef.current = null;
+    }
+
     // Close data channel
     if (dataChannelRef.current) {
       dataChannelRef.current.close();
@@ -201,10 +246,11 @@ const WebRTCTranscript: React.FC = () => {
     sessionRef.current = null;
   }, []);
 
-  const clearTranscript = () => {
-    setTranscript('');
-    setError('');
-  };
+  const stopRecording = useCallback(() => {
+    console.log('Stopping recording...');
+    setIsRecording(false);
+    cleanup();
+  }, [cleanup]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -229,205 +275,81 @@ const WebRTCTranscript: React.FC = () => {
     }
   };
 
+  // Expose methods to parent component
+  useImperativeHandle(ref, () => ({
+    startRecording: createRealtimeSession,
+    stopRecording: stopRecording,
+    getAudioData: () => {
+      // Create audio blob from chunks
+      const audioBlob = audioChunksRef.current.length > 0
+        ? new Blob(audioChunksRef.current, { type: 'audio/webm' })
+        : null;
+
+      return {
+        audioBlob,
+        transcriptWithTimestamps: transcriptWithTimestampsRef.current,
+        recordingStartTime: recordingStartTimeRef.current
+      };
+    }
+  }));
+
   return (
-    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
-        <h2 style={{ fontSize: '1.125rem', fontWeight: '600' }} className="text-token-text-primary">
-          Voice Transcript - WebRTC Live
-        </h2>
-        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <div style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: getStatusColor()
-          }}></div>
-          <span style={{ fontSize: '0.75rem', color: getStatusColor() }}>
-            {getStatusText()}
-          </span>
-          <button
-            onClick={clearTranscript}
-            style={{
-              padding: '0.25rem 0.75rem',
-              fontSize: '0.875rem',
-              backgroundColor: '#f3f4f6',
-              color: '#6b7280',
-              border: 'none',
-              borderRadius: '0.25rem',
-              cursor: 'pointer',
-              transition: 'background-color 0.2s',
-              marginLeft: '1rem'
-            }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#e5e7eb'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#f3f4f6'}
-          >
-            Clear
-          </button>
-        </div>
-      </div>
-
-      {/* Recording Controls */}
-      <div style={{ marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-        <button
-          onClick={isRecording ? stopRecording : createRealtimeSession}
-          disabled={isConnecting}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            padding: '0.5rem 1rem',
-            borderRadius: '0.5rem',
-            border: 'none',
-            cursor: isConnecting ? 'not-allowed' : 'pointer',
-            backgroundColor: isRecording ? '#ef4444' : '#22c55e',
-            color: 'white',
-            opacity: isConnecting ? '0.5' : '1',
-            transition: 'background-color 0.2s'
-          }}
-          onMouseEnter={(e) => {
-            if (!isConnecting) {
-              e.currentTarget.style.backgroundColor = isRecording ? '#dc2626' : '#16a34a';
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (!isConnecting) {
-              e.currentTarget.style.backgroundColor = isRecording ? '#ef4444' : '#22c55e';
-            }
-          }}
-        >
-          {isRecording ? (
-            <>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <rect x="4" y="4" width="8" height="8" rx="1"/>
-              </svg>
-              Stop Live Recording
-            </>
-          ) : (
-            <>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                <circle cx="8" cy="8" r="6"/>
-              </svg>
-              {isConnecting ? 'Connecting...' : 'Start Live Recording'}
-            </>
-          )}
-        </button>
-
-        {isConnecting && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }} className="text-token-text-secondary">
-            <div style={{
-              width: '1rem',
-              height: '1rem',
-              border: '2px solid #d1d5db',
-              borderTop: '2px solid #4b5563',
-              borderRadius: '50%',
-              animation: 'spin 1s linear infinite'
-            }}></div>
-            Setting up WebRTC connection...
-          </div>
-        )}
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', padding: '0.75rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', gap: '0.5rem' }}>
+        <div style={{
+          width: '8px',
+          height: '8px',
+          borderRadius: '50%',
+          backgroundColor: getStatusColor()
+        }}></div>
+        <span style={{ fontSize: '0.75rem', color: getStatusColor() }}>
+          {getStatusText()}
+        </span>
       </div>
 
       {/* Error Display */}
       {error && (
         <div style={{
-          marginBottom: '1rem',
-          padding: '0.75rem',
+          marginTop: '0.5rem',
+          padding: '0.5rem',
           backgroundColor: '#fef2f2',
           border: '1px solid #fecaca',
           borderRadius: '0.5rem',
           color: '#b91c1c',
-          fontSize: '0.875rem'
+          fontSize: '0.75rem'
         }}>
           {error}
         </div>
       )}
 
-      {/* Recording Status - Fixed height to prevent layout shift */}
-      <div style={{
-        height: isRecording ? '0' : '0',
-        //marginBottom: isRecording ? '1rem' : '0',
-        opacity: isRecording ? 1 : 0,
-        transition: 'all 0.2s ease-in-out',
-        overflow: 'hidden'
-      }}>
-        {/*
+      {/* Recording Info - Show when recording is active */}
+      {isRecording && (
         <div style={{
+          marginTop: '0.5rem',
           display: 'flex',
           alignItems: 'center',
           gap: '0.5rem',
           padding: '0.5rem',
           backgroundColor: '#f0f9ff',
           border: '1px solid #bae6fd',
-          borderRadius: '0.5rem',
-          height: '100%'
+          borderRadius: '0.5rem'
         }}>
           <div style={{
-            height: '0.75rem',
-            width: '0.75rem',
+            height: '0.5rem',
+            width: '0.5rem',
             backgroundColor: '#3b82f6',
             borderRadius: '50%',
             animation: 'pulse 2s infinite'
           }}></div>
-          <span style={{ color: '#1e40af', fontSize: '0.875rem', fontWeight: '500' }}>
-            WebRTC live transcription active - speak naturally
+          <span style={{ color: '#1e40af', fontSize: '0.75rem', fontWeight: '500' }}>
+            Audio recording active - speak naturally
           </span>
-        </div>
-        */}
-      </div>
-
-      {/* Transcript Display */}
-      <div style={{
-        flex: '1',
-        backgroundColor: '#f9fafb',
-        borderRadius: '0.5rem',
-        padding: '1rem',
-        overflowY: 'auto',
-        border: '1px solid #d1d5db',
-        minHeight: '150px',
-        maxHeight: '100%'
-      }}>
-        {transcript ? (
-          <div style={{
-            whiteSpace: 'pre-wrap',
-            fontSize: '0.875rem',
-            lineHeight: '1.625'
-          }} className="text-token-text-primary">
-            {transcript}
-          </div>
-        ) : (
-          <div style={{ textAlign: 'center', padding: '2rem 0' }} className="text-token-text-secondary">
-            <svg style={{
-              margin: '0 auto 1rem',
-              height: '3rem',
-              width: '3rem',
-              color: '#9ca3af'
-            }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-            </svg>
-            <p style={{ fontSize: '0.875rem' }}>Click "Start Live Recording" to begin WebRTC live transcription</p>
-            <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.25rem' }}>
-              Direct WebRTC connection to OpenAI GPT-4o Realtime API
-            </p>
-          </div>
-        )}
-      </div>
-
-      {/* Transcript Info */}
-      {transcript && (
-        <div style={{ marginTop: '0.75rem', fontSize: '0.75rem' }} className="text-token-text-secondary">
-          Words: {transcript.trim().split(/\s+/).filter(w => w.length > 0).length} |
-          Characters: {transcript.length} |
-          WebRTC Live Transcription via GPT-4o Realtime
         </div>
       )}
 
       {/* CSS for animations */}
       <style>
         {`
-          @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-          }
           @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
@@ -436,6 +358,8 @@ const WebRTCTranscript: React.FC = () => {
       </style>
     </div>
   );
-};
+});
+
+WebRTCTranscript.displayName = 'WebRTCTranscript';
 
 export default WebRTCTranscript;

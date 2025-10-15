@@ -53,9 +53,12 @@ CREATE TABLE IF NOT EXISTS submissions (
     session_id VARCHAR(36),
     final_writing TEXT,
     transcript_content TEXT,
-    chat_history JSON,
+    chat_history TEXT,
+    audio_file_url VARCHAR(255),
     word_count INT DEFAULT 0,
     char_count INT DEFAULT 0,
+    session_start_timestamp BIGINT,
+    recording_start_timestamp BIGINT,
     submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
 );
