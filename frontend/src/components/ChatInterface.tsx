@@ -262,8 +262,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
       }, 100);
 
       try {
-        // Call the chat API
-        const response = await fetch('/api/chat', {
+        // Call the streaming chat API
+        const response = await fetch('/api/chat/stream', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -271,7 +271,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
           body: JSON.stringify({
             sessionId: sessionId,
             message: userMessage.content,
-            contextMessageId: contextMessageId, // Send context message ID to backend
+            contextMessageId: contextMessageId,
             conversationHistory: messages.map(msg => ({
               role: msg.role,
               content: msg.content
@@ -283,24 +283,88 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const data = await response.json();
+        // Handle streaming response
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
 
-        const assistantMessage: Message = {
-          id: loadingMessageId,
-          role: 'assistant',
-          content: data.message || 'Sorry, I encountered an error processing your request.',
-          timestamp: new Date(),
-          modelSlug: currentModel,
-          isLoading: false
-        };
+        console.log('[Frontend] Starting to receive stream...');
+        if (reader) {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
+              console.log('[Frontend] Stream reading complete');
+              break;
+            }
 
-        // Replace loading message with actual response
-        setMessages(prev => prev.map(msg =>
-          msg.id === loadingMessageId ? assistantMessage : msg
-        ));
+            // Decode the chunk
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
 
-        // Save assistant message to database
-        await saveChatMessage(assistantMessage);
+            for (const line of lines) {
+              if (line.startsWith('data: ')) {
+                const jsonStr = line.slice(6);
+                try {
+                  const data = JSON.parse(jsonStr);
+
+                  if (data.error) {
+                    throw new Error(data.error);
+                  }
+
+                  if (data.done) {
+                    console.log('[Frontend] Received done signal');
+                    // Streaming complete, mark message as not loading
+                    setMessages(prev => prev.map(msg =>
+                      msg.id === loadingMessageId
+                        ? { ...msg, isLoading: false }
+                        : msg
+                    ));
+                  } else if (data.content) {
+                    // Append content chunk using functional update
+                    console.log('[Frontend] Received chunk:', data.content);
+
+                    // IMMEDIATE update - use functional update to avoid closure issues
+                    setMessages(prev => {
+                      const updated = prev.map(msg =>
+                        msg.id === loadingMessageId
+                          ? { ...msg, content: (msg.content || '') + data.content, isLoading: true }
+                          : msg
+                      );
+                      console.log('[Frontend] Updated messages, current content length:', updated.find(m => m.id === loadingMessageId)?.content.length);
+                      return updated;
+                    });
+
+                    // Auto-scroll to bottom
+                    setTimeout(() => {
+                      if (messagesEndRef.current) {
+                        messagesEndRef.current.scrollIntoView({ behavior: 'auto', block: 'nearest' });
+                      }
+                    }, 0);
+                  }
+                } catch (parseError) {
+                  console.error('Error parsing SSE data:', parseError);
+                }
+              }
+            }
+          }
+        }
+
+        // After streaming completes, get the accumulated content from state
+        setMessages(prev => {
+          const finalMsg = prev.find(msg => msg.id === loadingMessageId);
+          if (finalMsg && finalMsg.content) {
+            // Save the complete message to database
+            saveChatMessage({
+              id: loadingMessageId,
+              role: 'assistant',
+              content: finalMsg.content,
+              timestamp: new Date(),
+              modelSlug: currentModel,
+              isLoading: false
+            });
+          }
+          return prev;
+        });
+
       } catch (error) {
         console.error('Error calling chat API:', error);
 
@@ -637,8 +701,25 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
               ) : (
                 /* Assistant Message */
                 <div style={{ display: 'flex', width: '100%', flexDirection: 'column', gap: '0.25rem' }}>
-                  {message.isLoading ? (
-                    /* Loading indicator */
+                  {/* Show content if available, otherwise show loading indicator */}
+                  {message.content ? (
+                    <div className="markdown prose" style={{ width: '100%', wordBreak: 'break-word' }}>
+                      {/* Always show markdown, whether streaming or not */}
+                      <ReactMarkdown>{message.content}</ReactMarkdown>
+                      {/* Show cursor indicator while streaming */}
+                      {message.isLoading && (
+                        <span style={{
+                          display: 'inline-block',
+                          width: '0.5rem',
+                          height: '1rem',
+                          backgroundColor: '#9ca3af',
+                          marginLeft: '0.25rem',
+                          animation: 'blink 1s infinite'
+                        }}></span>
+                      )}
+                    </div>
+                  ) : (
+                    /* Loading indicator when no content yet */
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 0' }}>
                       <div style={{
                         width: '0.5rem',
@@ -661,10 +742,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                         backgroundColor: '#9ca3af',
                         animation: 'pulse 1.5s ease-in-out 0.4s infinite'
                       }}></div>
-                    </div>
-                  ) : (
-                    <div className="markdown prose" style={{ width: '100%', wordBreak: 'break-word' }}>
-                      <ReactMarkdown>{message.content}</ReactMarkdown>
                     </div>
                   )}
                 </div>

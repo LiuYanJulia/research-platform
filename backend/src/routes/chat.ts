@@ -83,6 +83,111 @@ router.post('/send', async (req, res) => {
   }
 });
 
+// POST /api/chat/stream - Streaming chat endpoint
+router.post('/stream', async (req, res) => {
+  try {
+    const { sessionId, message, conversationHistory = [] } = req.body;
+    const db = (req as any).db;
+
+    if (!sessionId || !message) {
+      return res.status(400).json({ error: 'Session ID and message are required' });
+    }
+
+    // Ensure session exists
+    if (db) {
+      await db.execute(
+        'INSERT IGNORE INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+        [sessionId, 'current_user', 'active']
+      );
+    }
+
+    // Get conversation history from database (user message already saved by frontend)
+    let messages = [];
+    if (db) {
+      const [rows] = await db.execute(
+        'SELECT role, content FROM messages WHERE session_id = ? ORDER BY timestamp ASC',
+        [sessionId]
+      );
+      messages = (rows as any[]).map(row => ({
+        role: row.role,
+        content: row.content
+      }));
+    }
+
+    // Use provided conversation history as fallback
+    if (messages.length === 0 && conversationHistory.length > 0) {
+      messages = conversationHistory;
+    }
+
+    // Set headers for SSE (Server-Sent Events)
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache, no-transform');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('X-Accel-Buffering', 'no'); // Disable nginx buffering
+    res.setHeader('Transfer-Encoding', 'chunked'); // Enable chunked transfer encoding
+    res.flushHeaders(); // Send headers immediately
+
+    // Disable any compression middleware
+    (res as any).socket?.setNoDelay(true);
+    (res as any).socket?.setTimeout(0);
+
+    // Call OpenAI API with streaming enabled
+    const openai = getOpenAI();
+    const stream = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant. Provide clear, helpful responses to user questions.' },
+        ...messages
+      ],
+      max_tokens: 1000,
+      temperature: 0.7,
+      stream: true,
+    });
+
+    let fullMessage = '';
+
+    // Stream the response chunks
+    for await (const chunk of stream) {
+      const content = chunk.choices[0]?.delta?.content || '';
+      if (content) {
+        fullMessage += content;
+        // Send chunk as SSE
+        const sseMessage = `data: ${JSON.stringify({ content, done: false })}\n\n`;
+        res.write(sseMessage);
+
+        // FORCE immediate flush to client using multiple methods
+        // Method 1: Try standard flush if available
+        if (typeof (res as any).flush === 'function') {
+          (res as any).flush();
+        }
+        // Method 2: Directly flush the underlying socket
+        if ((res as any).socket && typeof (res as any).socket.write === 'function') {
+          // Socket is already written to by res.write, just ensure no delay
+          (res as any).socket.uncork?.();
+        }
+      }
+    }
+
+    // Send completion signal
+    res.write(`data: ${JSON.stringify({ content: '', done: true })}\n\n`);
+
+    // Save complete assistant message to database
+    if (db) {
+      await db.execute(
+        'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
+        [sessionId, 'assistant', fullMessage, 'gpt-4o-mini']
+      );
+    }
+
+    res.end();
+
+  } catch (error) {
+    console.error('Chat streaming error:', error);
+    res.write(`data: ${JSON.stringify({ error: 'Failed to get LLM response', done: true })}\n\n`);
+    res.end();
+  }
+});
+
 // POST /api/chat - Main chat endpoint (alias for /send)
 router.post('/', async (req, res) => {
   try {

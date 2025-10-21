@@ -9,9 +9,10 @@ interface WritingSectionProps {
     logEvent: (event: any) => void;
     sendBatch: () => void;
   };
+  onSubmissionComplete?: () => void;
 }
 
-const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRef, sessionStartTime, logger }) => {
+const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRef, sessionStartTime, logger, onSubmissionComplete }) => {
   const [content, setContent] = useState('');
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
@@ -153,12 +154,13 @@ const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRe
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      // Show success message
-      alert('Your submission has been saved successfully!');
+      // Close confirmation modal
       setShowSubmitConfirm(false);
 
-      // Optionally clear the content or disable further editing
-      // setContent('');
+      // Trigger submission complete callback
+      if (onSubmissionComplete) {
+        onSubmissionComplete();
+      }
     } catch (error) {
       console.error('Error submitting:', error);
       alert('Error submitting your work. Please try again.');
@@ -227,7 +229,7 @@ const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRe
             placeholder="Combine your insights from the transcript and LLM conversation here. Write your final thoughts, conclusions, or answers..."
             style={{
               width: '100%',
-              minHeight: '400px',
+              minHeight: '600px',
               padding: '1rem',
               border: '1px solid #e5e7eb',
               borderRadius: '0.5rem',

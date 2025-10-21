@@ -4,10 +4,12 @@ import InstructionPage from './components/InstructionPage';
 import ChatInterface from './components/ChatInterface';
 import WebRTCTranscript, { WebRTCTranscriptRef } from './components/WebRTCTranscript';
 import WritingSection from './components/WritingSection';
+import SubmissionConfirmation from './components/SubmissionConfirmation';
 import { useInteractionLogger } from './hooks/useInteractionLogger';
 
 function App() {
   const [sessionStarted, setSessionStarted] = useState(false);
+  const [submissionComplete, setSubmissionComplete] = useState(false);
   const [sessionId, setSessionId] = useState<string>('');
   const [sessionStartTime, setSessionStartTime] = useState<number>(0);
   const transcriptRef = useRef<WebRTCTranscriptRef>(null);
@@ -64,8 +66,25 @@ function App() {
     }
   }, [sessionStarted]);
 
+  const handleSubmissionComplete = () => {
+    // Stop recording when submission is complete
+    if (transcriptRef.current) {
+      transcriptRef.current.stopRecording();
+    }
+
+    // Send any remaining logs
+    logger.sendBatch();
+
+    // Show confirmation page
+    setSubmissionComplete(true);
+  };
+
   if (!sessionStarted) {
     return <InstructionPage onAgree={handleAgree} />;
+  }
+
+  if (submissionComplete) {
+    return <SubmissionConfirmation />;
   }
 
   return (
@@ -93,6 +112,7 @@ function App() {
             transcriptRef={transcriptRef}
             sessionStartTime={sessionStartTime}
             logger={logger}
+            onSubmissionComplete={handleSubmissionComplete}
           />
         </div>
       </div>
