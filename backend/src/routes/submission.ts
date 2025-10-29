@@ -17,10 +17,10 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    const sessionId = req.body.sessionId || 'unknown';
+    // Generate temporary filename first, will rename after getting sessionId from body
     const timestamp = Date.now();
     const ext = path.extname(file.originalname);
-    cb(null, `${sessionId}_${timestamp}${ext}`);
+    cb(null, `temp_${timestamp}${ext}`);
   }
 });
 
@@ -33,13 +33,23 @@ router.post('/upload-audio', upload.single('audio'), async (req, res) => {
       return res.status(400).json({ error: 'No audio file uploaded' });
     }
 
-    const fileUrl = `/uploads/audio/${req.file.filename}`;
-    console.log(`Audio file uploaded: ${fileUrl}`);
+    const sessionId = req.body.sessionId || 'unknown';
+    const ext = path.extname(req.file.originalname);
+    const newFilename = `audio_${sessionId}${ext}`;
+
+    // Rename the file from temp name to proper name with sessionId
+    const oldPath = req.file.path;
+    const newPath = path.join(path.dirname(oldPath), newFilename);
+
+    fs.renameSync(oldPath, newPath);
+
+    const fileUrl = `/uploads/audio/${newFilename}`;
+    console.log(`Audio file uploaded and renamed: ${fileUrl}`);
 
     res.json({
       success: true,
       fileUrl,
-      filename: req.file.filename
+      filename: newFilename
     });
   } catch (error) {
     console.error('Error uploading audio:', error);
@@ -70,8 +80,119 @@ router.post('/submit', async (req, res) => {
 
     // Convert ISO timestamp to MySQL datetime format
     const mysqlTimestamp = new Date(submittedAt).toISOString().slice(0, 19).replace('T', ' ');
-    const transcriptJson = JSON.stringify(transcriptWithTimestamps || []);
-    const chatHistoryJson = JSON.stringify(chatHistoryWithTimestamps || []);
+
+    // Save transcript to a separate JSON file
+    const transcriptDir = path.join(__dirname, '../../uploads/transcripts');
+    if (!fs.existsSync(transcriptDir)) {
+      fs.mkdirSync(transcriptDir, { recursive: true });
+    }
+
+    const transcriptFilename = `transcript_${sessionId}.json`;
+    const transcriptPath = path.join(transcriptDir, transcriptFilename);
+    const transcriptFileUrl = `/uploads/transcripts/${transcriptFilename}`;
+
+    // Write transcript to file
+    fs.writeFileSync(transcriptPath, JSON.stringify(transcriptWithTimestamps || [], null, 2));
+    console.log(`Transcript saved to file: ${transcriptPath}`);
+
+    // Save chat history to a separate JSON file
+    const chatHistoryDir = path.join(__dirname, '../../uploads/chat_history');
+    if (!fs.existsSync(chatHistoryDir)) {
+      fs.mkdirSync(chatHistoryDir, { recursive: true });
+    }
+
+    const chatHistoryFilename = `chat_history_${sessionId}.json`;
+    const chatHistoryPath = path.join(chatHistoryDir, chatHistoryFilename);
+    const chatHistoryFileUrl = `/uploads/chat_history/${chatHistoryFilename}`;
+
+    // Write chat history to file
+    fs.writeFileSync(chatHistoryPath, JSON.stringify(chatHistoryWithTimestamps || [], null, 2));
+    console.log(`Chat history saved to file: ${chatHistoryPath}`);
+
+    // Generate and save interaction logs CSV
+    let interactionLogsFileUrl = null;
+    if (db) {
+      try {
+        // Get all logs for this session
+        const [rows] = await db.execute(
+          'SELECT * FROM interaction_logs WHERE session_id = ? ORDER BY timestamp ASC',
+          [sessionId]
+        );
+
+        const logs = rows as any[];
+
+        // Create CSV header
+        const headers = [
+          'id',
+          'session_id',
+          'event_type',
+          'action',
+          'target_element',
+          'target_section',
+          'coordinates',
+          'text_content',
+          'metadata',
+          'timestamp'
+        ];
+
+        // Helper function to escape CSV fields
+        const escapeCsvField = (value: any): string => {
+          if (value === null || value === undefined) {
+            return '';
+          }
+          // If value is an object (JSON), stringify it first
+          let stringValue: string;
+          if (typeof value === 'object') {
+            stringValue = JSON.stringify(value);
+          } else {
+            stringValue = String(value);
+          }
+          // If the field contains comma, newline, or double quote, wrap it in quotes
+          if (stringValue.includes(',') || stringValue.includes('\n') || stringValue.includes('"')) {
+            return `"${stringValue.replace(/"/g, '""')}"`;
+          }
+          return stringValue;
+        };
+
+        // Create CSV rows
+        const csvRows = [
+          headers.join(','), // Header row
+          ...logs.map(log => {
+            return [
+              log.id,
+              log.session_id,
+              log.event_type,
+              log.action,
+              escapeCsvField(log.target_element),
+              log.target_section,
+              escapeCsvField(log.coordinates),
+              escapeCsvField(log.text_content),
+              escapeCsvField(log.metadata),
+              log.timestamp
+            ].join(',');
+          })
+        ];
+
+        const csvContent = csvRows.join('\n');
+
+        // Save to uploads/interaction_logs directory
+        const logsDir = path.join(__dirname, '../../uploads/interaction_logs');
+        if (!fs.existsSync(logsDir)) {
+          fs.mkdirSync(logsDir, { recursive: true });
+        }
+
+        const logsFilename = `interaction_logs_${sessionId}.csv`;
+        const logsPath = path.join(logsDir, logsFilename);
+        interactionLogsFileUrl = `/uploads/interaction_logs/${logsFilename}`;
+
+        // Write CSV to file
+        fs.writeFileSync(logsPath, csvContent);
+        console.log(`Interaction logs saved to file: ${logsPath}`);
+      } catch (logError) {
+        console.error('Error saving interaction logs:', logError);
+        // Don't fail the submission if interaction logs fail
+      }
+    }
 
     if (!db) {
       console.log('Demo mode: Submission received but not saved to database');
@@ -83,7 +204,9 @@ router.post('/submit', async (req, res) => {
           sessionId,
           wordCount,
           charCount,
-          submittedAt
+          submittedAt,
+          transcriptFileUrl,
+          chatHistoryFileUrl
         }
       });
     }
@@ -98,9 +221,9 @@ router.post('/submit', async (req, res) => {
       // Update existing submission
       await db.execute(
         `UPDATE submissions
-         SET final_writing = ?, transcript_content = ?, chat_history = ?, audio_file_url = ?, word_count = ?, char_count = ?, session_start_timestamp = ?, recording_start_timestamp = ?, submitted_at = ?
+         SET final_writing = ?, transcript_file_url = ?, chat_history_file_url = ?, interaction_logs_file_url = ?, audio_file_url = ?, word_count = ?, char_count = ?, session_start_timestamp = ?, recording_start_timestamp = ?, submitted_at = ?
          WHERE session_id = ?`,
-        [finalWriting, transcriptJson, chatHistoryJson, audioFileUrl, wordCount, charCount, sessionStartTimestamp, recordingStartTimestamp, mysqlTimestamp, sessionId]
+        [finalWriting, transcriptFileUrl, chatHistoryFileUrl, interactionLogsFileUrl, audioFileUrl, wordCount, charCount, sessionStartTimestamp, recordingStartTimestamp, mysqlTimestamp, sessionId]
       );
     } else {
       // Generate unique ID for submission
@@ -108,9 +231,9 @@ router.post('/submit', async (req, res) => {
 
       // Insert new submission
       await db.execute(
-        `INSERT INTO submissions (id, session_id, final_writing, transcript_content, chat_history, audio_file_url, word_count, char_count, session_start_timestamp, recording_start_timestamp, submitted_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [submissionId, sessionId, finalWriting, transcriptJson, chatHistoryJson, audioFileUrl, wordCount, charCount, sessionStartTimestamp, recordingStartTimestamp, mysqlTimestamp]
+        `INSERT INTO submissions (id, session_id, final_writing, transcript_file_url, chat_history_file_url, interaction_logs_file_url, audio_file_url, word_count, char_count, session_start_timestamp, recording_start_timestamp, submitted_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [submissionId, sessionId, finalWriting, transcriptFileUrl, chatHistoryFileUrl, interactionLogsFileUrl, audioFileUrl, wordCount, charCount, sessionStartTimestamp, recordingStartTimestamp, mysqlTimestamp]
       );
     }
 
@@ -129,7 +252,10 @@ router.post('/submit', async (req, res) => {
         sessionId,
         wordCount,
         charCount,
-        submittedAt
+        submittedAt,
+        transcriptFileUrl,
+        chatHistoryFileUrl,
+        interactionLogsFileUrl
       }
     });
   } catch (error) {

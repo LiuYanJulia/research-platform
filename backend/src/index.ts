@@ -35,6 +35,9 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve uploaded files (audio and chat history)
+app.use('/uploads', express.static('uploads'));
+
 // Database connection
 let db: mysql.Connection;
 
@@ -110,7 +113,7 @@ async function createTables() {
         event_type ENUM('mouse', 'keyboard', 'ui', 'api', 'session', 'selection') NOT NULL,
         action VARCHAR(100) NOT NULL,
         target_element VARCHAR(255),
-        target_section ENUM('prompting', 'transcript', 'response', 'writing'),
+        target_section ENUM('prompting', 'transcript', 'response', 'writing', 'regenerate-menu'),
         coordinates JSON,
         text_content TEXT,
         metadata JSON,

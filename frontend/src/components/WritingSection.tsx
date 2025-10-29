@@ -154,6 +154,10 @@ const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRe
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+      const result = await response.json();
+      console.log('Submission successful:', result.data);
+      console.log('Interaction logs saved to:', result.data.interactionLogsFileUrl);
+
       // Close confirmation modal
       setShowSubmitConfirm(false);
 
@@ -226,10 +230,10 @@ const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRe
             data-testid="writing-textarea"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Combine your insights from the transcript and LLM conversation here. Write your final thoughts, conclusions, or answers..."
+            placeholder="Combine your insights here. Write your final thoughts, conclusions, or answers..."
             style={{
               width: '100%',
-              minHeight: '600px',
+              minHeight: '500px',
               padding: '1rem',
               border: '1px solid #e5e7eb',
               borderRadius: '0.5rem',

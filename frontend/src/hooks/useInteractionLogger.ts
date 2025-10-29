@@ -48,7 +48,7 @@ export type UIAction =
   | 'message_action'
   | 'navigation';
 
-export type Section = 'prompting' | 'transcript' | 'response' | 'writing';
+export type Section = 'prompting' | 'transcript' | 'response' | 'writing' | 'regenerate-menu';
 
 export interface LogEvent {
   eventType: EventType;
@@ -106,10 +106,14 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
   const batchTimerRef = useRef<NodeJS.Timeout | null>(null);
   const lastCursorTimeRef = useRef<number>(0);
   const lastScrollTimeRef = useRef<number>(0);
+  const lastUserScrollTimeRef = useRef<number>(0); // Track last time user actually scrolled
+  const lastScrollPositionRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 }); // Track scroll position for direction
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const currentHoverTargetRef = useRef<string | null>(null);
+  const lastLoggedHoverTargetRef = useRef<string | null>(null); // Track last logged hover to prevent duplicates
   const inputValuesRef = useRef<Map<HTMLElement, string>>(new Map());
   const hasActiveSelectionRef = useRef<boolean>(false); // Track if there's an active text selection
+  const lastMouseMoveTimeRef = useRef<number>(0); // Track last time mouse actually moved
 
   /**
    * Send batched events to the server
@@ -189,6 +193,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       if (now - lastCursorTimeRef.current < cursorThrottle) return;
 
       lastCursorTimeRef.current = now;
+      lastMouseMoveTimeRef.current = now; // Track that user moved mouse
 
       const section = getSectionFromElement(e.target as HTMLElement);
 
@@ -218,9 +223,13 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       const target = e.target as HTMLElement;
       const section = getSectionFromElement(target);
       const element = getElementIdentifier(target);
+      const messageId = getMessageIdFromElement(target);
 
       // Get button information (text and hover message)
       const buttonInfo = getButtonInfo(target);
+
+      // Add messageId to metadata if available
+      const metadata = messageId ? { ...buttonInfo, messageId } : buttonInfo;
 
       logEvent({
         eventType: 'mouse',
@@ -230,7 +239,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
           section,
           coordinates: { x: e.clientX, y: e.clientY },
         },
-        metadata: buttonInfo,
+        metadata,
       });
     };
 
@@ -238,7 +247,11 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       const target = e.target as HTMLElement;
       const section = getSectionFromElement(target);
       const element = getElementIdentifier(target);
+      const messageId = getMessageIdFromElement(target);
       const buttonInfo = getButtonInfo(target);
+
+      // Add messageId to metadata if available
+      const metadata = messageId ? { ...buttonInfo, messageId } : buttonInfo;
 
       logEvent({
         eventType: 'mouse',
@@ -248,7 +261,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
           section,
           coordinates: { x: e.clientX, y: e.clientY },
         },
-        metadata: buttonInfo,
+        metadata,
       });
     };
 
@@ -256,7 +269,11 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       const target = e.target as HTMLElement;
       const section = getSectionFromElement(target);
       const element = getElementIdentifier(target);
+      const messageId = getMessageIdFromElement(target);
       const buttonInfo = getButtonInfo(target);
+
+      // Add messageId to metadata if available
+      const metadata = messageId ? { ...buttonInfo, messageId } : buttonInfo;
 
       logEvent({
         eventType: 'mouse',
@@ -266,7 +283,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
           section,
           coordinates: { x: e.clientX, y: e.clientY },
         },
-        metadata: buttonInfo,
+        metadata,
       });
     };
 
@@ -287,14 +304,49 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
   useEffect(() => {
     if (!enableScrollTracking) return;
 
+    // Track wheel events to detect user-initiated scrolls
+    const handleWheel = () => {
+      lastUserScrollTimeRef.current = Date.now();
+    };
+
     const handleScroll = (e: Event) => {
       const now = Date.now();
       if (now - lastScrollTimeRef.current < scrollThrottle) return;
+
+      // Only log if user recently moved mouse or used scroll wheel
+      // This filters out auto-scrolls from streaming content
+      const timeSinceMouseMove = now - lastMouseMoveTimeRef.current;
+      const timeSinceUserScroll = now - lastUserScrollTimeRef.current;
+
+      // If no mouse movement in last 2 seconds AND no wheel scroll in last 500ms, skip logging (likely auto-scroll)
+      if (timeSinceMouseMove > 2000 && timeSinceUserScroll > 500) {
+        return;
+      }
 
       lastScrollTimeRef.current = now;
 
       const target = e.target as HTMLElement;
       const section = getSectionFromElement(target);
+
+      const currentScrollX = target.scrollLeft || window.scrollX;
+      const currentScrollY = target.scrollTop || window.scrollY;
+
+      // Determine scroll direction
+      const lastPos = lastScrollPositionRef.current;
+      let scrollDirection = 'none';
+
+      if (currentScrollY > lastPos.y) {
+        scrollDirection = 'down';
+      } else if (currentScrollY < lastPos.y) {
+        scrollDirection = 'up';
+      } else if (currentScrollX > lastPos.x) {
+        scrollDirection = 'right';
+      } else if (currentScrollX < lastPos.x) {
+        scrollDirection = 'left';
+      }
+
+      // Update last scroll position
+      lastScrollPositionRef.current = { x: currentScrollX, y: currentScrollY };
 
       logEvent({
         eventType: 'mouse',
@@ -302,20 +354,26 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
         target: {
           section,
           coordinates: {
-            x: target.scrollLeft || window.scrollX,
-            y: target.scrollTop || window.scrollY
+            x: currentScrollX,
+            y: currentScrollY
           },
         },
         metadata: {
           scrollHeight: target.scrollHeight || document.documentElement.scrollHeight,
           clientHeight: target.clientHeight || window.innerHeight,
+          scrollDirection,
         },
       });
     };
 
+    // Listen to wheel events to detect user scrolling
+    document.addEventListener('wheel', handleWheel, true);
     // Listen to scroll events on window and scrollable containers
     document.addEventListener('scroll', handleScroll, true);
-    return () => document.removeEventListener('scroll', handleScroll, true);
+    return () => {
+      document.removeEventListener('wheel', handleWheel, true);
+      document.removeEventListener('scroll', handleScroll, true);
+    };
   }, [enableScrollTracking, scrollThrottle, logEvent]);
 
   /**
@@ -335,19 +393,42 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       const element = getElementIdentifier(target);
       const section = getSectionFromElement(target);
 
+      // Skip if we're already hovering on this element (prevents duplicates during streaming)
+      if (lastLoggedHoverTargetRef.current === element) {
+        return;
+      }
+
+      // Only process hover if mouse recently moved (prevents false triggers from page reflows)
+      const now = Date.now();
+      const timeSinceMouseMove = now - lastMouseMoveTimeRef.current;
+
+      // If mouse hasn't moved in 1 second, this is likely a false trigger from page reflow
+      if (timeSinceMouseMove > 1000) {
+        return;
+      }
+
       currentHoverTargetRef.current = element;
 
       // Delay logging hover to avoid noise (only log if hover lasts 300ms)
       hoverTimeoutRef.current = setTimeout(() => {
-        logEvent({
-          eventType: 'mouse',
-          action: 'hover_start',
-          target: {
-            element,
-            section,
-            coordinates: { x: e.clientX, y: e.clientY },
-          },
-        });
+        // Double-check we're still on the same element
+        if (currentHoverTargetRef.current === element) {
+          // Get messageId for hover logging
+          const messageId = getMessageIdFromElement(target);
+          const metadata = messageId ? { messageId } : undefined;
+
+          logEvent({
+            eventType: 'mouse',
+            action: 'hover_start',
+            target: {
+              element,
+              section,
+              coordinates: { x: e.clientX, y: e.clientY },
+            },
+            metadata,
+          });
+          lastLoggedHoverTargetRef.current = element;
+        }
       }, 300);
     };
 
@@ -368,8 +449,12 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
         clearTimeout(hoverTimeoutRef.current);
       }
 
-      // Only log hover end if we logged hover start
-      if (currentHoverTargetRef.current === element) {
+      // Only log hover end if we logged hover start for this element
+      if (lastLoggedHoverTargetRef.current === element) {
+        // Get messageId for hover_end logging
+        const messageId = getMessageIdFromElement(target);
+        const metadata = messageId ? { messageId } : undefined;
+
         logEvent({
           eventType: 'mouse',
           action: 'hover_end',
@@ -377,9 +462,12 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
             element,
             section,
           },
+          metadata,
         });
-        currentHoverTargetRef.current = null;
+        lastLoggedHoverTargetRef.current = null;
       }
+
+      currentHoverTargetRef.current = null;
     };
 
     document.addEventListener('mouseenter', handleMouseEnter, true);
@@ -402,6 +490,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       const target = e.target as HTMLElement;
       const section = getSectionFromElement(target);
       const element = getElementIdentifier(target);
+      const messageId = getMessageIdFromElement(target);
 
       // Check for keyboard shortcuts
       if (e.ctrlKey || e.metaKey) {
@@ -418,6 +507,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
               metaKey: e.metaKey,
               shiftKey: e.shiftKey,
               altKey: e.altKey,
+              messageId, // Include messageId if available
             },
           });
           return;
@@ -433,6 +523,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
           metaKey: e.metaKey,
           shiftKey: e.shiftKey,
           altKey: e.altKey,
+          messageId, // Include messageId if available
         };
 
         // For Backspace/Delete, try to capture what character will be deleted
@@ -552,6 +643,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       if (!selection || selection.isCollapsed) {
         // Only log selection_clear if there was a previous active selection
         if (hasActiveSelectionRef.current) {
+          console.log('[Selection] Clearing selection');
           logEvent({
             eventType: 'selection',
             action: 'selection_clear',
@@ -570,6 +662,37 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       const section = element ? getSectionFromElement(element) : undefined;
       const elementId = element ? getElementIdentifier(element) : undefined;
 
+      // Find messageId by traversing up the DOM tree to find the message container
+      let messageId: number | undefined;
+      let currentElement = element;
+      while (currentElement && !messageId) {
+        // Check if this element has data-message-index attribute
+        const messageIndex = currentElement.getAttribute('data-message-index');
+        if (messageIndex) {
+          messageId = parseInt(messageIndex, 10);
+          break;
+        }
+        // Also check for article with data-turn attribute (message container)
+        if (currentElement.tagName === 'ARTICLE' && currentElement.getAttribute('data-turn')) {
+          const messageIndex = currentElement.getAttribute('data-message-index');
+          if (messageIndex) {
+            messageId = parseInt(messageIndex, 10);
+            break;
+          }
+        }
+        currentElement = currentElement.parentElement;
+      }
+
+      console.log('[Selection] Text selected:', {
+        selectedText: selectedText.substring(0, 50) + '...',
+        textLength: selectedText.length,
+        section,
+        element: elementId,
+        messageId,
+        startOffset: range.startOffset,
+        endOffset: range.endOffset,
+      });
+
       // Mark that we have an active selection
       hasActiveSelectionRef.current = true;
 
@@ -583,6 +706,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
         metadata: {
           selectedText: selectedText, // Full text without limit
           textLength: selectedText.length,
+          messageId, // Include messageId if selection is within a message
           startOffset: range.startOffset,
           endOffset: range.endOffset,
         },
@@ -644,6 +768,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
   useEffect(() => {
     const handleInput = (e: Event) => {
       const target = e.target as HTMLInputElement | HTMLTextAreaElement;
+      const inputEvent = e as InputEvent;
 
       // Only track input and textarea elements
       if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA') return;
@@ -652,6 +777,7 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       const previousValue = inputValuesRef.current.get(target) || '';
       const section = getSectionFromElement(target);
       const element = getElementIdentifier(target);
+      const messageId = getMessageIdFromElement(target);
 
       // Calculate the difference
       const currentLength = currentValue.length;
@@ -664,22 +790,33 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
           charsDelta: Math.abs(lengthDiff),
           newLength: currentLength,
           previousLength: previousLength,
+          messageId, // Include messageId if available
         };
 
         // For deletions, try to capture what was deleted
         if (!isInsert) {
-          // Find where the deletion occurred
+          // Find where the deletion occurred by comparing from the start
           let deletionStart = 0;
-          for (let i = 0; i < Math.min(currentLength, previousLength); i++) {
+          for (let i = 0; i < currentLength; i++) {
             if (currentValue[i] !== previousValue[i]) {
               deletionStart = i;
               break;
             }
           }
 
-          // If all matching characters are at the start, deletion is at the end
+          // If all current characters match the start of previous, deletion is at the end
           if (deletionStart === 0 && currentLength < previousLength) {
-            deletionStart = currentLength;
+            // Check if current value matches the prefix of previous value
+            let allMatch = true;
+            for (let i = 0; i < currentLength; i++) {
+              if (currentValue[i] !== previousValue[i]) {
+                allMatch = false;
+                break;
+              }
+            }
+            if (allMatch) {
+              deletionStart = currentLength;
+            }
           }
 
           const deletedText = previousValue.substring(deletionStart, deletionStart + Math.abs(lengthDiff));
@@ -688,17 +825,54 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
 
         // For insertions, capture what was inserted
         if (isInsert) {
-          // Find where the insertion occurred
-          let insertionStart = 0;
-          for (let i = 0; i < Math.min(currentLength, previousLength); i++) {
-            if (currentValue[i] !== previousValue[i]) {
-              insertionStart = i;
-              break;
-            }
-          }
+          // Use InputEvent.data if available (most accurate for single character insertions)
+          if (inputEvent.data && lengthDiff === inputEvent.data.length) {
+            metadata.insertedText = inputEvent.data;
+            console.log('[TextInsert] Using InputEvent.data:', {
+              insertedText: inputEvent.data,
+              previousValue: previousValue.substring(Math.max(0, previousLength - 20)),
+              currentValue: currentValue.substring(Math.max(0, currentLength - 20)),
+            });
+          } else {
+            // Fallback: Find insertion point by comparing from start and end
+            let insertionStart = 0;
 
-          const insertedText = currentValue.substring(insertionStart, insertionStart + lengthDiff);
-          metadata.insertedText = insertedText; // Full text without limit
+            // Find first difference from the start
+            for (let i = 0; i < previousLength; i++) {
+              if (currentValue[i] !== previousValue[i]) {
+                insertionStart = i;
+                break;
+              }
+            }
+
+            // If all previous characters match current from start, insertion is at the end
+            if (insertionStart === 0 && previousLength > 0) {
+              let allMatch = true;
+              for (let i = 0; i < previousLength; i++) {
+                if (currentValue[i] !== previousValue[i]) {
+                  allMatch = false;
+                  insertionStart = i;
+                  break;
+                }
+              }
+              if (allMatch) {
+                insertionStart = previousLength;
+              }
+            }
+
+            // Extract the inserted text at the insertion point
+            const insertedText = currentValue.substring(insertionStart, insertionStart + lengthDiff);
+            metadata.insertedText = insertedText;
+
+            console.log('[TextInsert] Using fallback algorithm:', {
+              insertionStart,
+              lengthDiff,
+              insertedText,
+              previousValue: previousValue.substring(Math.max(0, previousLength - 20)),
+              currentValue: currentValue.substring(Math.max(0, currentLength - 20)),
+              inputEventData: inputEvent.data,
+            });
+          }
         }
 
         logEvent({
@@ -767,6 +941,24 @@ function getSectionFromElement(element: HTMLElement | null): Section | undefined
 }
 
 /**
+ * Helper function to extract messageId from element or its parents
+ */
+function getMessageIdFromElement(element: HTMLElement | null): number | undefined {
+  if (!element) return undefined;
+
+  let current: HTMLElement | null = element;
+  while (current) {
+    const messageIndex = current.getAttribute('data-message-index');
+    if (messageIndex) {
+      return parseInt(messageIndex, 10);
+    }
+    current = current.parentElement;
+  }
+
+  return undefined;
+}
+
+/**
  * Helper function to get a meaningful identifier for an element
  * Walks up the DOM tree if the element is an SVG to find the parent button
  */
@@ -807,12 +999,9 @@ function getElementIdentifier(element: HTMLElement | null): string {
   if (element.id) return `#${element.id}`;
   if (element.getAttribute('aria-label')) return `[aria-label="${element.getAttribute('aria-label')}"]`;
 
-  // Special handling for placeholder with messageId
+  // Special handling for placeholder - just use placeholder without messageId
+  // messageId is extracted separately and put in metadata
   const placeholder = element.getAttribute('placeholder');
-  const messageId = element.getAttribute('data-message-id');
-  if (placeholder && messageId) {
-    return `[placeholder="${placeholder}", messageId="${messageId}"]`;
-  }
   if (placeholder) return `[placeholder="${placeholder}"]`;
 
   const tagName = element.tagName.toLowerCase();

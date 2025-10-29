@@ -1,4 +1,6 @@
 import express from 'express';
+import path from 'path';
+import fs from 'fs';
 
 const router = express.Router();
 
@@ -204,5 +206,109 @@ router.get('/:sessionId/stats', async (req, res) => {
     });
   }
 });
+
+// GET /api/logging/export-csv - Export interaction logs as CSV and save to uploads folder
+router.get('/export-csv', async (req, res) => {
+  try {
+    const { sessionId } = req.query;
+    const db = (req as any).db;
+
+    if (!sessionId) {
+      return res.status(400).json({ error: 'Session ID is required' });
+    }
+
+    // Get all logs for this session
+    const [rows] = await db.execute(
+      'SELECT * FROM interaction_logs WHERE session_id = ? ORDER BY timestamp ASC',
+      [sessionId]
+    );
+
+    const logs = rows as any[];
+
+    // Create CSV header
+    const headers = [
+      'id',
+      'session_id',
+      'event_type',
+      'action',
+      'target_element',
+      'target_section',
+      'coordinates',
+      'text_content',
+      'metadata',
+      'timestamp'
+    ];
+
+    // Create CSV rows
+    const csvRows = [
+      headers.join(','), // Header row
+      ...logs.map(log => {
+        return [
+          log.id,
+          log.session_id,
+          log.event_type,
+          log.action,
+          escapeCsvField(log.target_element),
+          log.target_section,
+          escapeCsvField(log.coordinates),
+          escapeCsvField(log.text_content),
+          escapeCsvField(log.metadata),
+          log.timestamp
+        ].join(',');
+      })
+    ];
+
+    const csvContent = csvRows.join('\n');
+
+    // Save to uploads/interaction_logs directory
+    const logsDir = path.join(__dirname, '../../uploads/interaction_logs');
+    if (!fs.existsSync(logsDir)) {
+      fs.mkdirSync(logsDir, { recursive: true });
+    }
+
+    const filename = `interaction_logs_${sessionId}.csv`;
+    const filePath = path.join(logsDir, filename);
+    const fileUrl = `/uploads/interaction_logs/${filename}`;
+
+    // Write CSV to file
+    fs.writeFileSync(filePath, csvContent);
+    console.log(`Interaction logs saved to file: ${filePath}`);
+
+    // Set headers for file download
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.send(csvContent);
+
+  } catch (error) {
+    console.error('Export CSV error:', error);
+    res.status(500).json({
+      error: 'Failed to export logs',
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+});
+
+// Helper function to escape CSV fields
+function escapeCsvField(value: any): string {
+  if (value === null || value === undefined) {
+    return '';
+  }
+
+  // If value is an object (JSON), stringify it first
+  let stringValue: string;
+  if (typeof value === 'object') {
+    stringValue = JSON.stringify(value);
+  } else {
+    stringValue = String(value);
+  }
+
+  // If the field contains comma, newline, or double quote, wrap it in quotes
+  if (stringValue.includes(',') || stringValue.includes('\n') || stringValue.includes('"')) {
+    // Escape double quotes by doubling them
+    return `"${stringValue.replace(/"/g, '""')}"`;
+  }
+
+  return stringValue;
+}
 
 export default router;

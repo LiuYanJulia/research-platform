@@ -26,24 +26,24 @@ interface ChatInterfaceProps {
 const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTime, logger }) => {
   const [prompt, setPrompt] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
-  const [currentModel, setCurrentModel] = useState('gpt-3.5-turbo'); // Default fallback
+  const [currentModel, setCurrentModel] = useState('gpt-5-mini'); // Default fallback
   const [expandedMessageId, setExpandedMessageId] = useState<string | null>(null); // Track which message's expanded section is open
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  const copyToClipboard = (text: string, messageId: string, messageRole: 'user' | 'assistant') => {
+  const copyToClipboard = (text: string, messageId: string, messageRole: 'user' | 'assistant', messageIndex: number) => {
     navigator.clipboard.writeText(text);
     // Log copy action
     logger.logEvent({
       eventType: 'ui',
       action: 'message_action',
       target: {
-        element: `copy-turn-action-button-${messageRole}-${messageId}`,
+        element: 'copy-turn-action-button',
         section: 'response',
       },
       metadata: {
-        messageId,
+        messageId: messageIndex, // Use sequential index instead of timestamp ID
         messageRole,
         actionType: 'copy',
         copiedText: text, // Full text without limit
@@ -54,7 +54,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
   };
 
 
-  const handleFeedback = async (messageId: string, isGood: boolean) => {
+  const handleFeedback = async (messageId: string, isGood: boolean, messageIndex: number) => {
     try {
       console.log('=== handleFeedback called ===');
       console.log('messageId:', messageId);
@@ -70,7 +70,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
           section: 'response',
         },
         metadata: {
-          messageId,
+          messageId: messageIndex, // Use sequential index
           actionType: 'feedback',
           feedbackValue: isGood ? 'good' : 'bad',
         },
@@ -194,6 +194,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
   const handleSend = async (contextMessageId?: string, customPrompt?: string, hideUserPrompt?: boolean) => {
     const messageContent = customPrompt || prompt;
     if (messageContent.trim()) {
+      // Find referenced message if contextMessageId is provided
+      let referencedMessage = null;
+      let referencedMessageIndex: number | undefined;
+      let mergedPrompt = messageContent;
+
+      if (contextMessageId) {
+        const messageIdx = messages.findIndex(msg => msg.id === contextMessageId);
+        if (messageIdx !== -1) {
+          referencedMessage = messages[messageIdx];
+          referencedMessageIndex = messageIdx + 1; // Convert to 1-based sequential index
+          // Merge prompt with referenced message content
+          mergedPrompt = `${messageContent} based on this information: ${referencedMessage.content}`;
+        }
+      }
+
       // Log prompt submission
       logger.logEvent({
         eventType: 'ui',
@@ -206,21 +221,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
           promptLength: messageContent.length,
           isCustomPrompt: !!customPrompt,
           hasContext: !!contextMessageId,
-          contextMessageId,
+          contextMessageId: referencedMessageIndex, // Use sequential index instead of timestamp ID
         },
       });
-
-      // Find referenced message if contextMessageId is provided
-      let referencedMessage = null;
-      let mergedPrompt = messageContent;
-
-      if (contextMessageId) {
-        referencedMessage = messages.find(msg => msg.id === contextMessageId);
-        if (referencedMessage) {
-          // Merge prompt with referenced message content
-          mergedPrompt = `${messageContent} based on this information: ${referencedMessage.content}`;
-        }
-      }
 
       // Add user message (only if not hidden)
       const userMessage: Message = {
@@ -307,10 +310,25 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                   const data = JSON.parse(jsonStr);
 
                   if (data.error) {
-                    throw new Error(data.error);
-                  }
-
-                  if (data.done) {
+                    // Handle error with optional partial content
+                    if (data.interrupted && data.partialContent) {
+                      console.warn('[Frontend] Stream was interrupted, displaying partial content:', data.partialContent.length, 'chars');
+                      // Update message with partial content and add error note
+                      setMessages(prev => prev.map(msg =>
+                        msg.id === loadingMessageId
+                          ? {
+                              ...msg,
+                              content: data.partialContent,
+                              isLoading: false
+                            }
+                          : msg
+                      ));
+                      // Note: Backend already saved the partial response with error note
+                    } else {
+                      // No partial content, throw error to trigger fallback
+                      throw new Error(data.error);
+                    }
+                  } else if (data.done) {
                     console.log('[Frontend] Received done signal');
                     // Streaming complete, mark message as not loading
                     setMessages(prev => prev.map(msg =>
@@ -348,22 +366,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
           }
         }
 
-        // After streaming completes, get the accumulated content from state
-        setMessages(prev => {
-          const finalMsg = prev.find(msg => msg.id === loadingMessageId);
-          if (finalMsg && finalMsg.content) {
-            // Save the complete message to database
-            saveChatMessage({
-              id: loadingMessageId,
-              role: 'assistant',
-              content: finalMsg.content,
-              timestamp: new Date(),
-              modelSlug: currentModel,
-              isLoading: false
-            });
-          }
-          return prev;
-        });
+        // After streaming completes, the assistant message is already saved by the backend
+        // No need to save again here to avoid duplicates
 
       } catch (error) {
         console.error('Error calling chat API:', error);
@@ -396,7 +400,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
     }
   };
 
-  const handleContextualPrompt = async (messageId: string, promptText: string) => {
+  const handleContextualPrompt = async (messageId: string, promptText: string, messageIndex: number) => {
     // Log contextual prompt action
     logger.logEvent({
       eventType: 'ui',
@@ -406,7 +410,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
         section: 'response',
       },
       metadata: {
-        messageId,
+        messageId: messageIndex, // Use sequential index
         actionType: 'contextual_prompt',
         promptText: promptText.substring(0, 100), // Log first 100 chars
         promptLength: promptText.length,
@@ -420,14 +424,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
   };
 
   // Expanded section component
-  const ExpandedSection: React.FC<{ messageId: string }> = ({ messageId }) => {
+  const ExpandedSection: React.FC<{ messageId: string; messageIndex: number }> = ({ messageId, messageIndex }) => {
     const [contextInput, setContextInput] = useState('');
 
     const handleContextInputKeyDown = (e: React.KeyboardEvent) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         if (contextInput.trim()) {
-          handleContextualPrompt(messageId, contextInput);
+          handleContextualPrompt(messageId, contextInput, messageIndex);
           setContextInput('');
         }
       }
@@ -451,6 +455,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
             onKeyDown={handleContextInputKeyDown}
             placeholder="Ask to change response"
             data-message-id={messageId}
+            data-message-index={messageIndex}
             style={{
               width: '100%',
               minWidth: '210px',
@@ -467,7 +472,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
           <button
             onClick={() => {
               if (contextInput.trim()) {
-                handleContextualPrompt(messageId, contextInput);
+                handleContextualPrompt(messageId, contextInput, messageIndex);
                 setContextInput('');
               }
             }}
@@ -500,7 +505,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
 
         {/* Try again button */}
         <button
-          onClick={() => handleContextualPrompt(messageId, 'Generate another version for this response.')}
+          onClick={() => handleContextualPrompt(messageId, 'Generate another version for this response.', messageIndex)}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -514,7 +519,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
             fontSize: '0.875rem'
           }}
           className="text-token-text-primary"
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)'}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)';
+          }}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -527,7 +534,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
 
         {/* Add details button */}
         <button
-          onClick={() => handleContextualPrompt(messageId, 'Add more details to this response')}
+          onClick={() => handleContextualPrompt(messageId, 'Add more details to this response', messageIndex)}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -541,7 +548,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
             fontSize: '0.875rem'
           }}
           className="text-token-text-primary"
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)'}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)';
+          }}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -557,7 +566,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
 
         {/* More concise button */}
         <button
-          onClick={() => handleContextualPrompt(messageId, 'Give me a more concise response')}
+          onClick={() => handleContextualPrompt(messageId, 'Give me a more concise response', messageIndex)}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -571,7 +580,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
             fontSize: '0.875rem'
           }}
           className="text-token-text-primary"
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)'}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)';
+          }}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -592,7 +603,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
 
         {/* Think longer button */}
         <button
-          onClick={() => handleContextualPrompt(messageId, 'Regenerate this response with longer thinking process')}
+          onClick={() => handleContextualPrompt(messageId, 'Regenerate this response with longer thinking process', messageIndex)}
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -606,7 +617,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
             fontSize: '0.875rem'
           }}
           className="text-token-text-primary"
-          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)'}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)';
+          }}
           onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
         >
           <div style={{ width: '20px', height: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -620,10 +633,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
     );
   };
 
-  const MessageBubble: React.FC<{ message: Message; turnIndex: number }> = ({ message, turnIndex }) => (
+  const MessageBubble: React.FC<{ message: Message; turnIndex: number; messageIndex: number }> = ({ message, turnIndex, messageIndex }) => (
     <article
       className="text-token-text-primary group"
       data-turn-id={message.id}
+      data-message-index={messageIndex}
       data-testid={`conversation-turn-${turnIndex}`}
       data-turn={message.role}
       style={{ width: '100%', outline: 'none' }}
@@ -762,7 +776,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
               }}>
                 {/* Copy Button */}
                 <button
-                  onClick={() => copyToClipboard(message.content, message.id, message.role)}
+                  onClick={() => copyToClipboard(message.content, message.id, message.role, messageIndex)}
                   className="text-token-text-secondary"
                   style={{
                     borderRadius: '0.5rem',
@@ -772,7 +786,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                     cursor: 'pointer',
                     position: 'relative'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)'}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--token-bg-secondary, #f8f9fa)';
+                  }}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                   aria-label="Copy"
                   title="Copy"
@@ -787,7 +803,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                 {/* Good Response Button - Hide if bad feedback given */}
                 {message.feedbackType !== 'bad' && (
                   <button
-                    onClick={() => handleFeedback(message.id, true)}
+                    onClick={() => handleFeedback(message.id, true, messageIndex)}
                     className={`text-token-text-secondary ${message.feedbackType === 'good' ? 'bg-token-bg-tertiary' : ''}`}
                     style={{
                       borderRadius: '0.5rem',
@@ -832,7 +848,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                 {/* Bad Response Button - Hide if good feedback given */}
                 {message.feedbackType !== 'good' && (
                   <button
-                    onClick={() => handleFeedback(message.id, false)}
+                    onClick={() => handleFeedback(message.id, false, messageIndex)}
                     className={`text-token-text-secondary ${message.feedbackType === 'bad' ? 'bg-token-bg-tertiary' : ''}`}
                     style={{
                       borderRadius: '0.5rem',
@@ -886,7 +902,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                         section: 'response',
                       },
                       metadata: {
-                        messageId: message.id,
+                        messageId: messageIndex,
                         actionType: 'toggle_regenerate_menu',
                         isExpanding,
                       },
@@ -927,7 +943,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
 
           {/* Expanded Section - Show below action buttons */}
           {expandedMessageId === message.id && (
-            <ExpandedSection messageId={message.id} />
+            <ExpandedSection messageId={message.id} messageIndex={messageIndex} />
           )}
         </div>
       </div>
@@ -960,7 +976,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
             </div>
           ) : (
             messages.map((message, index) => (
-              <MessageBubble key={message.id} message={message} turnIndex={index + 1} />
+              <MessageBubble key={message.id} message={message} turnIndex={index + 1} messageIndex={index + 1} />
             ))
           )}
           {/* Scroll anchor */}

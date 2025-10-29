@@ -48,8 +48,9 @@ router.post('/send', async (req, res) => {
 
     // Call OpenAI API with conversation context
     const openai = getOpenAI();
+    const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: modelName,
       messages: [
         { role: 'system', content: 'You are a helpful assistant. Provide clear, helpful responses to user questions.' },
         ...messages
@@ -64,13 +65,13 @@ router.post('/send', async (req, res) => {
     if (db) {
       await db.execute(
         'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
-        [sessionId, 'assistant', assistantMessage, 'gpt-4o-mini']
+        [sessionId, 'assistant', assistantMessage, modelName]
       );
     }
 
     res.json({
       message: assistantMessage,
-      model: 'gpt-4o-mini',
+      model: modelName,
       timestamp: new Date().toISOString(),
     });
 
@@ -85,10 +86,13 @@ router.post('/send', async (req, res) => {
 
 // POST /api/chat/stream - Streaming chat endpoint
 router.post('/stream', async (req, res) => {
-  try {
-    const { sessionId, message, conversationHistory = [] } = req.body;
-    const db = (req as any).db;
+  let fullMessage = '';
+  let streamStarted = false;
+  const { sessionId, message, conversationHistory = [] } = req.body;
+  const db = (req as any).db;
+  const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
 
+  try {
     if (!sessionId || !message) {
       return res.status(400).json({ error: 'Session ID and message are required' });
     }
@@ -134,7 +138,7 @@ router.post('/stream', async (req, res) => {
     // Call OpenAI API with streaming enabled
     const openai = getOpenAI();
     const stream = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: modelName,
       messages: [
         { role: 'system', content: 'You are a helpful assistant. Provide clear, helpful responses to user questions.' },
         ...messages
@@ -144,47 +148,121 @@ router.post('/stream', async (req, res) => {
       stream: true,
     });
 
-    let fullMessage = '';
+    streamStarted = true;
 
-    // Stream the response chunks
-    for await (const chunk of stream) {
-      const content = chunk.choices[0]?.delta?.content || '';
-      if (content) {
-        fullMessage += content;
-        // Send chunk as SSE
-        const sseMessage = `data: ${JSON.stringify({ content, done: false })}\n\n`;
-        res.write(sseMessage);
+    // Stream the response chunks with enhanced error handling
+    try {
+      for await (const chunk of stream) {
+        const content = chunk.choices[0]?.delta?.content || '';
+        if (content) {
+          fullMessage += content;
+          // Send chunk as SSE
+          const sseMessage = `data: ${JSON.stringify({ content, done: false })}\n\n`;
+          res.write(sseMessage);
 
-        // FORCE immediate flush to client using multiple methods
-        // Method 1: Try standard flush if available
-        if (typeof (res as any).flush === 'function') {
-          (res as any).flush();
+          // FORCE immediate flush to client using multiple methods
+          // Method 1: Try standard flush if available
+          if (typeof (res as any).flush === 'function') {
+            (res as any).flush();
+          }
+          // Method 2: Directly flush the underlying socket
+          if ((res as any).socket && typeof (res as any).socket.write === 'function') {
+            // Socket is already written to by res.write, just ensure no delay
+            (res as any).socket.uncork?.();
+          }
         }
-        // Method 2: Directly flush the underlying socket
-        if ((res as any).socket && typeof (res as any).socket.write === 'function') {
-          // Socket is already written to by res.write, just ensure no delay
-          (res as any).socket.uncork?.();
+      }
+
+      // Send completion signal - streaming completed successfully
+      res.write(`data: ${JSON.stringify({ content: '', done: true })}\n\n`);
+
+      // Save complete assistant message to database
+      if (db && fullMessage.trim()) {
+        await db.execute(
+          'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
+          [sessionId, 'assistant', fullMessage, modelName]
+        );
+      }
+
+      res.end();
+
+    } catch (streamError: any) {
+      // Handle connection termination during streaming
+      console.error('Stream connection error:', {
+        error: streamError.message,
+        code: streamError.code,
+        cause: streamError.cause?.message,
+        partialMessageLength: fullMessage.length,
+        sessionId: sessionId
+      });
+
+      // Save partial response if we have any content
+      if (db && fullMessage.trim()) {
+        console.log(`Saving partial response (${fullMessage.length} chars) for session ${sessionId}`);
+        try {
+          await db.execute(
+            'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
+            [sessionId, 'assistant', fullMessage + '\n\n[Note: Response was interrupted]', modelName]
+          );
+        } catch (dbError) {
+          console.error('Failed to save partial response:', dbError);
         }
+      }
+
+      // Try to notify frontend about the interruption with partial content
+      try {
+        res.write(`data: ${JSON.stringify({
+          error: 'Connection interrupted',
+          partialContent: fullMessage,
+          done: true,
+          interrupted: true
+        })}\n\n`);
+      } catch (writeError) {
+        console.error('Failed to write error message to response:', writeError);
+      }
+
+      // Try to end the response gracefully
+      try {
+        res.end();
+      } catch (endError) {
+        console.error('Failed to end response:', endError);
       }
     }
 
-    // Send completion signal
-    res.write(`data: ${JSON.stringify({ content: '', done: true })}\n\n`);
+  } catch (error: any) {
+    console.error('Chat streaming error:', {
+      error: error.message,
+      code: error.code,
+      streamStarted,
+      partialMessageLength: fullMessage.length,
+      sessionId: sessionId
+    });
 
-    // Save complete assistant message to database
-    if (db) {
-      await db.execute(
-        'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
-        [sessionId, 'assistant', fullMessage, 'gpt-4o-mini']
-      );
+    // Save partial response if streaming had started and we have content
+    if (streamStarted && db && fullMessage.trim()) {
+      console.log(`Saving partial response after outer error (${fullMessage.length} chars) for session ${sessionId}`);
+      try {
+        await db.execute(
+          'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
+          [sessionId, 'assistant', fullMessage + '\n\n[Note: Response encountered an error]', modelName]
+        );
+      } catch (dbError) {
+        console.error('Failed to save partial response:', dbError);
+      }
     }
 
-    res.end();
-
-  } catch (error) {
-    console.error('Chat streaming error:', error);
-    res.write(`data: ${JSON.stringify({ error: 'Failed to get LLM response', done: true })}\n\n`);
-    res.end();
+    // Try to send error message to frontend
+    try {
+      res.write(`data: ${JSON.stringify({
+        error: 'Failed to get LLM response',
+        partialContent: fullMessage,
+        done: true,
+        interrupted: true
+      })}\n\n`);
+      res.end();
+    } catch (writeError) {
+      console.error('Failed to write final error message:', writeError);
+    }
   }
 });
 
@@ -226,8 +304,9 @@ router.post('/', async (req, res) => {
 
     // Call OpenAI API with conversation context
     const openai = getOpenAI();
+    const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
     const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
+      model: modelName,
       messages: [
         { role: 'system', content: 'You are a helpful assistant. Provide clear, helpful responses to user questions.' },
         ...messages
@@ -242,13 +321,13 @@ router.post('/', async (req, res) => {
     if (db) {
       await db.execute(
         'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
-        [sessionId, 'assistant', assistantMessage, 'gpt-4o-mini']
+        [sessionId, 'assistant', assistantMessage, modelName]
       );
     }
 
     res.json({
       message: assistantMessage,
-      model: 'gpt-4o-mini',
+      model: modelName,
       timestamp: new Date().toISOString(),
     });
 
@@ -348,8 +427,9 @@ router.post('/generate-from-transcript', async (req, res) => {
     }
 
     const openai = getOpenAI();
+    const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
     const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: modelName,
       messages: [
         {
           role: 'system',
@@ -479,7 +559,7 @@ router.post('/feedback', async (req, res) => {
 router.get('/model-info', async (req, res) => {
   try {
     res.json({
-      model: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
+      model: process.env.OPENAI_MODEL || 'gpt-5-mini',
       provider: 'openai',
       timestamp: new Date().toISOString(),
     });

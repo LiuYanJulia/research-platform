@@ -38,7 +38,7 @@ const InstructionPage: React.FC<InstructionPageProps> = ({ onAgree }) => {
           marginBottom: '2rem'
         }}>
           <p style={{ marginBottom: '1rem' }}>
-            Welcome to the research platform. This study involves:
+            Welcome to the research platform. You will be designing the next year's iPhone (iPhone 18). Your goal is to create a comprehensive product design proposal. Throughout this study, you must continuously verbalize your thoughts out loud as you work on the design task. This study involves:
           </p>
 
           <ul style={{ paddingLeft: '1.5rem', marginBottom: '1rem' }}>
