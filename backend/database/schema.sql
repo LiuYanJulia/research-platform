@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS final_writings (
 CREATE TABLE IF NOT EXISTS submissions (
     id VARCHAR(36) PRIMARY KEY,
     session_id VARCHAR(36),
-    final_writing TEXT,
+    final_writing MEDIUMTEXT,
     transcript_file_url VARCHAR(255),
     chat_history_file_url VARCHAR(255),
     audio_file_url VARCHAR(255),

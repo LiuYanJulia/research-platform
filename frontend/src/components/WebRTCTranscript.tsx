@@ -19,7 +19,11 @@ export interface WebRTCTranscriptRef {
   };
 }
 
-const WebRTCTranscript = forwardRef<WebRTCTranscriptRef>((props, ref) => {
+interface WebRTCTranscriptProps {
+  isPracticeMode?: boolean;
+}
+
+const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(({ isPracticeMode = false }, ref) => {
   const [isRecording, setIsRecording] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [transcript, setTranscript] = useState(''); // Used in backend API, not displayed in UI

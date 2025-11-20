@@ -10,15 +10,26 @@ interface WritingSectionProps {
     sendBatch: () => void;
   };
   onSubmissionComplete?: () => void;
+  isPracticeMode?: boolean;
+  elapsedTime?: number; // in seconds
 }
 
-const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRef, sessionStartTime, logger, onSubmissionComplete }) => {
+const WritingSection: React.FC<WritingSectionProps> = ({
+  sessionId,
+  transcriptRef,
+  sessionStartTime,
+  logger,
+  onSubmissionComplete,
+  isPracticeMode = false,
+  elapsedTime = 0
+}) => {
   const [content, setContent] = useState('');
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
   const [isAutoSaving, setIsAutoSaving] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
+  const [showTimeWarning, setShowTimeWarning] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Update counts when content changes
@@ -318,9 +329,17 @@ const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRe
             </div>
 
             <button
-              onClick={() => setShowSubmitConfirm(true)}
-              disabled={!content.trim()}
+              onClick={() => {
+                // Check 10-minute minimum for actual task
+                if (!isPracticeMode && elapsedTime < 600) {
+                  setShowTimeWarning(true);
+                  return;
+                }
+                setShowSubmitConfirm(true);
+              }}
+              disabled={!content.trim() || isPracticeMode}
               style={{
+                display: isPracticeMode ? 'none' : 'block',
                 width: '100%',
                 padding: '0.75rem 1rem',
                 borderRadius: '0.5rem',
@@ -413,6 +432,56 @@ const WritingSection: React.FC<WritingSectionProps> = ({ sessionId, transcriptRe
                 Submit
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Time Warning Modal (less than 10 minutes) */}
+      {showTimeWarning && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '0.5rem',
+            padding: '1.5rem',
+            maxWidth: '28rem',
+            width: '100%',
+            margin: '0 1rem'
+          }}>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#d97706' }}>
+              Minimum Time Requirement
+            </h3>
+            <p style={{ fontSize: '0.875rem', color: '#4b5563', marginBottom: '1rem' }}>
+              The minimum time requirement is 10 minutes. Please continue working on your design.
+            </p>
+            <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1.5rem' }}>
+              You have spent <strong>{Math.floor(elapsedTime / 60)} minutes and {elapsedTime % 60} seconds</strong> so far.
+            </p>
+            <button
+              onClick={() => setShowTimeWarning(false)}
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: '#3b82f6',
+                color: 'white',
+                border: 'none',
+                borderRadius: '0.5rem',
+                cursor: 'pointer',
+                fontWeight: '500',
+                transition: 'background-color 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563eb'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3b82f6'}
+            >
+              Continue Working
+            </button>
           </div>
         </div>
       )}

@@ -1,0 +1,262 @@
+id,session_id,event_type,action,target_element,target_section,coordinates,text_content,metadata,timestamp
+66927,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":942,""y"":751}",,,310
+66928,session_1762096692449_ij9sf4nym,mouse,cursor_move,,,"{""x"":1383,""y"":0}",,,417
+66929,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1306,""y"":160}",,,8419
+66930,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":501,""y"":706}",,,8752
+66931,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":203,""y"":904}",,,8858
+66932,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":118,""y"":947}",,,8965
+66933,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":91,""y"":965}",,,9072
+66934,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":69,""y"":966}",,,9192
+66935,session_1762096692449_ij9sf4nym,mouse,hover_start,"[placeholder=""Ask anything""]",prompting,"{""x"":126,""y"":943}",,,9243
+66936,session_1762096692449_ij9sf4nym,mouse,click,"[placeholder=""Ask anything""]",prompting,"{""x"":69,""y"":966}",,{},9402
+66937,session_1762096692449_ij9sf4nym,keyboard,keyboard_shortcut,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""v"",""altKey"":false,""ctrlKey"":false,""metaKey"":true,""shiftKey"":false,""shortcut"":""Cmd+V""}",9628
+66938,session_1762096692449_ij9sf4nym,keyboard,paste,"[placeholder=""Ask anything""]",prompting,,"hi, can you give me summary of new changes from iphone 13 to 17? I want separate the changes for each batch","{""textLength"":107}",9634
+66939,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":107,""charsDelta"":107,""insertedText"":""hi, can you give me summary of new changes from iphone 13 to 17? I want separate the changes for each batch"",""previousLength"":0}",9636
+66940,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":4}",,"{""clientHeight"":28,""scrollHeight"":34,""scrollDirection"":""down""}",9638
+66941,session_1762096692449_ij9sf4nym,ui,composer_interaction,send-button,prompting,,,"{""hasContext"":false,""promptLength"":107,""isCustomPrompt"":false}",10174
+66942,session_1762096692449_ij9sf4nym,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",10177
+66943,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":0}",,"{""clientHeight"":28,""scrollHeight"":28,""scrollDirection"":""up""}",10194
+66944,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":58,""y"":965}",,,371165
+66945,session_1762096692449_ij9sf4nym,mouse,hover_end,"[placeholder=""Ask anything""]",prompting,,,,371182
+66946,session_1762096692449_ij9sf4nym,mouse,cursor_move,,,"{""x"":0,""y"":876}",,,371270
+66947,session_1762096692449_ij9sf4nym,mouse,cursor_move,,,"{""x"":0,""y"":726}",,,371377
+66948,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":65,""y"":691}",,,371485
+66949,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":179,""y"":640}",,,371591
+66950,session_1762096692449_ij9sf4nym,mouse,hover_start,"[data-testid=""conversation-turn-2""]",response,"{""x"":37,""y"":701}",,"{""messageId"":2}",371746
+66951,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":222,""y"":614}",,,372058
+66952,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":338,""y"":588}",,,372164
+66953,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":434,""y"":618}",,,372271
+66954,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":828}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",374222
+66955,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":575}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""up""}",374431
+66956,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":568}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""up""}",374863
+66957,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":176}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""up""}",375072
+66958,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":1}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""up""}",375972
+66959,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":242}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",376179
+66960,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":244}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",377639
+66961,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":277}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",377846
+66962,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":294}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",378046
+66963,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":312}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",378247
+66964,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":334}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",378447
+66965,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":336}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",378852
+66966,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":468}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",379061
+66967,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":670}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",379261
+66968,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":765}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",379461
+66969,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":803}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",379673
+66970,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":812}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",379928
+66971,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":833}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",380141
+66972,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":859}",,"{""clientHeight"":830,""scrollHeight"":1691,""scrollDirection"":""down""}",380395
+66973,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":434,""y"":618}",,,383702
+66974,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":357,""y"":719}",,,383809
+66975,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":251,""y"":821}",,,383916
+66976,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":210,""y"":849}",,,384022
+66977,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":185,""y"":864}",,,384129
+66978,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":158,""y"":862}",,,384236
+66979,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":142,""y"":855}",,,384344
+66980,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":141,""y"":852}",,,384449
+66981,session_1762096692449_ij9sf4nym,mouse,hover_start,"[aria-label=""Regenerate response""]",response,"{""x"":152,""y"":860}",,"{""messageId"":2}",384569
+66982,session_1762096692449_ij9sf4nym,ui,message_action,regenerate-button,response,,,"{""messageId"":2,""actionType"":""toggle_regenerate_menu"",""isExpanding"":true}",384603
+66983,session_1762096692449_ij9sf4nym,mouse,click,"[aria-label=""Regenerate response""]",response,"{""x"":141,""y"":852}",,"{""messageId"":2,""buttonType"":""submit"",""buttonHoverMessage"":""Regenerate response""}",384632
+66984,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":141,""y"":852}",,,384850
+66985,session_1762096692449_ij9sf4nym,mouse,hover_end,"[aria-label=""Regenerate response""]",response,,,"{""messageId"":2}",384902
+66986,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":192,""y"":884}",,,384955
+66987,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":863}",,"{""clientHeight"":830,""scrollHeight"":1959,""scrollDirection"":""down""}",385214
+66988,session_1762096692449_ij9sf4nym,mouse,hover_start,"[placeholder=""Ask to change response""]",response,"{""x"":198,""y"":895}",,"{""messageId"":2}",385284
+66989,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":1081}",,"{""clientHeight"":830,""scrollHeight"":1959,""scrollDirection"":""down""}",385423
+66990,session_1762096692449_ij9sf4nym,mouse,hover_end,"[placeholder=""Ask to change response""]",response,,,"{""messageId"":2}",385623
+66991,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":201,""y"":907}",,,385663
+66992,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":188,""y"":860}",,,385772
+66993,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":181,""y"":832}",,,385876
+66994,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":178,""y"":817}",,,385983
+66995,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":178,""y"":812}",,,386090
+66996,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":182,""y"":789}",,,386196
+66997,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":185,""y"":763}",,,386303
+66998,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":185,""y"":762}",,,386437
+66999,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":193,""y"":807}",,,386543
+67000,session_1762096692449_ij9sf4nym,ui,message_action,search-web-button,response,,,"{""messageId"":2,""actionType"":""search_web""}",386781
+67001,session_1762096692449_ij9sf4nym,ui,message_action,contextual-prompt-input,response,,,"{""messageId"":2,""actionType"":""contextual_prompt"",""promptText"":""Regenerate this response with searching the web"",""promptLength"":47,""useWebSearch"":true}",386781
+67002,session_1762096692449_ij9sf4nym,ui,composer_interaction,send-button,prompting,,,"{""hasContext"":true,""promptLength"":3404,""isCustomPrompt"":true,""contextMessageId"":2}",386781
+67003,session_1762096692449_ij9sf4nym,mouse,click,button.text-token-text-primary,response,"{""x"":194,""y"":818}",,"{""messageId"":2,""buttonText"":""Search the web"",""buttonType"":""submit""}",386808
+67004,session_1762096692449_ij9sf4nym,mouse,hover_start,button.text-token-text-primary,response,"{""x"":191,""y"":797}",,"{""messageId"":2}",386829
+67005,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":1131}",,"{""clientHeight"":830,""scrollHeight"":2200,""scrollDirection"":""down""}",386930
+67006,session_1762096692449_ij9sf4nym,mouse,hover_start,"[data-testid=""conversation-turn-2""]",response,"{""x"":194,""y"":818}",,"{""messageId"":2}",387113
+67007,session_1762096692449_ij9sf4nym,mouse,scroll,,prompting,"{""x"":0,""y"":1367}",,"{""clientHeight"":830,""scrollHeight"":2200,""scrollDirection"":""down""}",387129
+67008,session_1762096692449_ij9sf4nym,mouse,hover_start,"[data-testid=""conversation-turn-2""]",response,"{""x"":194,""y"":818}",,"{""messageId"":2}",387143
+67009,session_1762096692449_ij9sf4nym,mouse,hover_end,"[data-testid=""conversation-turn-2""]",response,,,"{""messageId"":2}",387197
+67010,session_1762096692449_ij9sf4nym,mouse,hover_start,"[data-testid=""conversation-turn-3""]",response,"{""x"":194,""y"":818}",,"{""messageId"":3}",387498
+67011,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":194,""y"":815}",,,426212
+67012,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":541,""y"":348}",,,426318
+67013,session_1762096692449_ij9sf4nym,mouse,cursor_move,,,"{""x"":839,""y"":0}",,,426604
+67014,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1116,""y"":169}",,,428705
+67015,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":683,""y"":491}",,,428805
+67016,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":450,""y"":554}",,,428932
+67017,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":341,""y"":537}",,,429038
+67018,session_1762096692449_ij9sf4nym,mouse,hover_start,"[data-testid=""conversation-turn-4""]",response,"{""x"":892,""y"":344}",,"{""messageId"":4}",429049
+67019,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":318,""y"":531}",,,429345
+67020,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":223,""y"":525}",,,429452
+67021,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":183,""y"":516}",,,429558
+67022,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":159,""y"":514}",,,429666
+67023,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":146,""y"":505}",,,429773
+67024,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":144,""y"":501}",,,429893
+67025,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":144,""y"":501}",,,430013
+67026,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":144,""y"":501}",,,430213
+67027,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":146,""y"":502}",,,430493
+67028,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":16,""messageId"":4,""textLength"":1,""startOffset"":15,""selectedText"":""i""}",430533
+67029,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":18,""messageId"":4,""textLength"":3,""startOffset"":15,""selectedText"":""ile""}",430535
+67030,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":22,""messageId"":4,""textLength"":7,""startOffset"":15,""selectedText"":""iled at""}",430560
+67031,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":25,""messageId"":4,""textLength"":10,""startOffset"":15,""selectedText"":""iled at Ap""}",430573
+67032,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":28,""messageId"":4,""textLength"":13,""startOffset"":15,""selectedText"":""iled at Apple""}",430587
+67033,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":251,""y"":502}",,,430599
+67034,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":32,""messageId"":4,""textLength"":17,""startOffset"":15,""selectedText"":""iled at Apple’s \""""}",430601
+67035,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":36,""messageId"":4,""textLength"":21,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe ""}",430615
+67036,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":39,""messageId"":4,""textLength"":24,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dro""}",430627
+67037,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":43,""messageId"":4,""textLength"":28,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Droppin""}",430641
+67038,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":45,""messageId"":4,""textLength"":30,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\""""}",430654
+67039,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":48,""messageId"":4,""textLength"":33,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" ev""}",430668
+67040,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":50,""messageId"":4,""textLength"":35,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" even""}",430682
+67041,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":52,""messageId"":4,""textLength"":37,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" event ""}",430695
+67042,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":392,""y"":509}",,,430706
+67043,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":53,""messageId"":4,""textLength"":38,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" event o""}",430708
+67044,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":54,""messageId"":4,""textLength"":39,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" event on""}",430734
+67045,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":404,""y"":511}",,,430826
+67046,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":54,""messageId"":4,""textLength"":39,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" event on""}",430830
+67047,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":404,""y"":512}",,,431306
+67048,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":0,""messageId"":4,""textLength"":59,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" event on September 9, 2025.\n""}",431308
+67049,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":54,""messageId"":4,""textLength"":39,""startOffset"":15,""selectedText"":""iled at Apple’s \""Awe Dropping\"" event on""}",431375
+67050,session_1762096692449_ij9sf4nym,mouse,click,li,response,"{""x"":404,""y"":511}",,"{""messageId"":4}",432093
+67051,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":403,""y"":512}",,,432361
+67052,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":367,""y"":550}",,,432467
+67053,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":364,""y"":550}",,,432574
+67054,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":353,""y"":535}",,,432680
+67055,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":345,""y"":533}",,,432787
+67056,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":337,""y"":531}",,,432894
+67057,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":337,""y"":531}",,,433014
+67058,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":336,""y"":530}",,,433120
+67059,session_1762096692449_ij9sf4nym,selection,selection_clear,,,,,,433122
+67060,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":337,""y"":530}",,,433267
+67061,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":13,""messageId"":4,""textLength"":2,""startOffset"":11,""selectedText"":"" t""}",433296
+67062,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":15,""messageId"":4,""textLength"":4,""startOffset"":11,""selectedText"":"" the""}",433309
+67063,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":18,""messageId"":4,""textLength"":7,""startOffset"":11,""selectedText"":"" the Pl""}",433322
+67064,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":21,""messageId"":4,""textLength"":10,""startOffset"":11,""selectedText"":"" the Plus ""}",433336
+67065,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":24,""messageId"":4,""textLength"":13,""startOffset"":11,""selectedText"":"" the Plus mod""}",433349
+67066,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":28,""messageId"":4,""textLength"":17,""startOffset"":11,""selectedText"":"" the Plus model w""}",433362
+67067,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":471,""y"":530}",,,433373
+67068,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":31,""messageId"":4,""textLength"":20,""startOffset"":11,""selectedText"":"" the Plus model with""}",433375
+67069,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":34,""messageId"":4,""textLength"":23,""startOffset"":11,""selectedText"":"" the Plus model with an""}",433389
+67070,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":36,""messageId"":4,""textLength"":25,""startOffset"":11,""selectedText"":"" the Plus model with an u""}",433401
+67071,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":38,""messageId"":4,""textLength"":27,""startOffset"":11,""selectedText"":"" the Plus model with an ult""}",433415
+67072,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":39,""messageId"":4,""textLength"":28,""startOffset"":11,""selectedText"":"" the Plus model with an ultr""}",433428
+67073,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":40,""messageId"":4,""textLength"":29,""startOffset"":11,""selectedText"":"" the Plus model with an ultra""}",433443
+67074,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":41,""messageId"":4,""textLength"":30,""startOffset"":11,""selectedText"":"" the Plus model with an ultra-""}",433455
+67075,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":529,""y"":536}",,,433480
+67076,session_1762096692449_ij9sf4nym,mouse,click,li,response,"{""x"":529,""y"":536}",,"{""messageId"":4}",433505
+67077,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":529,""y"":537}",,,433774
+67078,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":473,""y"":611}",,,433881
+67079,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":434,""y"":652}",,,433987
+67080,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":414,""y"":643}",,,434094
+67081,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":402,""y"":616}",,,434201
+67082,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":402,""y"":610}",,,434307
+67083,session_1762096692449_ij9sf4nym,selection,selection_clear,,,,,,434428
+67084,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":403,""y"":611}",,,434440
+67085,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":403,""y"":611}",,,434588
+67086,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":11,""messageId"":4,""textLength"":1,""startOffset"":10,""selectedText"":""n""}",434617
+67087,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":0,""messageId"":4,""textLength"":40,""startOffset"":10,""selectedText"":""nd always-on display across all models.\n""}",434630
+67088,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":28,""messageId"":4,""textLength"":93,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured a""}",434644
+67089,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":29,""messageId"":4,""textLength"":94,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured an""}",434656
+67090,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":0,""messageId"":4,""textLength"":122,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured an Apple-designed Wi-Fi chip.\n""}",434670
+67091,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":54,""messageId"":4,""textLength"":176,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured an Apple-designed Wi-Fi chip.\nCameras included a 48MP telephoto and a 24MP front cam""}",434683
+67092,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":439,""y"":668}",,,434694
+67093,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":0,""messageId"":4,""textLength"":199,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured an Apple-designed Wi-Fi chip.\nCameras included a 48MP telephoto and a 24MP front camera across the lineup.\n""}",434710
+67094,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":59,""messageId"":4,""textLength"":258,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured an Apple-designed Wi-Fi chip.\nCameras included a 48MP telephoto and a 24MP front camera across the lineup.\nDurability and performance improved with a scratch-resistan""}",434723
+67095,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":60,""messageId"":4,""textLength"":259,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured an Apple-designed Wi-Fi chip.\nCameras included a 48MP telephoto and a 24MP front camera across the lineup.\nDurability and performance improved with a scratch-resistant""}",434748
+67096,session_1762096692449_ij9sf4nym,selection,text_select,li,response,,,"{""endOffset"":61,""messageId"":4,""textLength"":260,""startOffset"":10,""selectedText"":""nd always-on display across all models.\nPro models gained Wi-Fi 7, and base models featured an Apple-designed Wi-Fi chip.\nCameras included a 48MP telephoto and a 24MP front camera across the lineup.\nDurability and performance improved with a scratch-resistant ""}",434762
+67097,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":458,""y"":698}",,,434801
+67098,session_1762096692449_ij9sf4nym,mouse,click,ul,response,"{""x"":458,""y"":698}",,"{""messageId"":4}",434866
+67099,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":459,""y"":698}",,,435281
+67100,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":504,""y"":727}",,,435388
+67101,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":508,""y"":730}",,,435495
+67102,session_1762096692449_ij9sf4nym,selection,selection_clear,,,,,,435535
+67103,session_1762096692449_ij9sf4nym,mouse,click,li,response,"{""x"":508,""y"":730}",,"{""messageId"":4}",435652
+67104,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":508,""y"":730}",,,438176
+67105,session_1762096692449_ij9sf4nym,mouse,hover_end,"[data-testid=""conversation-turn-4""]",response,,,"{""messageId"":4}",438283
+67106,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":949,""y"":121}",,,438283
+67107,session_1762096692449_ij9sf4nym,mouse,cursor_move,,,"{""x"":1484,""y"":0}",,,438389
+67108,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1362,""y"":223}",,,441843
+67109,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":700,""y"":671}",,,441955
+67110,session_1762096692449_ij9sf4nym,mouse,hover_start,"[data-testid=""conversation-turn-4""]",response,"{""x"":926,""y"":534}",,"{""messageId"":4}",442193
+67111,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":664,""y"":689}",,,442444
+67112,session_1762096692449_ij9sf4nym,mouse,hover_end,"[data-testid=""conversation-turn-4""]",response,,,"{""messageId"":4}",442537
+67113,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":187,""y"":913}",,,442550
+67114,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":101,""y"":928}",,,442657
+67115,session_1762096692449_ij9sf4nym,mouse,cursor_move,,prompting,"{""x"":101,""y"":922}",,,442764
+67116,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":123,""y"":888}",,,442871
+67117,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":144,""y"":872}",,,442977
+67118,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":145,""y"":870}",,,443084
+67119,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":150,""y"":828}",,,443191
+67120,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":190,""y"":729}",,,443297
+67121,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":192,""y"":726}",,,443792
+67122,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":516,""y"":389}",,,443898
+67123,session_1762096692449_ij9sf4nym,mouse,cursor_move,,response,"{""x"":715,""y"":183}",,,444191
+67124,session_1762096692449_ij9sf4nym,mouse,cursor_move,,,"{""x"":1512,""y"":0}",,,444297
+67125,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1461,""y"":185}",,,446498
+67126,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1171,""y"":386}",,,446606
+67127,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1168,""y"":388}",,,446965
+67128,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1168,""y"":387}",,,447112
+67129,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1168,""y"":384}",,,447219
+67130,session_1762096692449_ij9sf4nym,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":0,""currentWordCount"":0}",447365
+67131,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1169,""y"":383}",,,447366
+67132,session_1762096692449_ij9sf4nym,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":1169,""y"":383}",,{},447381
+67133,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""["",""code"":""BracketLeft"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",448217
+67134,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":1,""charsDelta"":1,""insertedText"":""["",""previousLength"":0}",448223
+67135,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""]"",""code"":""BracketRight"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",448310
+67136,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":2,""charsDelta"":1,""insertedText"":""]"",""previousLength"":1}",448311
+67137,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""ArrowLeft"",""code"":""ArrowLeft"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",448668
+67138,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",449227
+67139,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":3,""charsDelta"":1,""insertedText"":""t"",""previousLength"":2}",449229
+67140,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",449365
+67141,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":4,""charsDelta"":1,""insertedText"":""e"",""previousLength"":3}",449366
+67142,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",449532
+67143,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":5,""charsDelta"":1,""insertedText"":""s"",""previousLength"":4}",449532
+67144,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",449588
+67145,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":6,""charsDelta"":1,""insertedText"":""t"",""previousLength"":5}",449589
+67146,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",449764
+67147,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":7,""charsDelta"":1,""insertedText"":"" "",""previousLength"":6}",449765
+67148,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",451967
+67149,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":8,""charsDelta"":1,""insertedText"":""s"",""previousLength"":7}",451968
+67150,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",452163
+67151,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":9,""charsDelta"":1,""insertedText"":""e"",""previousLength"":8}",452166
+67152,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",452351
+67153,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":10,""charsDelta"":1,""insertedText"":""a"",""previousLength"":9}",452353
+67154,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""r"",""code"":""KeyR"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",452437
+67155,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":11,""charsDelta"":1,""insertedText"":""r"",""previousLength"":10}",452438
+67156,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""c"",""code"":""KeyC"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",452678
+67157,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":12,""charsDelta"":1,""insertedText"":""c"",""previousLength"":11}",452681
+67158,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",452741
+67159,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":13,""charsDelta"":1,""insertedText"":""h"",""previousLength"":12}",452742
+67160,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",452857
+67161,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":14,""charsDelta"":1,""insertedText"":"" "",""previousLength"":13}",452859
+67162,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",452976
+67163,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":15,""charsDelta"":1,""insertedText"":""t"",""previousLength"":14}",452978
+67164,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",453134
+67165,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":16,""charsDelta"":1,""insertedText"":""h"",""previousLength"":15}",453136
+67166,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",453225
+67167,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":17,""charsDelta"":1,""insertedText"":""e"",""previousLength"":16}",453227
+67168,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",453311
+67169,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":18,""charsDelta"":1,""insertedText"":"" "",""previousLength"":17}",453314
+67170,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""w"",""code"":""KeyW"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",453434
+67171,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":19,""charsDelta"":1,""insertedText"":""w"",""previousLength"":18}",453436
+67172,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",453510
+67173,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":20,""charsDelta"":1,""insertedText"":""e"",""previousLength"":19}",453512
+67174,session_1762096692449_ij9sf4nym,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""b"",""code"":""KeyB"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",453571
+67175,session_1762096692449_ij9sf4nym,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":21,""charsDelta"":1,""insertedText"":""b"",""previousLength"":20}",453573
+67176,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1174,""y"":387}",,,454094
+67177,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1481,""y"":563}",,,454194
+67178,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1674,""y"":790}",,,454300
+67179,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1662,""y"":866}",,,454407
+67180,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1616,""y"":927}",,,454514
+67181,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1567,""y"":962}",,,454621
+67182,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1559,""y"":959}",,,454728
+67183,session_1762096692449_ij9sf4nym,mouse,hover_start,button,writing,"{""x"":1601,""y"":940}",,,454830
+67184,session_1762096692449_ij9sf4nym,mouse,cursor_move,,writing,"{""x"":1546,""y"":951}",,,454835
+67185,session_1762096692449_ij9sf4nym,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":21,""currentWordCount"":4}",454860
+67186,session_1762096692449_ij9sf4nym,mouse,click,button,writing,"{""x"":1546,""y"":951}",,"{""buttonText"":""Submit Final Work"",""buttonType"":""submit""}",454975
+67187,session_1762096692449_ij9sf4nym,mouse,hover_end,button,writing,,,,454981

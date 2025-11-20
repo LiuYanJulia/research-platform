@@ -3,6 +3,7 @@ import mysql from 'mysql2/promise';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import { isPracticeSession } from '../utils/sessionUtils';
 
 const router = express.Router();
 
@@ -29,11 +30,28 @@ const upload = multer({ storage });
 // Upload audio file
 router.post('/upload-audio', upload.single('audio'), async (req, res) => {
   try {
+    const sessionId = req.body.sessionId || 'unknown';
+
+    // Check if this is a practice session
+    const isPractice = isPracticeSession(sessionId);
+
+    // If practice session, delete the uploaded file and return success
+    if (isPractice) {
+      if (req.file) {
+        fs.unlinkSync(req.file.path);
+        console.log(`Practice session: Audio file deleted (not saved)`);
+      }
+      return res.json({
+        success: true,
+        fileUrl: null,
+        filename: null
+      });
+    }
+
     if (!req.file) {
       return res.status(400).json({ error: 'No audio file uploaded' });
     }
 
-    const sessionId = req.body.sessionId || 'unknown';
     const ext = path.extname(req.file.originalname);
     const newFilename = `audio_${sessionId}${ext}`;
 
@@ -77,6 +95,24 @@ router.post('/submit', async (req, res) => {
       recordingStartTimestamp,
       submittedAt
     } = req.body;
+
+    // Check if this is a practice session
+    const isPractice = isPracticeSession(sessionId);
+
+    // If practice session, return success without saving anything
+    if (isPractice) {
+      console.log(`Practice session: Submission not saved (session: ${sessionId})`);
+      return res.json({
+        success: true,
+        message: 'Practice session submission (not saved)',
+        data: {
+          sessionId,
+          wordCount,
+          charCount,
+          submittedAt
+        }
+      });
+    }
 
     // Convert ISO timestamp to MySQL datetime format
     const mysqlTimestamp = new Date(submittedAt).toISOString().slice(0, 19).replace('T', ' ');

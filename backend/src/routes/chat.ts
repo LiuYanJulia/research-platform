@@ -1,5 +1,6 @@
 import express from 'express';
 import OpenAI from 'openai';
+import { isPracticeSession } from '../utils/sessionUtils';
 
 const router = express.Router();
 
@@ -92,12 +93,15 @@ router.post('/stream', async (req, res) => {
   const db = (req as any).db;
   const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
 
+  // Check if this is a practice session (declare at function scope)
+  const isPractice = isPracticeSession(sessionId);
+
   try {
     if (!sessionId || !message) {
       return res.status(400).json({ error: 'Session ID and message are required' });
     }
 
-    // Ensure session exists
+    // Ensure session exists (allow for both practice and actual sessions)
     if (db) {
       await db.execute(
         'INSERT IGNORE INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
@@ -176,7 +180,7 @@ router.post('/stream', async (req, res) => {
       // Send completion signal - streaming completed successfully
       res.write(`data: ${JSON.stringify({ content: '', done: true })}\n\n`);
 
-      // Save complete assistant message to database
+      // Save complete assistant message to database (allow for both practice and actual sessions)
       if (db && fullMessage.trim()) {
         await db.execute(
           'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',
@@ -196,7 +200,7 @@ router.post('/stream', async (req, res) => {
         sessionId: sessionId
       });
 
-      // Save partial response if we have any content
+      // Save partial response if we have any content (allow for both practice and actual sessions)
       if (db && fullMessage.trim()) {
         console.log(`Saving partial response (${fullMessage.length} chars) for session ${sessionId}`);
         try {
@@ -238,7 +242,7 @@ router.post('/stream', async (req, res) => {
       sessionId: sessionId
     });
 
-    // Save partial response if streaming had started and we have content
+    // Save partial response if streaming had started and we have content (allow for both practice and actual sessions)
     if (streamStarted && db && fullMessage.trim()) {
       console.log(`Saving partial response after outer error (${fullMessage.length} chars) for session ${sessionId}`);
       try {
@@ -350,7 +354,10 @@ router.post('/save-message', async (req, res) => {
       return res.status(400).json({ error: 'Session ID, role, and content are required' });
     }
 
-    // Ensure session exists
+    // Check if this is a practice session
+    const isPractice = isPracticeSession(sessionId);
+
+    // Ensure session exists (allow for both practice and actual sessions)
     if (db) {
       await db.execute(
         'INSERT IGNORE INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
@@ -358,6 +365,7 @@ router.post('/save-message', async (req, res) => {
       );
     }
 
+    // Save message (allow for both practice and actual sessions)
     if (db) {
       await db.execute(
         'INSERT INTO messages (session_id, role, content, model_slug) VALUES (?, ?, ?, ?)',

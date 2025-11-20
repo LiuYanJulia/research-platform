@@ -1,122 +1,120 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
-import InstructionPage from './components/InstructionPage';
-import ChatInterface from './components/ChatInterface';
-import WebRTCTranscript, { WebRTCTranscriptRef } from './components/WebRTCTranscript';
-import WritingSection from './components/WritingSection';
-import SubmissionConfirmation from './components/SubmissionConfirmation';
-import { useInteractionLogger } from './hooks/useInteractionLogger';
+import UserIdEntry from './components/UserIdEntry';
+import WelcomePractice from './components/WelcomePractice';
+import WelcomeActual from './components/WelcomeActual';
+import ResearchPagePractice from './pages/ResearchPagePractice';
+import ResearchPageActual from './pages/ResearchPageActual';
 
-function App() {
-  const [sessionStarted, setSessionStarted] = useState(false);
-  const [submissionComplete, setSubmissionComplete] = useState(false);
-  const [sessionId, setSessionId] = useState<string>('');
-  const [sessionStartTime, setSessionStartTime] = useState<number>(0);
-  const transcriptRef = useRef<WebRTCTranscriptRef>(null);
+function AppContent() {
+  const navigate = useNavigate();
+  const [userId, setUserId] = useState<string>('');
+  const [practiceSessionId, setPracticeSessionId] = useState<string>('');
+  const [actualSessionId, setActualSessionId] = useState<string>('');
+  const [practiceSessionStartTime, setPracticeSessionStartTime] = useState<number>(0);
+  const [actualSessionStartTime, setActualSessionStartTime] = useState<number>(0);
 
-  // Initialize logger ONCE at the App level (not in individual components)
-  // This prevents duplicate logging since global event listeners are attached once
-  const logger = useInteractionLogger({
-    sessionId: sessionId || '',
-    sessionStartTime: sessionStartTime || Date.now(),
-    batchSize: 50,
-    batchInterval: 5000,
-  });
+  // Handle user ID submission
+  const handleUserIdSubmit = async (submittedUserId: string) => {
+    setUserId(submittedUserId);
 
-  const handleAgree = async () => {
-    // Generate unique session ID
-    const newSessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-
-    // Record session start time (milliseconds since epoch)
-    const startTime = Date.now();
-    setSessionStartTime(startTime);
+    // Generate practice session ID
+    const practiceId = `practice_${submittedUserId}_${Date.now()}`;
+    setPracticeSessionId(practiceId);
+    setPracticeSessionStartTime(Date.now());
 
     try {
-      // Create session in database
-      const response = await fetch('/api/session/create', {
+      // Create practice session in database immediately
+      await fetch('/api/session/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          sessionId: newSessionId,
-          participantId: 'participant_' + Date.now() // You can customize this
+          sessionId: practiceId,
+          participantId: submittedUserId
         }),
       });
+    } catch (error) {
+      console.error('Error creating practice session:', error);
+    }
 
-      if (!response.ok) {
-        console.error('Failed to create session in database');
-      }
+    // Navigate to practice welcome page
+    navigate('/welcome-practice');
+  };
+
+  // Handle start practice task
+  const handleStartPractice = () => {
+    navigate('/practice');
+  };
+
+  // Handle practice complete
+  const handlePracticeComplete = () => {
+    navigate('/welcome-actual');
+  };
+
+  // Handle start actual task
+  const handleStartActual = async () => {
+    // Generate actual session ID
+    const actualId = `${userId}_${Date.now()}`;
+    const startTime = Date.now();
+
+    setActualSessionId(actualId);
+    setActualSessionStartTime(startTime);
+
+    try {
+      // Create session in database
+      await fetch('/api/session/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sessionId: actualId,
+          participantId: userId
+        }),
+      });
     } catch (error) {
       console.error('Error creating session:', error);
     }
 
-    setSessionId(newSessionId);
-    setSessionStarted(true);
+    navigate('/research');
   };
-
-  // Auto-start recording when session starts
-  useEffect(() => {
-    if (sessionStarted && transcriptRef.current) {
-      // Small delay to ensure component is mounted
-      setTimeout(() => {
-        console.log('Auto-starting recording...');
-        transcriptRef.current?.startRecording();
-      }, 1000);
-    }
-  }, [sessionStarted]);
-
-  const handleSubmissionComplete = () => {
-    // Stop recording when submission is complete
-    if (transcriptRef.current) {
-      transcriptRef.current.stopRecording();
-    }
-
-    // Send any remaining logs
-    logger.sendBatch();
-
-    // Show confirmation page
-    setSubmissionComplete(true);
-  };
-
-  if (!sessionStarted) {
-    return <InstructionPage onAgree={handleAgree} />;
-  }
-
-  if (submissionComplete) {
-    return <SubmissionConfirmation />;
-  }
 
   return (
-    <div className="main-grid bg-token-bg-primary text-token-text-primary">
-      {/* LLM Chat Interface - Left Half */}
-      <div className="section-chat border border-gray-200 rounded-lg p-4 bg-token-bg-primary">
-        <ChatInterface
-          sessionId={sessionId}
-          sessionStartTime={sessionStartTime}
-          logger={logger}
-        />
-      </div>
-
-      {/* Right Half - Transcript and Writing */}
-      <div className="section-right">
-        {/* Voice Transcript Section - Top Right */}
-        <div className="section-transcript border border-gray-200 rounded-lg p-4 bg-token-bg-primary">
-          <WebRTCTranscript ref={transcriptRef} />
-        </div>
-
-        {/* Final Writing/Submission Section - Bottom Right */}
-        <div className="section-writing border border-gray-200 rounded-lg p-4 bg-token-bg-primary">
-          <WritingSection
-            sessionId={sessionId}
-            transcriptRef={transcriptRef}
-            sessionStartTime={sessionStartTime}
-            logger={logger}
-            onSubmissionComplete={handleSubmissionComplete}
+    <Routes>
+      <Route path="/" element={<UserIdEntry onSubmit={handleUserIdSubmit} />} />
+      <Route path="/welcome-practice" element={<WelcomePractice onStart={handleStartPractice} />} />
+      <Route
+        path="/practice"
+        element={
+          <ResearchPagePractice
+            sessionId={practiceSessionId}
+            sessionStartTime={practiceSessionStartTime}
+            onComplete={handlePracticeComplete}
           />
-        </div>
-      </div>
-    </div>
+        }
+      />
+      <Route path="/welcome-actual" element={<WelcomeActual onStart={handleStartActual} />} />
+      <Route
+        path="/research"
+        element={
+          <ResearchPageActual
+            sessionId={actualSessionId}
+            sessionStartTime={actualSessionStartTime}
+          />
+        }
+      />
+    </Routes>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 

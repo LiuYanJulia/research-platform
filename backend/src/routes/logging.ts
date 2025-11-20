@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
+import { isPracticeSession } from '../utils/sessionUtils';
 
 const router = express.Router();
 
@@ -28,6 +29,7 @@ router.post('/batch', async (req, res) => {
       return res.status(400).json({ error: 'Session ID and logs array are required' });
     }
 
+    // Allow logging for both practice and actual sessions
     // Prepare bulk insert with normalized event types
     const values = logs.map((log: any) => {
       return [
@@ -86,6 +88,7 @@ router.post('/single', async (req, res) => {
       return res.status(400).json({ error: 'Session ID, event type, and action are required' });
     }
 
+    // Allow logging for both practice and actual sessions
     await db.execute(
       `INSERT INTO interaction_logs
        (session_id, event_type, action, target_element, target_section, coordinates, text_content, metadata)
