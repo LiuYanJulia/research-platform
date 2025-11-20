@@ -52,6 +52,9 @@ router.post('/session', async (req, res) => {
   try {
     console.log('Creating new OpenAI Realtime session...');
 
+    // Get realtime model from environment or use default
+    const realtimeModel = process.env.OPENAI_REALTIME_MODEL || 'gpt-4o-realtime-preview-2024-12-17';
+
     // Create session using OpenAI Realtime Sessions API
     const response = await fetch("https://api.openai.com/v1/realtime/sessions", {
       method: "POST",
@@ -60,7 +63,7 @@ router.post('/session', async (req, res) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "gpt-4o-realtime-preview-2024-12-17",
+        model: realtimeModel,
         voice: "alloy",
         modalities: ["text", "audio"],
         instructions: "You are a helpful assistant that provides live transcription. Focus on accurate speech-to-text conversion. Respond with transcribed text as you hear it.",
