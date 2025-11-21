@@ -49,7 +49,7 @@ router.post('/send', async (req, res) => {
 
     // Call OpenAI API with conversation context
     const openai = getOpenAI();
-    const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
+    const modelName = process.env.OPENAI_MODEL || 'gpt-4o';
     const completion = await openai.chat.completions.create({
       model: modelName,
       messages: [
@@ -91,7 +91,7 @@ router.post('/stream', async (req, res) => {
   let streamStarted = false;
   const { sessionId, message, conversationHistory = [] } = req.body;
   const db = (req as any).db;
-  const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
+  const modelName = process.env.OPENAI_MODEL || 'gpt-4o';
 
   // Check if this is a practice session (declare at function scope)
   const isPractice = isPracticeSession(sessionId);
@@ -308,7 +308,7 @@ router.post('/', async (req, res) => {
 
     // Call OpenAI API with conversation context
     const openai = getOpenAI();
-    const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
+    const modelName = process.env.OPENAI_MODEL || 'gpt-4o';
     const completion = await openai.chat.completions.create({
       model: modelName,
       messages: [
@@ -435,7 +435,7 @@ router.post('/generate-from-transcript', async (req, res) => {
     }
 
     const openai = getOpenAI();
-    const modelName = process.env.OPENAI_MODEL || 'gpt-5-mini';
+    const modelName = process.env.OPENAI_MODEL || 'gpt-4o';
     const completion = await openai.chat.completions.create({
       model: modelName,
       messages: [
@@ -567,7 +567,7 @@ router.post('/feedback', async (req, res) => {
 router.get('/model-info', async (req, res) => {
   try {
     res.json({
-      model: process.env.OPENAI_MODEL || 'gpt-5-mini',
+      model: process.env.OPENAI_MODEL || 'gpt-4o',
       provider: 'openai',
       timestamp: new Date().toISOString(),
     });

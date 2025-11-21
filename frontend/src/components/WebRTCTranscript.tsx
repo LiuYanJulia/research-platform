@@ -61,9 +61,9 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
         throw new Error(`Failed to create session: ${response.status}`);
       }
 
-      const { session } = await response.json();
+      const { session, model } = await response.json();
       sessionRef.current = session;
-      console.log('Session created:', session.id);
+      console.log('Session created:', session.id, 'Model:', model);
 
       // Step 2: Set up WebRTC peer connection
       const peerConnection = new RTCPeerConnection({
@@ -185,7 +185,7 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
       await peerConnection.setLocalDescription(offer);
 
       // Step 7: Connect to OpenAI Realtime API via WebRTC
-      const realtimeUrl = `https://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-12-17`;
+      const realtimeUrl = `https://api.openai.com/v1/realtime?model=${model || 'gpt-realtime'}`;
 
       const connectResponse = await fetch(realtimeUrl, {
         method: 'POST',

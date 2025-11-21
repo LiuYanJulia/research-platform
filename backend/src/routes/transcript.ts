@@ -53,7 +53,7 @@ router.post('/session', async (req, res) => {
     console.log('Creating new OpenAI Realtime session...');
 
     // Get realtime model from environment or use default
-    const realtimeModel = process.env.OPENAI_REALTIME_MODEL || 'gpt-4o-realtime-preview-2024-12-17';
+    const realtimeModel = process.env.OPENAI_REALTIME_MODEL || 'gpt-realtime';
 
     // Create session using OpenAI Realtime Sessions API
     const response = await fetch("https://api.openai.com/v1/realtime/sessions", {
@@ -84,6 +84,7 @@ router.post('/session', async (req, res) => {
 
     res.json({
       session,
+      model: realtimeModel,  // Pass model to frontend
       status: 'session_created',
       message: 'OpenAI Realtime session created for WebRTC'
     });

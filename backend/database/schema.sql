@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS chat_messages (
 CREATE TABLE IF NOT EXISTS final_writings (
     id VARCHAR(36) PRIMARY KEY,
     session_id VARCHAR(36),
-    content TEXT,
+    content MEDIUMTEXT,
     word_count INT DEFAULT 0,
     char_count INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
