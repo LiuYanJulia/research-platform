@@ -128,11 +128,17 @@ async function createTables() {
     // Final submissions table
     await db.execute(`
       CREATE TABLE IF NOT EXISTS submissions (
-        id INT AUTO_INCREMENT PRIMARY KEY,
+        id VARCHAR(50) PRIMARY KEY,
         session_id VARCHAR(36) NOT NULL UNIQUE,
-        content TEXT NOT NULL,
+        final_writing TEXT NOT NULL,
+        transcript_file_url VARCHAR(255),
+        chat_history_file_url VARCHAR(255),
+        interaction_logs_file_url VARCHAR(255),
+        audio_file_url VARCHAR(255),
         word_count INT DEFAULT 0,
         char_count INT DEFAULT 0,
+        session_start_timestamp BIGINT,
+        recording_start_timestamp BIGINT,
         submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (session_id) REFERENCES sessions(id) ON DELETE CASCADE
       )

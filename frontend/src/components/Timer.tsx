@@ -16,43 +16,49 @@ const Timer: React.FC<TimerProps> = ({
   onTick
 }) => {
   const [seconds, setSeconds] = useState(mode === 'countdown' ? initialSeconds : 0);
+  const [expired, setExpired] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Handle timer tick - just update the state, no callbacks here
   useEffect(() => {
-    // Start the timer
     intervalRef.current = setInterval(() => {
       setSeconds(prev => {
         if (mode === 'countdown') {
           const newValue = prev - 1;
           if (newValue <= 0) {
-            // Timer expired
             if (intervalRef.current) {
               clearInterval(intervalRef.current);
             }
-            if (onExpire) {
-              onExpire();
-            }
+            setExpired(true);
             return 0;
           }
           return newValue;
         } else {
-          // Count up mode
-          const newValue = prev + 1;
-          if (onTick) {
-            onTick(newValue);
-          }
-          return newValue;
+          return prev + 1;
         }
       });
     }, 1000);
 
-    // Cleanup on unmount
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
     };
-  }, [mode, onExpire, onTick]);
+  }, [mode]);
+
+  // Handle onExpire callback separately (outside of render)
+  useEffect(() => {
+    if (expired && onExpire) {
+      onExpire();
+    }
+  }, [expired, onExpire]);
+
+  // Handle onTick callback separately (outside of render)
+  useEffect(() => {
+    if (mode === 'countup' && seconds > 0 && onTick) {
+      onTick(seconds);
+    }
+  }, [seconds, mode, onTick]);
 
   // Format seconds to MM:SS
   const formatTime = (totalSeconds: number): string => {

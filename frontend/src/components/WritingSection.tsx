@@ -11,7 +11,8 @@ interface WritingSectionProps {
   };
   onSubmissionComplete?: () => void;
   isPracticeMode?: boolean;
-  elapsedTime?: number; // in seconds
+  elapsedTime?: number; // in seconds (for practice mode)
+  elapsedTimeRef?: React.RefObject<number>; // ref for actual mode (avoids re-renders)
 }
 
 const WritingSection: React.FC<WritingSectionProps> = ({
@@ -21,8 +22,13 @@ const WritingSection: React.FC<WritingSectionProps> = ({
   logger,
   onSubmissionComplete,
   isPracticeMode = false,
-  elapsedTime = 0
+  elapsedTime = 0,
+  elapsedTimeRef
 }) => {
+  // Get elapsed time from either prop or ref
+  const getElapsedTime = () => {
+    return elapsedTimeRef?.current ?? elapsedTime;
+  };
   const [content, setContent] = useState('');
   const [wordCount, setWordCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
@@ -235,7 +241,7 @@ const WritingSection: React.FC<WritingSectionProps> = ({
         </div>
 
         {/* Writing Area - You can change minHeight here (e.g., '400px', '500px') */}
-        <div style={{ marginBottom: '0.75rem' }}>
+        <div style={{ marginBottom: '0.75rem', overflow: 'hidden' }}>
           <textarea
             ref={textareaRef}
             data-testid="writing-textarea"
@@ -252,7 +258,11 @@ const WritingSection: React.FC<WritingSectionProps> = ({
               outline: 'none',
               fontSize: '0.875rem',
               lineHeight: '1.625',
-              transition: 'border-color 0.2s, box-shadow 0.2s'
+              transition: 'border-color 0.2s, box-shadow 0.2s',
+              boxSizing: 'border-box',
+              wordWrap: 'break-word',
+              overflowWrap: 'break-word',
+              whiteSpace: 'pre-wrap'
             }}
             onFocus={(e) => {
               e.target.style.borderColor = '#3b82f6';
@@ -331,7 +341,8 @@ const WritingSection: React.FC<WritingSectionProps> = ({
             <button
               onClick={() => {
                 // Check 10-minute minimum for actual task
-                if (!isPracticeMode && elapsedTime < 600) {
+                const currentElapsedTime = getElapsedTime();
+                if (!isPracticeMode && currentElapsedTime < 600) {
                   setShowTimeWarning(true);
                   return;
                 }
@@ -462,7 +473,7 @@ const WritingSection: React.FC<WritingSectionProps> = ({
               The minimum time requirement is 10 minutes. Please continue working on your design.
             </p>
             <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1.5rem' }}>
-              You have spent <strong>{Math.floor(elapsedTime / 60)} minutes and {elapsedTime % 60} seconds</strong> so far.
+              You have spent <strong>{Math.floor(getElapsedTime() / 60)} minutes and {getElapsedTime() % 60} seconds</strong> so far.
             </p>
             <button
               onClick={() => setShowTimeWarning(false)}

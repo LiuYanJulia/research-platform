@@ -23,23 +23,36 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
     batchSize: 50,
     batchInterval: 5000,
   });
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [submissionComplete, setSubmissionComplete] = useState(false);
   const transcriptRef = useRef<WebRTCTranscriptRef>(null);
+  const elapsedSecondsRef = useRef(0);
 
   // Auto-start recording when page loads
   useEffect(() => {
     if (transcriptRef.current) {
+      // Longer delay to ensure practice session is fully cleaned up
       setTimeout(() => {
-        console.log('Auto-starting recording...');
+        console.log('[Actual] Auto-starting recording for main task...');
         transcriptRef.current?.startRecording();
-      }, 1000);
+      }, 500);
     }
   }, []);
 
-  const handleTimerTick = (seconds: number) => {
-    setElapsedSeconds(seconds);
-  };
+  // Cleanup on unmount - ensure session is terminated
+  useEffect(() => {
+    // Capture ref value in the effect scope
+    const currentTranscriptRef = transcriptRef.current;
+    return () => {
+      console.log('[Actual] Component unmounting - stopping recording');
+      if (currentTranscriptRef) {
+        currentTranscriptRef.stopRecording();
+      }
+    };
+  }, []);
+
+  const handleTimerTick = React.useCallback((seconds: number) => {
+    elapsedSecondsRef.current = seconds;
+  }, []);
 
   const handleSubmissionComplete = () => {
     // Stop recording when submission is complete
@@ -95,7 +108,7 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
               sessionStartTime={sessionStartTime}
               logger={logger}
               isPracticeMode={false}
-              elapsedTime={elapsedSeconds}
+              elapsedTimeRef={elapsedSecondsRef}
               onSubmissionComplete={handleSubmissionComplete}
             />
           </div>

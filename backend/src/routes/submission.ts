@@ -82,6 +82,9 @@ router.post('/upload-audio', upload.single('audio'), async (req, res) => {
 router.post('/submit', async (req, res) => {
   const db: mysql.Connection = (req as any).db;
 
+  console.log('=== SUBMISSION REQUEST RECEIVED ===');
+  console.log('Database connection:', db ? 'Available' : 'NOT AVAILABLE');
+
   try {
     const {
       sessionId,
@@ -96,8 +99,34 @@ router.post('/submit', async (req, res) => {
       submittedAt
     } = req.body;
 
+    console.log('Session ID:', sessionId);
+    console.log('Word count:', wordCount);
+    console.log('Submitted at:', submittedAt);
+
     // Check if this is a practice session
     const isPractice = isPracticeSession(sessionId);
+
+    // Ensure session exists in database (auto-create if not)
+    if (db && !isPractice) {
+      try {
+        const [existingSessions] = await db.execute(
+          'SELECT id FROM sessions WHERE id = ?',
+          [sessionId]
+        );
+
+        if ((existingSessions as any[]).length === 0) {
+          console.log(`Session ${sessionId} not found in database, creating it...`);
+          await db.execute(
+            'INSERT INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+            [sessionId, 'auto-created', 'active']
+          );
+          console.log(`Session ${sessionId} created in database`);
+        }
+      } catch (sessionError) {
+        console.error('Error checking/creating session:', sessionError);
+        // Continue anyway - the foreign key will fail if there's a real issue
+      }
+    }
 
     // If practice session, return success without saving anything
     if (isPractice) {

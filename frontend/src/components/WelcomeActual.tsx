@@ -141,10 +141,24 @@ const WelcomeActual: React.FC<WelcomeActualProps> = ({ onStart }) => {
           }}>
             <p style={{
               fontSize: '0.875rem',
+              color: '#1e40af',
+              marginBottom: '0.5rem'
+            }}>
+              <strong>Remember:</strong>
+            </p>
+            <ul style={{
+              marginLeft: '1.5rem',
+              listStyle: 'disc',
+              fontSize: '0.875rem',
               color: '#1e40af'
             }}>
-              <strong>Remember:</strong> You cannot submit your work until you have spent at least 10 minutes on the task. Take your time and think deeply about your design.
-            </p>
+              <li style={{ marginBottom: '0.25rem' }}>
+                <strong>Your main task is to design a platform for adult learning</strong>
+              </li>
+              <li>
+                <strong>Speak out your thoughts as much as possible</strong> - verbalize your ideas, considerations, and design decisions
+              </li>
+            </ul>
           </div>
         </div>
 

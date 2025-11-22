@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, memo } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 interface Message {
@@ -31,6 +31,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll helper - currently disabled
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const autoScrollToBottom = (_behavior: ScrollBehavior = 'smooth') => {
+    // Completely disable auto-scroll to test if it's causing selection issues
+    return;
+  };
 
   const copyToClipboard = (text: string, messageId: string, messageRole: 'user' | 'assistant', messageIndex: number) => {
     navigator.clipboard.writeText(text);
@@ -189,6 +196,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
       loadChatHistory();
       loadModelInfo();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sessionId]);
 
   const handleSend = async (contextMessageId?: string, customPrompt?: string, hideUserPrompt?: boolean) => {
@@ -258,11 +266,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
       setMessages(prev => [...prev, loadingMessage]);
 
       // Auto-scroll to bottom of messages container only (not the entire page)
-      setTimeout(() => {
-        if (messagesEndRef.current) {
-          messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      }, 100);
+      setTimeout(() => autoScrollToBottom('smooth'), 100);
 
       try {
         // Call the streaming chat API
@@ -351,12 +355,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                       return updated;
                     });
 
-                    // Auto-scroll to bottom
-                    setTimeout(() => {
-                      if (messagesEndRef.current) {
-                        messagesEndRef.current.scrollIntoView({ behavior: 'auto', block: 'nearest' });
-                      }
-                    }, 0);
+                    // Auto-scroll to bottom (skip if user has text selected)
+                    requestAnimationFrame(() => autoScrollToBottom('auto'));
                   }
                 } catch (parseError) {
                   console.error('Error parsing SSE data:', parseError);
@@ -633,7 +633,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
     );
   };
 
-  const MessageBubble: React.FC<{ message: Message; turnIndex: number; messageIndex: number }> = ({ message, turnIndex, messageIndex }) => (
+  // Memoized markdown renderer to prevent re-renders that clear selection
+  const MemoizedMarkdown = memo(({ content }: { content: string }) => (
+    <ReactMarkdown>{content}</ReactMarkdown>
+  ));
+  MemoizedMarkdown.displayName = 'MemoizedMarkdown';
+
+  const MessageBubble: React.FC<{ message: Message; turnIndex: number; messageIndex: number }> = memo(({ message, turnIndex, messageIndex }) => (
     <article
       className="text-token-text-primary group"
       data-turn-id={message.id}
@@ -717,9 +723,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                 <div style={{ display: 'flex', width: '100%', flexDirection: 'column', gap: '0.25rem' }}>
                   {/* Show content if available, otherwise show loading indicator */}
                   {message.content ? (
-                    <div className="markdown prose" style={{ width: '100%', wordBreak: 'break-word' }}>
+                    <div
+                      className="markdown prose"
+                      style={{
+                        width: '100%',
+                        wordBreak: 'break-word',
+                        userSelect: 'text',
+                        WebkitUserSelect: 'text',
+                        MozUserSelect: 'text',
+                        msUserSelect: 'text'
+                      }}
+                    >
                       {/* Always show markdown, whether streaming or not */}
-                      <ReactMarkdown>{message.content}</ReactMarkdown>
+                      <MemoizedMarkdown content={message.content} />
                       {/* Show cursor indicator while streaming */}
                       {message.isLoading && (
                         <span style={{
@@ -772,7 +788,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
                 alignItems: 'center',
                 gap: '0.5rem',
                 padding: '0.25rem',
-                userSelect: 'none'
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
+                MozUserSelect: 'none',
+                msUserSelect: 'none'
               }}>
                 {/* Copy Button */}
                 <button
@@ -948,7 +967,18 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
         </div>
       </div>
     </article>
-  );
+  ), (prevProps, nextProps) => {
+    // Custom comparison: only re-render if message content, isLoading, or feedbackType changes
+    return (
+      prevProps.message.id === nextProps.message.id &&
+      prevProps.message.content === nextProps.message.content &&
+      prevProps.message.isLoading === nextProps.message.isLoading &&
+      prevProps.message.feedbackType === nextProps.message.feedbackType &&
+      prevProps.turnIndex === nextProps.turnIndex &&
+      prevProps.messageIndex === nextProps.messageIndex
+    );
+  });
+  MessageBubble.displayName = 'MessageBubble';
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', padding: '1rem' }}>
@@ -957,7 +987,17 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ sessionId, sessionStartTi
       </h2>
 
       {/* Chat Messages Area */}
-      <div ref={messagesContainerRef} style={{ flex: '1', overflowY: 'auto', marginBottom: '1rem', maxHeight: 'calc(100vh - 250px)' }}>
+      <div
+        ref={messagesContainerRef}
+        style={{
+          flex: '1',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          marginBottom: '1rem',
+          maxHeight: 'calc(100vh - 250px)',
+          overscrollBehavior: 'contain'
+        }}
+      >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           {messages.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '2rem 0' }} className="text-token-text-secondary">

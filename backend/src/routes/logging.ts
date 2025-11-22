@@ -29,6 +29,30 @@ router.post('/batch', async (req, res) => {
       return res.status(400).json({ error: 'Session ID and logs array are required' });
     }
 
+    // Check if this is a practice session
+    const isPractice = isPracticeSession(sessionId);
+
+    // Ensure session exists in database (auto-create if not) - required for foreign key
+    if (db && !isPractice) {
+      try {
+        const [existingSessions] = await db.execute(
+          'SELECT id FROM sessions WHERE id = ?',
+          [sessionId]
+        );
+
+        if ((existingSessions as any[]).length === 0) {
+          console.log(`[Logging] Session ${sessionId} not found, creating it...`);
+          await db.execute(
+            'INSERT INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+            [sessionId, 'auto-created', 'active']
+          );
+        }
+      } catch (sessionError) {
+        console.error('[Logging] Error checking/creating session:', sessionError);
+        // Continue anyway - will fail on foreign key if there's a real issue
+      }
+    }
+
     // Allow logging for both practice and actual sessions
     // Prepare bulk insert with normalized event types
     const values = logs.map((log: any) => {
@@ -86,6 +110,29 @@ router.post('/single', async (req, res) => {
 
     if (!sessionId || !eventType || !action) {
       return res.status(400).json({ error: 'Session ID, event type, and action are required' });
+    }
+
+    // Check if this is a practice session
+    const isPractice = isPracticeSession(sessionId);
+
+    // Ensure session exists in database (auto-create if not) - required for foreign key
+    if (db && !isPractice) {
+      try {
+        const [existingSessions] = await db.execute(
+          'SELECT id FROM sessions WHERE id = ?',
+          [sessionId]
+        );
+
+        if ((existingSessions as any[]).length === 0) {
+          console.log(`[Logging] Session ${sessionId} not found, creating it...`);
+          await db.execute(
+            'INSERT INTO sessions (id, user_id, status) VALUES (?, ?, ?)',
+            [sessionId, 'auto-created', 'active']
+          );
+        }
+      } catch (sessionError) {
+        console.error('[Logging] Error checking/creating session:', sessionError);
+      }
     }
 
     // Allow logging for both practice and actual sessions

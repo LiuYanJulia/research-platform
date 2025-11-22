@@ -643,7 +643,6 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
       if (!selection || selection.isCollapsed) {
         // Only log selection_clear if there was a previous active selection
         if (hasActiveSelectionRef.current) {
-          console.log('[Selection] Clearing selection');
           logEvent({
             eventType: 'selection',
             action: 'selection_clear',
@@ -682,16 +681,6 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
         }
         currentElement = currentElement.parentElement;
       }
-
-      console.log('[Selection] Text selected:', {
-        selectedText: selectedText.substring(0, 50) + '...',
-        textLength: selectedText.length,
-        section,
-        element: elementId,
-        messageId,
-        startOffset: range.startOffset,
-        endOffset: range.endOffset,
-      });
 
       // Mark that we have an active selection
       hasActiveSelectionRef.current = true;
@@ -828,11 +817,6 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
           // Use InputEvent.data if available (most accurate for single character insertions)
           if (inputEvent.data && lengthDiff === inputEvent.data.length) {
             metadata.insertedText = inputEvent.data;
-            console.log('[TextInsert] Using InputEvent.data:', {
-              insertedText: inputEvent.data,
-              previousValue: previousValue.substring(Math.max(0, previousLength - 20)),
-              currentValue: currentValue.substring(Math.max(0, currentLength - 20)),
-            });
           } else {
             // Fallback: Find insertion point by comparing from start and end
             let insertionStart = 0;
@@ -863,15 +847,6 @@ export const useInteractionLogger = (options: UseInteractionLoggerOptions) => {
             // Extract the inserted text at the insertion point
             const insertedText = currentValue.substring(insertionStart, insertionStart + lengthDiff);
             metadata.insertedText = insertedText;
-
-            console.log('[TextInsert] Using fallback algorithm:', {
-              insertionStart,
-              lengthDiff,
-              insertedText,
-              previousValue: previousValue.substring(Math.max(0, previousLength - 20)),
-              currentValue: currentValue.substring(Math.max(0, currentLength - 20)),
-              inputEventData: inputEvent.data,
-            });
           }
         }
 

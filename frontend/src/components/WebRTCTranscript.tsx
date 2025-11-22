@@ -9,12 +9,20 @@ interface RealtimeSession {
   expires_at: number;
 }
 
+export interface TranscriptEntry {
+  text: string;
+  timestamp: number;  // When speech STARTED (ms since recording start) - for correct ordering
+  receiveTimestamp: number;  // When we received the transcription (ms since recording start)
+  itemId?: string | null;  // OpenAI's item_id for reference
+  speechOrder: number;  // Order based on when speech started (correct chronological order)
+}
+
 export interface WebRTCTranscriptRef {
   startRecording: () => void;
   stopRecording: () => void;
   getAudioData: () => {
     audioBlob: Blob | null;
-    transcriptWithTimestamps: Array<{text: string, timestamp: number}>;
+    transcriptWithTimestamps: Array<TranscriptEntry>;
     recordingStartTime: number;
   };
 }
@@ -39,17 +47,44 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
   const recordingStartTimeRef = useRef<number>(0);
-  const transcriptWithTimestampsRef = useRef<Array<{text: string, timestamp: number}>>([]);
+  const transcriptWithTimestampsRef = useRef<Array<TranscriptEntry>>([]);
+  const lastTranscriptRef = useRef<{text: string, timestamp: number} | null>(null);
+
+  // Track speech start times for correct ordering
+  // Key: item_id, Value: timestamp when speech started
+  const speechStartTimesRef = useRef<Map<string, number>>(new Map());
+  // Counter for speech order (incremented each time speech starts)
+  const speechOrderCounterRef = useRef<number>(0);
+
+  const sessionLabel = isPracticeMode ? '[WebRTC-Practice]' : '[WebRTC-Actual]';
+
+  // Log component mount/unmount
+  useEffect(() => {
+    console.log(`${sessionLabel} Component mounted`);
+    return () => {
+      console.log(`${sessionLabel} Component unmounting - triggering cleanup`);
+    };
+  }, [sessionLabel]);
 
   // Create session and establish WebRTC connection
   const createRealtimeSession = async () => {
     try {
+      console.log(`${sessionLabel} Starting new recording session...`);
+
+      // CRITICAL: Check if there's already an active session
+      if (peerConnectionRef.current || mediaRecorderRef.current) {
+        console.warn(`${sessionLabel} Found existing session - cleaning up first`);
+        cleanup();
+        // Wait a bit for cleanup to complete
+        await new Promise(resolve => setTimeout(resolve, 200));
+      }
+
       setIsConnecting(true);
       setConnectionStatus('connecting');
       setError('');
 
       // Step 1: Create OpenAI Realtime session
-      console.log('Creating OpenAI Realtime session...');
+      console.log(`${sessionLabel} Creating OpenAI Realtime session...`);
       const response = await fetch('/api/transcript/session', {
         method: 'POST',
         headers: {
@@ -63,7 +98,7 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
 
       const { session, model } = await response.json();
       sessionRef.current = session;
-      console.log('Session created:', session.id, 'Model:', model);
+      console.log(`${sessionLabel} Session created:`, session.id, 'Model:', model);
 
       // Step 2: Set up WebRTC peer connection
       const peerConnection = new RTCPeerConnection({
@@ -80,55 +115,141 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
       dataChannelRef.current = dataChannel;
 
       dataChannel.onopen = () => {
-        console.log('Data channel opened');
+        console.log(`${sessionLabel} Data channel opened`);
         setConnectionStatus('connected');
 
-        // Send session update to enable input audio transcription
+        // Send session update to enable input audio transcription with server VAD
         dataChannel.send(JSON.stringify({
           type: 'session.update',
           session: {
             input_audio_transcription: {
               model: 'whisper-1'
-            }
+            },
+            // Enable server-side VAD (Voice Activity Detection) to detect speech segments
+            turn_detection: {
+              type: 'server_vad',
+              threshold: 0.5,
+              prefix_padding_ms: 300,
+              silence_duration_ms: 500
+            },
+            modalities: ['text']    // Only text, no audio output
           }
         }));
-        console.log('Session update sent to enable transcription');
+        console.log(`${sessionLabel} Session update sent - transcription with server VAD enabled, audio output disabled`);
       };
 
       dataChannel.onmessage = (event) => {
         try {
           const message = JSON.parse(event.data);
-          console.log('Received message:', message);
 
-          // Handle different transcription event types
+          // Track when speech STARTS - this gives us the correct chronological order
+          if (message.type === 'input_audio_buffer.speech_started') {
+            const speechStartTime = Date.now() - recordingStartTimeRef.current;
+            speechOrderCounterRef.current += 1;
+            const currentOrder = speechOrderCounterRef.current;
+
+            // Store the speech start time with current order as key (item_id comes later)
+            // We'll use a temporary key based on order since item_id isn't available yet
+            const tempKey = `pending_${currentOrder}`;
+            speechStartTimesRef.current.set(tempKey, speechStartTime);
+
+            console.log(`${sessionLabel} Speech started at ${speechStartTime}ms, order: ${currentOrder}`);
+          }
+
+          // Track when speech STOPS - we can now associate item_id with the speech
+          if (message.type === 'input_audio_buffer.speech_stopped') {
+            const itemId = message.item_id;
+            if (itemId) {
+              // Find the most recent pending speech start and associate it with this item_id
+              const pendingKeys = Array.from(speechStartTimesRef.current.keys())
+                .filter(k => k.startsWith('pending_'))
+                .sort((a, b) => parseInt(a.split('_')[1]) - parseInt(b.split('_')[1]));
+
+              if (pendingKeys.length > 0) {
+                const oldestPendingKey = pendingKeys[0];
+                const speechStartTime = speechStartTimesRef.current.get(oldestPendingKey);
+                if (speechStartTime !== undefined) {
+                  // Move from pending key to item_id key
+                  speechStartTimesRef.current.delete(oldestPendingKey);
+                  speechStartTimesRef.current.set(itemId, speechStartTime);
+                  console.log(`${sessionLabel} Speech stopped, item_id: ${itemId}, started at: ${speechStartTime}ms`);
+                }
+              }
+            }
+          }
+
+          // Handle transcription completion
           if (message.type === 'conversation.item.input_audio_transcription.completed') {
-            console.log('Transcription completed:', message.transcript);
             const transcriptText = message.transcript;
-            setTranscript(prev => prev + ' ' + transcriptText);
+            const receiveTimestamp = Date.now() - recordingStartTimeRef.current;
+            const itemId = message.item_id;
 
-            // Save with timestamp (milliseconds since recording started)
-            const timestamp = Date.now() - recordingStartTimeRef.current;
-            transcriptWithTimestampsRef.current.push({
-              text: transcriptText,
-              timestamp: timestamp
-            });
-            console.log(`Transcript saved with timestamp: ${timestamp}ms`);
-          } else if (message.type === 'input_audio_buffer.speech_started') {
-            console.log('Speech started');
-          } else if (message.type === 'input_audio_buffer.speech_stopped') {
-            console.log('Speech stopped');
-          } else if (message.type === 'session.created') {
-            console.log('Session created:', message);
-          } else if (message.type === 'session.updated') {
-            console.log('Session updated:', message);
+            // Get the speech start time for this item (for correct ordering)
+            const speechStartTime = itemId ? speechStartTimesRef.current.get(itemId) : null;
+
+            console.log(`${sessionLabel} Transcription completed:`, transcriptText);
+            console.log(`${sessionLabel} item_id: ${itemId}, speech started at: ${speechStartTime}ms, received at: ${receiveTimestamp}ms`);
+
+            // Deduplication: Check if this is a duplicate of the last transcript
+            const isDuplicate = lastTranscriptRef.current &&
+              lastTranscriptRef.current.text === transcriptText &&
+              Math.abs(lastTranscriptRef.current.timestamp - receiveTimestamp) < 1000; // Within 1 second
+
+            if (!isDuplicate) {
+              // Not a duplicate, save it
+              setTranscript(prev => prev + ' ' + transcriptText);
+
+              // Determine speech order based on when this speech actually started
+              // If we have the speech start time, find its order; otherwise use receive order
+              let speechOrder = transcriptWithTimestampsRef.current.length;
+              if (speechStartTime !== undefined && speechStartTime !== null) {
+                // Count how many existing entries have earlier speech start times
+                const startTime = speechStartTime; // TypeScript narrowing
+                speechOrder = transcriptWithTimestampsRef.current.filter(
+                  entry => entry.timestamp < startTime
+                ).length;
+              }
+
+              const entry: TranscriptEntry = {
+                text: transcriptText,
+                timestamp: speechStartTime ?? receiveTimestamp,  // Use speech start time if available
+                receiveTimestamp: receiveTimestamp,
+                itemId: itemId || null,
+                speechOrder: speechOrder
+              };
+
+              transcriptWithTimestampsRef.current.push(entry);
+
+              // Re-sort by timestamp (speech start time) to maintain correct order
+              transcriptWithTimestampsRef.current.sort((a, b) => a.timestamp - b.timestamp);
+
+              // Update speech order after sorting
+              transcriptWithTimestampsRef.current.forEach((e, idx) => {
+                e.speechOrder = idx;
+              });
+
+              console.log(`${sessionLabel} Transcript saved and sorted. Total count:`, transcriptWithTimestampsRef.current.length);
+
+              // Update last transcript reference
+              lastTranscriptRef.current = { text: transcriptText, timestamp: receiveTimestamp };
+
+              // Clean up the speech start time entry
+              if (itemId) {
+                speechStartTimesRef.current.delete(itemId);
+              }
+            } else {
+              console.log(`${sessionLabel} Duplicate transcript ignored`);
+            }
           } else if (message.type === 'error') {
-            console.error('OpenAI error:', message);
+            console.error(`${sessionLabel} OpenAI error:`, message);
             setError(message.error?.message || 'Unknown error from OpenAI');
-          } else {
-            console.log('Other message:', message);
+          }
+          // Log other message types for debugging (but not the common ones)
+          else if (!['session.created', 'session.updated', 'input_audio_buffer.speech_started', 'input_audio_buffer.speech_stopped', 'input_audio_buffer.committed', 'conversation.item.created', 'response.created', 'response.done'].includes(message.type)) {
+            console.log(`${sessionLabel} Received message type:`, message.type);
           }
         } catch (error) {
-          console.error('Error parsing message:', error);
+          console.error(`${sessionLabel} Error parsing message:`, error);
         }
       };
 
@@ -138,7 +259,6 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
       };
 
       dataChannel.onclose = () => {
-        console.log('Data channel closed');
         setConnectionStatus('disconnected');
       };
 
@@ -170,7 +290,7 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
         mediaRecorder.start(1000); // Collect data every second
         mediaRecorderRef.current = mediaRecorder;
         recordingStartTimeRef.current = Date.now();
-        console.log('Started audio recording for file save');
+        console.log(`${sessionLabel} Started audio recording for file save`);
       } catch (recorderError) {
         console.error('Failed to start MediaRecorder:', recorderError);
       }
@@ -208,12 +328,12 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
         sdp: answerSdp,
       }));
 
-      console.log('WebRTC connection established');
+      console.log(`${sessionLabel} WebRTC connection established successfully`);
       setIsRecording(true);
       setIsConnecting(false);
 
     } catch (error) {
-      console.error('Failed to create realtime session:', error);
+      console.error(`${sessionLabel} Failed to create realtime session:`, error);
       setError(error instanceof Error ? error.message : 'Failed to start recording');
       setIsConnecting(false);
       setConnectionStatus('disconnected');
@@ -222,6 +342,8 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
   };
 
   const cleanup = useCallback(() => {
+    console.log(`${sessionLabel} Cleaning up session...`);
+
     // Stop media recorder
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
       mediaRecorderRef.current.stop();
@@ -240,21 +362,24 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
       peerConnectionRef.current = null;
     }
 
-    // Stop media stream
+    // Stop media stream (microphone)
     if (mediaStreamRef.current) {
       mediaStreamRef.current.getTracks().forEach(track => track.stop());
       mediaStreamRef.current = null;
     }
 
+    // Reset deduplication reference
+    lastTranscriptRef.current = null;
+
     setConnectionStatus('disconnected');
     sessionRef.current = null;
-  }, []);
+  }, [sessionLabel]);
 
   const stopRecording = useCallback(() => {
-    console.log('Stopping recording...');
+    console.log(`${sessionLabel} Stopping recording...`);
     setIsRecording(false);
     cleanup();
-  }, [cleanup]);
+  }, [cleanup, sessionLabel]);
 
   // Cleanup on unmount
   useEffect(() => {

@@ -40,6 +40,7 @@ const ResearchPagePractice: React.FC<ResearchPagePracticeProps> = ({
   const handleTimerExpire = () => {
     // Stop recording when practice time is up
     if (transcriptRef.current) {
+      console.log('[Practice] Stopping recording due to timer expiration');
       transcriptRef.current.stopRecording();
     }
 
@@ -48,9 +49,31 @@ const ResearchPagePractice: React.FC<ResearchPagePracticeProps> = ({
   };
 
   const handleContinue = () => {
+    // CRITICAL: Ensure recording is fully stopped before navigating
+    if (transcriptRef.current) {
+      console.log('[Practice] Ensuring recording stopped before navigation');
+      transcriptRef.current.stopRecording();
+    }
+
     setShowCompleteModal(false);
-    onComplete();
+
+    // Give a brief delay to ensure cleanup completes before unmounting
+    setTimeout(() => {
+      onComplete();
+    }, 100);
   };
+
+  // Cleanup on unmount - ensure session is terminated
+  React.useEffect(() => {
+    // Capture ref value in the effect scope
+    const currentTranscriptRef = transcriptRef.current;
+    return () => {
+      console.log('[Practice] Component unmounting - stopping recording');
+      if (currentTranscriptRef) {
+        currentTranscriptRef.stopRecording();
+      }
+    };
+  }, []);
 
   return (
     <>
