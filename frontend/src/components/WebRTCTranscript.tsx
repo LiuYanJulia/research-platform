@@ -263,6 +263,11 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
       };
 
       // Step 4: Get user media (microphone)
+      // Check if mediaDevices is available (requires HTTPS in production)
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('Microphone access requires HTTPS. Please use a secure connection.');
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
           sampleRate: 24000,

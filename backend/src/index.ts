@@ -38,19 +38,29 @@ app.use(express.urlencoded({ extended: true }));
 // Serve uploaded files (audio and chat history)
 app.use('/uploads', express.static('uploads'));
 
-// Database connection
-let db: mysql.Connection;
+// Database connection pool (handles reconnection automatically)
+let db: mysql.Pool;
 
 async function initDatabase() {
   try {
-    db = await mysql.createConnection({
+    // Use createPool instead of createConnection for better reliability
+    // Pool automatically handles connection drops and reconnection
+    db = mysql.createPool({
       host: process.env.DB_HOST || 'localhost',
       user: process.env.DB_USER || 'root',
       password: process.env.DB_PASSWORD || '',
-      database: process.env.DB_NAME || 'research_platform'
+      database: process.env.DB_NAME || 'research_platform',
+      waitForConnections: true,
+      connectionLimit: 10,
+      queueLimit: 0,
+      enableKeepAlive: true,
+      keepAliveInitialDelay: 10000  // 10 seconds
     });
 
-    console.log('Connected to MySQL database');
+    // Test the connection
+    const connection = await db.getConnection();
+    console.log('Connected to MySQL database (using connection pool)');
+    connection.release();
 
     // Create tables if they don't exist
     await createTables();
