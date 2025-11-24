@@ -58,7 +58,7 @@ const WelcomePractice: React.FC<WelcomePracticeProps> = ({ onStart }) => {
               Practice Task: Design a Toy
             </h2>
             <p style={{ marginBottom: '0.75rem' }}>
-              Your practice task is to <strong>design a toy</strong>. Think about:
+              Your practice task is to <strong>design a toy</strong> and <strong>write down your product design proposal in the writing box on the right-hand side of the platform</strong>. Think about:
             </p>
             <ul style={{
               marginLeft: '1.5rem',

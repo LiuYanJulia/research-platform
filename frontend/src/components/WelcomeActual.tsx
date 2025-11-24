@@ -58,7 +58,7 @@ const WelcomeActual: React.FC<WelcomeActualProps> = ({ onStart }) => {
               Your Task: Design a Platform for Adults to Learn
             </h2>
             <p style={{ marginBottom: '0.75rem' }}>
-              Your task is to <strong>design a learning platform for adults</strong>. Consider:
+              Your task is to <strong>design a learning platform for adults</strong> and <strong>write down your product design proposal in the writing box on the right-hand side of the platform</strong>. Consider:
             </p>
             <ul style={{
               marginLeft: '1.5rem',
@@ -98,68 +98,6 @@ const WelcomeActual: React.FC<WelcomeActualProps> = ({ onStart }) => {
             </li>
           </ul>
 
-          <div style={{
-            backgroundColor: '#fef3c7',
-            padding: '1rem',
-            borderRadius: '0.375rem',
-            borderLeft: '4px solid #f59e0b',
-            marginBottom: '1rem'
-          }}>
-            <p style={{
-              fontSize: '0.875rem',
-              color: '#92400e',
-              marginBottom: '0.5rem'
-            }}>
-              <strong>Data Recording Notice:</strong>
-            </p>
-            <p style={{
-              fontSize: '0.875rem',
-              color: '#92400e'
-            }}>
-              During this task, we will record the following data for research purposes:
-            </p>
-            <ul style={{
-              marginLeft: '1.5rem',
-              listStyle: 'disc',
-              marginTop: '0.5rem',
-              fontSize: '0.875rem',
-              color: '#92400e'
-            }}>
-              <li>Your voice recording (audio file)</li>
-              <li>Transcript of your speech</li>
-              <li>Your conversation with the AI assistant</li>
-              <li>Your interaction logs (clicks, typing, etc.)</li>
-              <li>Your final written submission</li>
-            </ul>
-          </div>
-
-          <div style={{
-            backgroundColor: '#dbeafe',
-            padding: '1rem',
-            borderRadius: '0.375rem',
-            borderLeft: '4px solid #3b82f6'
-          }}>
-            <p style={{
-              fontSize: '0.875rem',
-              color: '#1e40af',
-              marginBottom: '0.5rem'
-            }}>
-              <strong>Remember:</strong>
-            </p>
-            <ul style={{
-              marginLeft: '1.5rem',
-              listStyle: 'disc',
-              fontSize: '0.875rem',
-              color: '#1e40af'
-            }}>
-              <li style={{ marginBottom: '0.25rem' }}>
-                <strong>Your main task is to design a platform for adult learning</strong>
-              </li>
-              <li>
-                <strong>Speak out your thoughts as much as possible</strong> - verbalize your ideas, considerations, and design decisions
-              </li>
-            </ul>
-          </div>
         </div>
 
         <button
