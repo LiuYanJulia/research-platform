@@ -94,7 +94,7 @@ const WelcomeActual: React.FC<WelcomeActualProps> = ({ onStart }) => {
               <strong>Verbalize Your Thoughts:</strong> Continue speaking out loud as you work
             </li>
             <li style={{ marginBottom: '0.5rem' }}>
-              <strong>Use All Tools:</strong> Feel free to use the AI assistant and writing area
+              <strong>Use All Tools:</strong> Feel free to use the AI assistant and writing area, but please remain on this website throughout the entire process until you submit your final work
             </li>
           </ul>
 

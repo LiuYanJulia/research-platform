@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS submissions (
     final_writing MEDIUMTEXT,
     transcript_file_url VARCHAR(255),
     chat_history_file_url VARCHAR(255),
+    interaction_logs_file_url VARCHAR(255),
     audio_file_url VARCHAR(255),
     word_count INT DEFAULT 0,
     char_count INT DEFAULT 0,

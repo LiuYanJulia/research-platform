@@ -120,7 +120,13 @@ const WritingSection: React.FC<WritingSectionProps> = ({
         formData.append('audio', audioData.audioBlob, 'recording.webm');
         formData.append('sessionId', sessionId || 'unknown');
 
-        const audioResponse = await fetch('/api/submissions/upload-audio', {
+        // Use direct backend URL for large uploads (bypasses CloudFront 20MB limit)
+        // Falls back to relative URL if REACT_APP_BACKEND_URL not set
+        const uploadUrl = process.env.REACT_APP_BACKEND_URL
+          ? `${process.env.REACT_APP_BACKEND_URL}/api/submissions/upload-audio`
+          : '/api/submissions/upload-audio';
+
+        const audioResponse = await fetch(uploadUrl, {
           method: 'POST',
           body: formData,
         });
