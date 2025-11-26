@@ -64,7 +64,7 @@ services:
     networks:
       - research-network
 
-  # Nginx SSL reverse proxy
+  # Nginx SSL reverse proxy (serves both frontend and backend)
   nginx-ssl:
     image: nginx:alpine
     container_name: research-nginx-ssl
@@ -75,8 +75,10 @@ services:
     volumes:
       - ./nginx-ssl.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./frontend/build:/usr/share/nginx/html:ro
     depends_on:
       - backend
+      - frontend
     networks:
       - research-network
 

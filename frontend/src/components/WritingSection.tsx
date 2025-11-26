@@ -116,30 +116,25 @@ const WritingSection: React.FC<WritingSectionProps> = ({
       // Upload audio file if available
       let audioFileUrl = null;
       if (audioData?.audioBlob) {
-        // Check audio file size (CloudFront has ~20MB limit)
         const audioSizeMB = audioData.audioBlob.size / (1024 * 1024);
         console.log(`Audio file size: ${audioSizeMB.toFixed(2)} MB`);
 
-        if (audioSizeMB > 18) {
-          console.warn('Audio file too large for CloudFront, skipping upload');
-          alert('Audio file is too large to upload. Your transcript and other data will still be saved.');
+        const formData = new FormData();
+        formData.append('audio', audioData.audioBlob, 'recording.webm');
+        formData.append('sessionId', sessionId || 'unknown');
+
+        // Upload audio file
+        const audioResponse = await fetch('/api/submissions/upload-audio', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (audioResponse.ok) {
+          const audioResult = await audioResponse.json();
+          audioFileUrl = audioResult.fileUrl;
+          console.log('Audio file uploaded:', audioFileUrl);
         } else {
-          const formData = new FormData();
-          formData.append('audio', audioData.audioBlob, 'recording.webm');
-          formData.append('sessionId', sessionId || 'unknown');
-
-          const audioResponse = await fetch('/api/submissions/upload-audio', {
-            method: 'POST',
-            body: formData,
-          });
-
-          if (audioResponse.ok) {
-            const audioResult = await audioResponse.json();
-            audioFileUrl = audioResult.fileUrl;
-            console.log('Audio file uploaded:', audioFileUrl);
-          } else {
-            console.error('Audio upload failed:', audioResponse.status);
-          }
+          console.error('Audio upload failed:', audioResponse.status);
         }
       }
 
