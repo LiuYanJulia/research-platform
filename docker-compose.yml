@@ -59,6 +59,8 @@ services:
       dockerfile: Dockerfile
     container_name: research-frontend
     restart: always
+    volumes:
+      - frontend-build:/usr/share/nginx/html
     depends_on:
       - backend
     networks:
@@ -75,7 +77,7 @@ services:
     volumes:
       - ./nginx-ssl.conf:/etc/nginx/conf.d/default.conf
       - /etc/letsencrypt:/etc/letsencrypt:ro
-      - ./frontend/build:/usr/share/nginx/html:ro
+      - frontend-build:/usr/share/nginx/html:ro
     depends_on:
       - backend
       - frontend
@@ -84,6 +86,8 @@ services:
 
 volumes:
   db-data:
+    driver: local
+  frontend-build:
     driver: local
 
 networks:
