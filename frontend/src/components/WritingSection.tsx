@@ -38,6 +38,7 @@ const WritingSection: React.FC<WritingSectionProps> = ({
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
   const [showTimeWarning, setShowTimeWarning] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Update counts when content changes
@@ -95,6 +96,10 @@ const WritingSection: React.FC<WritingSectionProps> = ({
       alert('Please write something before submitting.');
       return;
     }
+
+    // Close confirmation modal and show uploading modal
+    setShowSubmitConfirm(false);
+    setIsUploading(true);
 
     // Log submission action
     logger.logEvent({
@@ -183,15 +188,13 @@ const WritingSection: React.FC<WritingSectionProps> = ({
       console.log('Submission successful:', result.data);
       console.log('Interaction logs saved to:', result.data.interactionLogsFileUrl);
 
-      // Close confirmation modal
-      setShowSubmitConfirm(false);
-
-      // Trigger submission complete callback
+      // Trigger submission complete callback (this will show the confirmation page)
       if (onSubmissionComplete) {
         onSubmissionComplete();
       }
     } catch (error) {
       console.error('Error submitting:', error);
+      setIsUploading(false);
       alert('Error submitting your work. Please try again.');
     }
   };
@@ -510,6 +513,75 @@ const WritingSection: React.FC<WritingSectionProps> = ({
             >
               Continue Working
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Uploading Modal */}
+      {isUploading && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 10000
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '0.5rem',
+            padding: '2rem',
+            maxWidth: '32rem',
+            width: '100%',
+            margin: '0 1rem',
+            textAlign: 'center'
+          }}>
+            {/* Spinner */}
+            <div style={{
+              width: '4rem',
+              height: '4rem',
+              border: '4px solid #e5e7eb',
+              borderTop: '4px solid #3b82f6',
+              borderRadius: '50%',
+              margin: '0 auto 1.5rem',
+              animation: 'spin 1s linear infinite'
+            }}></div>
+
+            <h3 style={{
+              fontSize: '1.25rem',
+              fontWeight: '600',
+              marginBottom: '1rem',
+              color: '#1f2937'
+            }}>
+              Uploading Your Data
+            </h3>
+
+            <p style={{
+              fontSize: '0.875rem',
+              color: '#4b5563',
+              lineHeight: '1.6',
+              marginBottom: '1rem'
+            }}>
+              Your submission is being uploaded. This process may take up to 2 minutes depending on your internet connection speed.
+            </p>
+
+            <div style={{
+              backgroundColor: '#fef3c7',
+              border: '1px solid #fbbf24',
+              borderRadius: '0.375rem',
+              padding: '1rem',
+              marginTop: '1.5rem'
+            }}>
+              <p style={{
+                fontSize: '0.875rem',
+                color: '#92400e',
+                fontWeight: '500',
+                margin: 0
+              }}>
+                ⚠️ Please do not close this window, refresh the page, or navigate away until the upload is complete.
+              </p>
+            </div>
           </div>
         </div>
       )}

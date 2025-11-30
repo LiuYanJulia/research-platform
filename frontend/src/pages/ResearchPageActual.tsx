@@ -54,14 +54,18 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
     elapsedSecondsRef.current = seconds;
   }, []);
 
-  const handleSubmissionComplete = () => {
+  const handleSubmissionComplete = async () => {
     // Stop recording when submission is complete
     if (transcriptRef.current) {
       transcriptRef.current.stopRecording();
     }
 
-    // Send any remaining logs
-    logger.sendBatch();
+    // Try to send any remaining logs (but don't block if it fails)
+    try {
+      await logger.sendBatch();
+    } catch (error) {
+      console.warn('Failed to send final log batch, but submission will continue:', error);
+    }
 
     // Show confirmation page
     setSubmissionComplete(true);
