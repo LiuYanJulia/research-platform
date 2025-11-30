@@ -110,6 +110,7 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
               isPracticeMode={false}
               elapsedTimeRef={elapsedSecondsRef}
               onSubmissionComplete={handleSubmissionComplete}
+              taskDescription="Adult Learning Platform"
             />
           </div>
         </div>

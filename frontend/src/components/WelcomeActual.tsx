@@ -58,7 +58,10 @@ const WelcomeActual: React.FC<WelcomeActualProps> = ({ onStart }) => {
               Your Task: Design a Platform for Adults to Learn
             </h2>
             <p style={{ marginBottom: '0.75rem' }}>
-              Your task is to <strong>design a learning platform for adults</strong> and <strong>write down your product design proposal in the writing box on the right-hand side of the platform</strong>. Consider:
+              Your task is to <strong>design a learning platform for adults</strong> and <strong>write down your product design proposal in the writing box on the right-hand side of the platform</strong>.
+            </p>
+            <p style={{ marginBottom: '0.5rem' }}>
+              Here are some example questions to start with:
             </p>
             <ul style={{
               marginLeft: '1.5rem',

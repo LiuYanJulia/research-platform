@@ -113,6 +113,7 @@ const ResearchPagePractice: React.FC<ResearchPagePracticeProps> = ({
               sessionStartTime={sessionStartTime}
               logger={logger}
               isPracticeMode={true}
+              taskDescription="Toy"
             />
           </div>
         </div>

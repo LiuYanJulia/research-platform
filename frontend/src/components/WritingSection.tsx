@@ -13,6 +13,7 @@ interface WritingSectionProps {
   isPracticeMode?: boolean;
   elapsedTime?: number; // in seconds (for practice mode)
   elapsedTimeRef?: React.RefObject<number>; // ref for actual mode (avoids re-renders)
+  taskDescription?: string; // e.g., "Toy" or "Adult Learning Platform"
 }
 
 const WritingSection: React.FC<WritingSectionProps> = ({
@@ -23,7 +24,8 @@ const WritingSection: React.FC<WritingSectionProps> = ({
   onSubmissionComplete,
   isPracticeMode = false,
   elapsedTime = 0,
-  elapsedTimeRef
+  elapsedTimeRef,
+  taskDescription
 }) => {
   // Get elapsed time from either prop or ref
   const getElapsedTime = () => {
@@ -226,7 +228,16 @@ const WritingSection: React.FC<WritingSectionProps> = ({
     <>
       <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
-          <h2 style={{ fontSize: '1.125rem', fontWeight: '600' }} className="text-token-text-primary">Writing & Submission</h2>
+          <div>
+            <h2 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '0.25rem' }} className="text-token-text-primary">
+              Writing & Submission
+            </h2>
+            {taskDescription && (
+              <p style={{ fontSize: '0.875rem', color: '#6b7280', margin: 0 }}>
+                Write design proposal for {taskDescription}
+              </p>
+            )}
+          </div>
           <button
             onClick={clearContent}
             style={{
