@@ -25,6 +25,8 @@ const ResearchPagePractice: React.FC<ResearchPagePracticeProps> = ({
     batchInterval: 5000,
   });
   const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [password, setPassword] = useState('');
+  const [passwordError, setPasswordError] = useState('');
   const transcriptRef = useRef<WebRTCTranscriptRef>(null);
 
   // Auto-start recording when page loads
@@ -49,6 +51,12 @@ const ResearchPagePractice: React.FC<ResearchPagePracticeProps> = ({
   };
 
   const handleContinue = () => {
+    // Validate password (case-sensitive)
+    if (password !== 'Continue') {
+      setPasswordError('Incorrect password. Please try again.');
+      return;
+    }
+
     // CRITICAL: Ensure recording is fully stopped before navigating
     if (transcriptRef.current) {
       console.log('[Practice] Ensuring recording stopped before navigation');
@@ -169,10 +177,52 @@ const ResearchPagePractice: React.FC<ResearchPagePracticeProps> = ({
               </h3>
               <p style={{
                 fontSize: '0.875rem',
-                color: '#6b7280'
+                color: '#6b7280',
+                marginBottom: '1rem'
               }}>
-                Great job! You're now familiar with the platform. Please proceed to the actual task.
+                Time's up, practice finished. Research team will come and check again. Please stay at this page. You need a password to continue with the main task.
               </p>
+            </div>
+
+            {/* Password Input */}
+            <div style={{ marginBottom: '1rem' }}>
+              <input
+                type="text"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setPasswordError(''); // Clear error when typing
+                }}
+                placeholder="Enter password"
+                style={{
+                  width: '100%',
+                  padding: '0.75rem',
+                  border: passwordError ? '2px solid #ef4444' : '1px solid #d1d5db',
+                  borderRadius: '0.5rem',
+                  fontSize: '1rem',
+                  outline: 'none',
+                  transition: 'border-color 0.2s'
+                }}
+                onFocus={(e) => {
+                  if (!passwordError) {
+                    e.currentTarget.style.borderColor = '#10b981';
+                  }
+                }}
+                onBlur={(e) => {
+                  if (!passwordError) {
+                    e.currentTarget.style.borderColor = '#d1d5db';
+                  }
+                }}
+              />
+              {passwordError && (
+                <p style={{
+                  marginTop: '0.5rem',
+                  fontSize: '0.875rem',
+                  color: '#ef4444'
+                }}>
+                  {passwordError}
+                </p>
+              )}
             </div>
 
             <button
