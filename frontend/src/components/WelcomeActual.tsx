@@ -60,19 +60,26 @@ const WelcomeActual: React.FC<WelcomeActualProps> = ({ onStart }) => {
             <p style={{ marginBottom: '0.75rem' }}>
               Your task is to <strong>design a learning platform for adults</strong> and <strong>write down your product design proposal in the writing box on the right-hand side of the platform</strong>.
             </p>
-            <p style={{ marginBottom: '0.5rem' }}>
-              Here are some example questions to start with:
-            </p>
-            <ul style={{
-              marginLeft: '1.5rem',
-              listStyle: 'disc',
-              marginBottom: '1rem'
+          </div>
+
+          <div style={{
+            backgroundColor: '#fef3c7',
+            padding: '1.25rem',
+            borderRadius: '0.5rem',
+            marginBottom: '1.5rem',
+            border: '1px solid #fbbf24'
+          }}>
+            <p style={{
+              fontSize: '1rem',
+              fontWeight: '600',
+              marginBottom: '0.5rem',
+              color: '#92400e'
             }}>
-              <li>What types of learning experiences would be most effective?</li>
-              <li>What features and functionality should the platform include?</li>
-              <li>How would you address the unique needs of adult learners?</li>
-              <li>What would make your platform engaging and easy to use?</li>
-            </ul>
+              ⚠️ Important Reminder:
+            </p>
+            <p style={{ color: '#92400e' }}>
+              When designing this platform, <strong>avoid</strong> thinking about technical details. You should treat yourself as the <strong>product manager</strong>, <strong>NOT a programmer or software engineer</strong>. Focus on user needs, features, and experience rather than implementation details.
+            </p>
           </div>
 
           <h3 style={{
