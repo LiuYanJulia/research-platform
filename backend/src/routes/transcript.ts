@@ -28,7 +28,7 @@ const realtimeConnections = new Map<string, WebSocket>();
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 25 * 1024 * 1024, // 25MB limit (OpenAI Whisper limit)
+    fileSize: 50 * 1024 * 1024, // 50MB limit (increased for longer recordings)
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [

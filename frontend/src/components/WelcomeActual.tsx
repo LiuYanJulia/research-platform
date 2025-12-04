@@ -98,7 +98,7 @@ const WelcomeActual: React.FC<WelcomeActualProps> = ({ onStart }) => {
               <strong>Minimum Time:</strong> Please spend at least 10 minutes on this task
             </li>
             <li style={{ marginBottom: '0.5rem' }}>
-              <strong>Maximum Time:</strong> There is no maximum time limit - take as long as you need
+              <strong>Maximum Time:</strong> 25 minutes (you will receive a 5-minute warning at the 20-minute mark)
             </li>
             <li style={{ marginBottom: '0.5rem' }}>
               <strong>Verbalize Your Thoughts:</strong> Continue speaking out loud as you work

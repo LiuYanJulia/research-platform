@@ -14,6 +14,7 @@ interface WritingSectionProps {
   elapsedTime?: number; // in seconds (for practice mode)
   elapsedTimeRef?: React.RefObject<number>; // ref for actual mode (avoids re-renders)
   taskDescription?: string; // e.g., "Toy" or "Adult Learning Platform"
+  showForcedSubmission?: boolean; // Show forced submission popup at 25 minutes
 }
 
 const WritingSection: React.FC<WritingSectionProps> = ({
@@ -25,7 +26,8 @@ const WritingSection: React.FC<WritingSectionProps> = ({
   isPracticeMode = false,
   elapsedTime = 0,
   elapsedTimeRef,
-  taskDescription
+  taskDescription,
+  showForcedSubmission = false
 }) => {
   // Get elapsed time from either prop or ref
   const getElapsedTime = () => {
@@ -582,6 +584,67 @@ const WritingSection: React.FC<WritingSectionProps> = ({
                 ⚠️ Please do not close this window, refresh the page, or navigate away until the upload is complete.
               </p>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Forced Submission Modal (25 minutes - no cancel button) */}
+      {showForcedSubmission && (
+        <div style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 9999
+        }}>
+          <div style={{
+            backgroundColor: 'white',
+            borderRadius: '0.5rem',
+            padding: '1.5rem',
+            maxWidth: '28rem',
+            width: '100%',
+            margin: '0 1rem'
+          }}>
+            <div style={{
+              fontSize: '1.25rem',
+              fontWeight: '700',
+              marginBottom: '1rem',
+              color: '#dc2626',
+              textAlign: 'center'
+            }}>
+              ⏰ Time's up.
+            </div>
+            <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem' }}>Confirm Submission</h3>
+            <p style={{ fontSize: '0.875rem', color: '#4b5563', marginBottom: '1.5rem' }}>
+              The maximum time limit has been reached. Please submit your final work now. This will save all your progress including:
+            </p>
+            <ul style={{ fontSize: '0.875rem', color: '#4b5563', marginBottom: '1.5rem', marginLeft: '1rem', listStyle: 'disc' }}>
+              <li style={{ marginBottom: '0.25rem' }}>Your voice transcript</li>
+              <li style={{ marginBottom: '0.25rem' }}>LLM conversation history</li>
+              <li style={{ marginBottom: '0.25rem' }}>Final written content ({wordCount} words)</li>
+              <li style={{ marginBottom: '0.25rem' }}>All interaction logs</li>
+            </ul>
+            <button
+              onClick={handleSubmit}
+              style={{
+                width: '100%',
+                padding: '0.75rem 1rem',
+                backgroundColor: '#22c55e',
+                color: 'white',
+                border: 'none',
+                borderRadius: '0.5rem',
+                cursor: 'pointer',
+                fontWeight: '600',
+                fontSize: '1rem',
+                transition: 'background-color 0.2s'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#16a34a'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#22c55e'}
+            >
+              Submit
+            </button>
           </div>
         </div>
       )}

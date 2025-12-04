@@ -4,6 +4,7 @@ import WebRTCTranscript, { WebRTCTranscriptRef } from '../components/WebRTCTrans
 import WritingSection from '../components/WritingSection';
 import Timer from '../components/Timer';
 import SubmissionConfirmation from '../components/SubmissionConfirmation';
+import TimeWarningPopup from '../components/TimeWarningPopup';
 import { useInteractionLogger } from '../hooks/useInteractionLogger';
 import '../App.css';
 
@@ -24,8 +25,15 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
     batchInterval: 5000,
   });
   const [submissionComplete, setSubmissionComplete] = useState(false);
+  const [showTimeWarning, setShowTimeWarning] = useState(false);
+  const [showForcedSubmission, setShowForcedSubmission] = useState(false);
   const transcriptRef = useRef<WebRTCTranscriptRef>(null);
   const elapsedSecondsRef = useRef(0);
+  const warningShownRef = useRef(false);
+  const forcedSubmissionShownRef = useRef(false);
+
+  const TIME_WARNING_SECONDS = 20 * 60; // 20 minutes
+  const TIME_LIMIT_SECONDS = 25 * 60; // 25 minutes
 
   // Auto-start recording when page loads
   useEffect(() => {
@@ -52,7 +60,23 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
 
   const handleTimerTick = React.useCallback((seconds: number) => {
     elapsedSecondsRef.current = seconds;
-  }, []);
+
+    // Show 20-minute warning (once)
+    if (seconds >= TIME_WARNING_SECONDS && !warningShownRef.current && !forcedSubmissionShownRef.current) {
+      warningShownRef.current = true;
+      setShowTimeWarning(true);
+    }
+
+    // Show 25-minute forced submission (once)
+    if (seconds >= TIME_LIMIT_SECONDS && !forcedSubmissionShownRef.current) {
+      forcedSubmissionShownRef.current = true;
+      setShowForcedSubmission(true);
+    }
+  }, [TIME_WARNING_SECONDS, TIME_LIMIT_SECONDS]);
+
+  const handleTimeWarningContinue = () => {
+    setShowTimeWarning(false);
+  };
 
   const handleSubmissionComplete = async () => {
     // Stop recording when submission is complete
@@ -83,6 +107,11 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
         visible={false}
         onTick={handleTimerTick}
       />
+
+      {/* 20-minute warning popup */}
+      {showTimeWarning && (
+        <TimeWarningPopup onContinue={handleTimeWarningContinue} />
+      )}
 
       <div className="main-grid bg-token-bg-primary text-token-text-primary">
         {/* LLM Chat Interface - Left Half */}
@@ -115,6 +144,7 @@ const ResearchPageActual: React.FC<ResearchPageActualProps> = ({
               elapsedTimeRef={elapsedSecondsRef}
               onSubmissionComplete={handleSubmissionComplete}
               taskDescription="Adult Learning Platform"
+              showForcedSubmission={showForcedSubmission}
             />
           </div>
         </div>
