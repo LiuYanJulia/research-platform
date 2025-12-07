@@ -98,6 +98,54 @@ router.post('/session', async (req, res) => {
   }
 });
 
+// POST /api/transcript/realtime-connect - Proxy WebRTC connection to OpenAI (CORS fix)
+router.post('/realtime-connect', async (req, res) => {
+  try {
+    const { sdp, model, clientSecret } = req.body;
+
+    if (!sdp || !clientSecret) {
+      return res.status(400).json({
+        error: 'Missing required fields: sdp and clientSecret are required'
+      });
+    }
+
+    console.log('Proxying WebRTC connection to OpenAI Realtime API...');
+
+    // Forward the SDP offer to OpenAI
+    const realtimeUrl = `https://api.openai.com/v1/realtime?model=${model || 'gpt-realtime'}`;
+
+    const response = await fetch(realtimeUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${clientSecret}`,
+        'Content-Type': 'application/sdp',
+      },
+      body: sdp,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('OpenAI WebRTC connection failed:', response.status, errorText);
+      throw new Error(`OpenAI WebRTC connection failed: ${response.status} ${errorText}`);
+    }
+
+    // Get the SDP answer from OpenAI
+    const answerSdp = await response.text();
+    console.log('WebRTC connection established successfully through proxy');
+
+    // Return the SDP answer to the client
+    res.setHeader('Content-Type', 'application/sdp');
+    res.send(answerSdp);
+
+  } catch (error) {
+    console.error('Failed to proxy WebRTC connection:', error);
+    res.status(500).json({
+      error: 'Failed to establish WebRTC connection',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    });
+  }
+});
+
 // Legacy endpoints for backward compatibility - these will be replaced by WebRTC
 router.post('/realtime-audio', (req, res) => {
   res.status(410).json({

@@ -1,0 +1,434 @@
+id,session_id,event_type,action,target_element,target_section,coordinates,text_content,metadata,timestamp
+87456,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":742,""y"":596}",,,584
+87457,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":805,""y"":385}",,,699
+87458,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":834,""y"":308}",,,799
+87459,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":766,""y"":514}",,,956
+87460,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":836,""y"":305}",,,1099
+87461,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":725,""y"":324}",,,1199
+87462,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,1215
+87463,test01_1764821293482,mouse,right_click,div,prompting,"{""x"":700,""y"":315}",,{},1459
+87464,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":834,""y"":667}",,,3466
+87465,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":780,""y"":246}",,,3568
+87466,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":778,""y"":370}",,,3817
+87467,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":789,""y"":204}",,,4649
+87468,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,4739
+87469,test01_1764821293482,mouse,cursor_move,,transcript,"{""x"":548,""y"":51}",,,5991
+87470,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":630,""y"":274}",,,6094
+87471,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":598,""y"":205}",,,6326
+87472,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":632,""y"":274}",,,6833
+87473,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,6912
+87474,test01_1764821293482,mouse,cursor_move,,,"{""x"":919,""y"":130}",,,6936
+87475,test01_1764821293482,mouse,cursor_move,,,"{""x"":921,""y"":148}",,,8107
+87476,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":638,""y"":355}",,,8213
+87477,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":844,""y"":202}",,,8417
+87478,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":0,""currentWordCount"":0}",10793
+87479,test01_1764821293482,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":634,""y"":358}",,{},10838
+87480,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":632,""y"":358}",,,13750
+87481,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":482,""y"":371}",,,13851
+87482,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,13868
+87483,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":409,""y"":423}",,,13956
+87484,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":398,""y"":486}",,,14060
+87485,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":404,""y"":486}",,,14205
+87486,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":489,""y"":362}",,,14311
+87487,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":479,""y"":372}",,,14596
+87488,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",15221
+87489,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":1,""charsDelta"":1,""insertedText"":""t"",""previousLength"":0}",15223
+87490,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",15319
+87491,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":2,""charsDelta"":1,""insertedText"":""e"",""previousLength"":1}",15320
+87492,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",15496
+87493,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":3,""charsDelta"":1,""insertedText"":""s"",""previousLength"":2}",15497
+87494,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",15551
+87495,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":4,""charsDelta"":1,""insertedText"":""t"",""previousLength"":3}",15553
+87496,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""0"",""code"":""Digit0"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",15998
+87497,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":5,""charsDelta"":1,""insertedText"":""0"",""previousLength"":4}",16000
+87498,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""1"",""code"":""Digit1"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",16082
+87499,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":6,""charsDelta"":1,""insertedText"":""1"",""previousLength"":5}",16085
+87500,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":501,""y"":346}",,,16369
+87501,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,16377
+87502,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":125,""y"":600}",,,16472
+87503,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":91,""y"":648}",,,16594
+87504,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":99,""y"":663}",,,16697
+87505,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":113,""y"":613}",,,16800
+87506,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":111,""y"":599}",,,16904
+87507,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6,""currentWordCount"":1}",16931
+87508,test01_1764821293482,mouse,click,"[placeholder=""Ask anything""]",prompting,"{""x"":111,""y"":599}",,{},17029
+87509,test01_1764821293482,mouse,hover_start,"[placeholder=""Ask anything""]",prompting,"{""x"":113,""y"":613}",,,17100
+87510,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",17361
+87511,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":1,""charsDelta"":1,""insertedText"":""h"",""previousLength"":0}",17363
+87512,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",17454
+87513,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":2,""charsDelta"":1,""insertedText"":""i"",""previousLength"":1}",17455
+87514,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"","",""code"":""Comma"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",17697
+87515,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":3,""charsDelta"":1,""insertedText"":"","",""previousLength"":2}",17700
+87516,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",17862
+87517,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":4,""charsDelta"":1,""insertedText"":"" "",""previousLength"":3}",17864
+87518,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""I"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":true}",18044
+87519,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":5,""charsDelta"":1,""insertedText"":""I"",""previousLength"":4}",18045
+87520,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",18122
+87521,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":6,""charsDelta"":1,""insertedText"":"" "",""previousLength"":5}",18126
+87522,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",18265
+87523,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":7,""charsDelta"":1,""insertedText"":""a"",""previousLength"":6}",18268
+87524,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""m"",""code"":""KeyM"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",18346
+87525,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":8,""charsDelta"":1,""insertedText"":""m"",""previousLength"":7}",18349
+87526,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",18404
+87527,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":9,""charsDelta"":1,""insertedText"":"" "",""previousLength"":8}",18406
+87528,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",18689
+87529,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":10,""charsDelta"":1,""insertedText"":""s"",""previousLength"":9}",18691
+87530,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""o"",""code"":""KeyO"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",18756
+87531,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":11,""charsDelta"":1,""insertedText"":""o"",""previousLength"":10}",18758
+87532,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",18885
+87533,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":12,""charsDelta"":1,""insertedText"":""i"",""previousLength"":11}",18886
+87534,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""i""}",19146
+87535,test01_1764821293482,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":11,""charsDelta"":1,""deletedText"":""i"",""previousLength"":12}",19147
+87536,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""o""}",19296
+87537,test01_1764821293482,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":10,""charsDelta"":1,""deletedText"":""o"",""previousLength"":11}",19297
+87538,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""s""}",19413
+87539,test01_1764821293482,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":9,""charsDelta"":1,""deletedText"":""s"",""previousLength"":10}",19414
+87540,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""d"",""code"":""KeyD"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",19560
+87541,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":10,""charsDelta"":1,""insertedText"":""d"",""previousLength"":9}",19562
+87542,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""o"",""code"":""KeyO"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",19630
+87543,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":11,""charsDelta"":1,""insertedText"":""o"",""previousLength"":10}",19631
+87544,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",19818
+87545,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":12,""charsDelta"":1,""insertedText"":""i"",""previousLength"":11}",19819
+87546,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""n"",""code"":""KeyN"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",19943
+87547,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":13,""charsDelta"":1,""insertedText"":""n"",""previousLength"":12}",19945
+87548,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""g"",""code"":""KeyG"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",20136
+87549,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":14,""charsDelta"":1,""insertedText"":""g"",""previousLength"":13}",20137
+87550,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",20251
+87551,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":15,""charsDelta"":1,""insertedText"":"" "",""previousLength"":14}",20253
+87552,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",20362
+87553,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":16,""charsDelta"":1,""insertedText"":""t"",""previousLength"":15}",20363
+87554,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",20486
+87555,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":17,""charsDelta"":1,""insertedText"":""e"",""previousLength"":16}",20488
+87556,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",20680
+87557,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":18,""charsDelta"":1,""insertedText"":""s"",""previousLength"":17}",20682
+87558,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",20719
+87559,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":19,""charsDelta"":1,""insertedText"":""t"",""previousLength"":18}",20721
+87560,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""0"",""code"":""Digit0"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",21129
+87561,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":20,""charsDelta"":1,""insertedText"":""0"",""previousLength"":19}",21132
+87562,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""1"",""code"":""Digit1"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",21244
+87563,test01_1764821293482,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":21,""charsDelta"":1,""insertedText"":""1"",""previousLength"":20}",21247
+87564,test01_1764821293482,ui,composer_interaction,send-button,prompting,,,"{""hasContext"":false,""promptLength"":21,""isCustomPrompt"":false}",21479
+87565,test01_1764821293482,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",21483
+87566,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":111,""y"":597}",,,21915
+87567,test01_1764821293482,mouse,hover_end,"[placeholder=""Ask anything""]",prompting,,,,21950
+87568,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":203,""y"":397}",,,22016
+87569,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":251,""y"":316}",,,22128
+87570,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":251,""y"":315}",,,22395
+87571,test01_1764821293482,mouse,cursor_move,,response,"{""x"":270,""y"":193}",,,22496
+87572,test01_1764821293482,mouse,cursor_move,,response,"{""x"":279,""y"":175}",,,22611
+87573,test01_1764821293482,mouse,hover_start,"[data-testid=""conversation-turn-2""]",response,"{""x"":252,""y"":294}",,"{""messageId"":2}",22735
+87574,test01_1764821293482,mouse,cursor_move,,response,"{""x"":278,""y"":180}",,,29084
+87575,test01_1764821293482,mouse,hover_end,"[data-testid=""conversation-turn-2""]",response,,,"{""messageId"":2}",29115
+87576,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":222,""y"":58}",,,124720
+87577,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":197,""y"":39}",,,124866
+87578,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":69,""y"":23}",,,126636
+87579,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":905,""y"":428}",,,126742
+87580,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":939,""y"":381}",,,247190
+87581,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":758,""y"":589}",,,247291
+87582,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":755,""y"":596}",,,247476
+87583,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":721,""y"":764}",,,247586
+87584,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":710,""y"":804}",,,247693
+87585,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":704,""y"":823}",,,247797
+87586,test01_1764821293482,mouse,click,button,writing,"{""x"":703,""y"":823}",,"{""buttonText"":""Submit Final Work"",""buttonType"":""submit""}",247980
+87587,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":702,""y"":823}",,,248334
+87588,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":565,""y"":611}",,,248435
+87589,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":504,""y"":478}",,,248539
+87590,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":486,""y"":407}",,,248643
+87591,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":503,""y"":454}",,,248747
+87592,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":530,""y"":524}",,,248850
+87593,test01_1764821293482,mouse,hover_start,button,writing,"{""x"":525,""y"":512}",,,249103
+87594,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":531,""y"":525}",,,249110
+87595,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":532,""y"":524}",,,249212
+87596,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":533,""y"":522}",,,249315
+87597,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":533,""y"":522}",,,249508
+87598,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":538,""y"":527}",,,249610
+87599,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":540,""y"":529}",,,249714
+87600,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":540,""y"":529}",,,250115
+87601,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":540,""y"":528}",,,250226
+87602,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":539,""y"":527}",,,250340
+87603,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":538,""y"":526}",,,250466
+87604,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":538,""y"":526}",,,250749
+87605,test01_1764821293482,mouse,click,button,,"{""x"":538,""y"":526}",,"{""buttonText"":""Continue Working"",""buttonType"":""submit""}",251305
+87606,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":538,""y"":526}",,,251608
+87607,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,252431
+87608,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":899,""y"":445}",,,334543
+87609,test01_1764821293482,mouse,cursor_move,,transcript,"{""x"":956,""y"":34}",,,334644
+87610,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":943,""y"":176}",,,335024
+87611,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":879,""y"":664}",,,335276
+87612,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":836,""y"":736}",,,335381
+87613,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":823,""y"":776}",,,335483
+87614,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":819,""y"":791}",,,335587
+87615,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":815,""y"":808}",,,335691
+87616,test01_1764821293482,mouse,click,button,writing,"{""x"":813,""y"":813}",,"{""buttonText"":""Submit Final Work"",""buttonType"":""submit""}",335889
+87617,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":813,""y"":812}",,,336293
+87618,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":719,""y"":656}",,,336395
+87619,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":671,""y"":593}",,,336499
+87620,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":649,""y"":566}",,,336603
+87621,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":644,""y"":561}",,,336707
+87622,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":631,""y"":541}",,,336810
+87623,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":627,""y"":530}",,,336916
+87624,test01_1764821293482,mouse,click,button,,"{""x"":627,""y"":530}",,"{""buttonText"":""Continue Working"",""buttonType"":""submit""}",337036
+87625,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":627,""y"":527}",,,337252
+87626,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":872,""y"":281}",,,550529
+87627,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":564,""y"":586}",,,551554
+87628,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":624,""y"":802}",,,551659
+87629,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":631,""y"":820}",,,551932
+87630,test01_1764821293482,mouse,hover_start,button,writing,"{""x"":624,""y"":805}",,,551972
+87631,test01_1764821293482,mouse,click,button,writing,"{""x"":631,""y"":820}",,"{""buttonText"":""Submit Final Work"",""buttonType"":""submit""}",552180
+87632,test01_1764821293482,mouse,hover_end,button,writing,,,,552181
+87633,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":631,""y"":820}",,,552715
+87634,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":577,""y"":672}",,,552818
+87635,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":547,""y"":543}",,,552922
+87636,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":543,""y"":523}",,,553025
+87637,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":543,""y"":522}",,,553130
+87638,test01_1764821293482,mouse,hover_start,button,writing,"{""x"":549,""y"":548}",,,553207
+87639,test01_1764821293482,mouse,click,button,,"{""x"":543,""y"":522}",,"{""buttonText"":""Continue Working"",""buttonType"":""submit""}",553310
+87640,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":543,""y"":520}",,,553579
+87641,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":543,""y"":522}",,,553614
+87642,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,553641
+87643,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":881,""y"":260}",,,1102170
+87644,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":659,""y"":421}",,,1102401
+87645,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":668,""y"":802}",,,1102504
+87646,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":672,""y"":867}",,,1102676
+87647,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":658,""y"":840}",,,1102777
+87648,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":652,""y"":830}",,,1102880
+87649,test01_1764821293482,mouse,click,button,writing,"{""x"":651,""y"":829}",,"{""buttonText"":""Submit Final Work"",""buttonType"":""submit""}",1103041
+87650,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":651,""y"":827}",,,1103322
+87651,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":522,""y"":644}",,,1103429
+87652,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":481,""y"":619}",,,1103536
+87653,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":464,""y"":613}",,,1103640
+87654,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":452,""y"":593}",,,1103744
+87655,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":447,""y"":577}",,,1103848
+87656,test01_1764821293482,mouse,click,button,,"{""x"":446,""y"":572}",,"{""buttonText"":""Cancel"",""buttonType"":""submit""}",1104023
+87657,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":446,""y"":569}",,,1104246
+87658,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":959,""y"":286}",,,1105551
+87659,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":735,""y"":499}",,,1105654
+87660,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":735,""y"":493}",,,1109582
+87661,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":943,""y"":267}",,,1109683
+87662,test01_1764821293482,mouse,cursor_move,,,"{""x"":971,""y"":210}",,,1126156
+87663,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":909,""y"":227}",,,1126265
+87664,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":889,""y"":230}",,,1126370
+87665,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6,""currentWordCount"":1}",1126458
+87666,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":957,""y"":216}",,,1126470
+87667,test01_1764821293482,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":885,""y"":231}",,{},1126643
+87668,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":885,""y"":230}",,,1127315
+87669,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,1127346
+87670,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":907,""y"":124}",,,1127964
+87671,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":763,""y"":220}",,,1128066
+87672,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":825,""y"":182}",,,1128310
+87673,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":730,""y"":239}",,,1128384
+87674,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":673,""y"":248}",,,1128488
+87675,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":660,""y"":248}",,,1128612
+87676,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",1129393
+87677,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":7,""charsDelta"":1,""insertedText"":"" "",""previousLength"":6}",1129397
+87678,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",1129629
+87679,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":8,""charsDelta"":1,""insertedText"":""\n"",""previousLength"":7}",1129630
+87680,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",1129772
+87681,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":9,""charsDelta"":1,""insertedText"":""\n"",""previousLength"":8}",1129773
+87682,test01_1764821293482,keyboard,keyboard_shortcut,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""v"",""altKey"":false,""ctrlKey"":false,""metaKey"":true,""shiftKey"":false,""shortcut"":""Cmd+V""}",1130346
+87683,test01_1764821293482,keyboard,paste,"[data-testid=""writing-textarea""]",writing,,"Adult learning, often referred to as andragogy, differs from children's learning (pedagogy) in several key ways due to the unique characteristics and needs of adults. Here are some of the unique needs and principles associated with adult learning:
+
+1. **Self-Direction**: Adults typically prefer to take charge of their own learning. They like to have a say in what, how, and when they learn, and they appreciate being treated as capable of self-direction.
+
+2. **Experience**: Adults bring a wealth of personal and professional experiences to the learning environment. These experiences can be a rich resource for learning, and adults often prefer learning methods that acknowledge and leverage their prior knowledge.
+
+3. **Relevance and Practicality**: Adults need to see the relevance of what they are learning. They are more motivated to learn when the content is applicable to their personal and professional lives. Practical, problem-solving approaches often resonate more with adult learners.
+
+4. **Goal-Oriented**: Many adults enter learning experiences with specific goals in mind. They appreciate clearly defined objectives and outcomes that align with their personal or career aspirations.
+
+5. **Problem-Centered**: Unlike children, who may learn content for content's sake, adults often prefer learning that is organized around real-life problems or tasks. They appreciate learning that helps them solve issues they face in their daily lives or work.
+
+6. **Motivation**: While external motivators (like promotions or raises) can influence adults, they are often more driven by internal factors such as personal growth, satisfaction, and the desire to improve their quality of life.
+
+7. **Need for Respect**: Adults expect to be treated with respect and as equals in the learning process. They appreciate when their opinions and contributions are valued and when they are actively involved in the learning process.
+
+8. **Learning Styles**: Adults often have established preferences for how they learn best, whether it be visual, auditory, or kinesthetic methods, and they benefit from having a variety of learning options to choose from.
+
+These principles suggest that effective adult education should be flexible, practical, and tailored to the unique needs and motivations of adult learners.","{""textLength"":2303}",1130399
+87684,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":2312,""charsDelta"":2303,""insertedText"":""Adult learning, often referred to as andragogy, differs from children's learning (pedagogy) in several key ways due to the unique characteristics and needs of adults. Here are some of the unique needs and principles associated with adult learning:\n\n1. **Self-Direction**: Adults typically prefer to take charge of their own learning. They like to have a say in what, how, and when they learn, and they appreciate being treated as capable of self-direction.\n\n2. **Experience**: Adults bring a wealth of personal and professional experiences to the learning environment. These experiences can be a rich resource for learning, and adults often prefer learning methods that acknowledge and leverage their prior knowledge.\n\n3. **Relevance and Practicality**: Adults need to see the relevance of what they are learning. They are more motivated to learn when the content is applicable to their personal and professional lives. Practical, problem-solving approaches often resonate more with adult learners.\n\n4. **Goal-Oriented**: Many adults enter learning experiences with specific goals in mind. They appreciate clearly defined objectives and outcomes that align with their personal or career aspirations.\n\n5. **Problem-Centered**: Unlike children, who may learn content for content's sake, adults often prefer learning that is organized around real-life problems or tasks. They appreciate learning that helps them solve issues they face in their daily lives or work.\n\n6. **Motivation**: While external motivators (like promotions or raises) can influence adults, they are often more driven by internal factors such as personal growth, satisfaction, and the desire to improve their quality of life.\n\n7. **Need for Respect**: Adults expect to be treated with respect and as equals in the learning process. They appreciate when their opinions and contributions are valued and when they are actively involved in the learning process.\n\n8. **Learning Styles**: Adults often have established preferences for how they learn best, whether it be visual, auditory, or kinesthetic methods, and they benefit from having a variety of learning options to choose from.\n\nThese principles suggest that effective adult education should be flexible, practical, and tailored to the unique needs and motivations of adult learners."",""previousLength"":9}",1130402
+87685,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":971}",,"{""clientHeight"":498,""scrollHeight"":1488,""scrollDirection"":""down""}",1130414
+87686,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":662,""y"":247}",,,1130807
+87687,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":973}",,"{""clientHeight"":498,""scrollHeight"":1488,""scrollDirection"":""down""}",1131083
+87688,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",1131467
+87689,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":2313,""charsDelta"":1,""insertedText"":""\n"",""previousLength"":2312}",1131468
+87690,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":993.5}",,"{""clientHeight"":498,""scrollHeight"":1511,""scrollDirection"":""down""}",1131483
+87691,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",1131846
+87692,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":2314,""charsDelta"":1,""insertedText"":""\n"",""previousLength"":2313}",1131846
+87693,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":1016.5}",,"{""clientHeight"":498,""scrollHeight"":1534,""scrollDirection"":""down""}",1131850
+87694,test01_1764821293482,keyboard,keyboard_shortcut,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""v"",""altKey"":false,""ctrlKey"":false,""metaKey"":true,""shiftKey"":false,""shortcut"":""Cmd+V""}",1132403
+87695,test01_1764821293482,keyboard,paste,"[data-testid=""writing-textarea""]",writing,,"Adult learning, often referred to as andragogy, differs from children's learning (pedagogy) in several key ways due to the unique characteristics and needs of adults. Here are some of the unique needs and principles associated with adult learning:
+
+1. **Self-Direction**: Adults typically prefer to take charge of their own learning. They like to have a say in what, how, and when they learn, and they appreciate being treated as capable of self-direction.
+
+2. **Experience**: Adults bring a wealth of personal and professional experiences to the learning environment. These experiences can be a rich resource for learning, and adults often prefer learning methods that acknowledge and leverage their prior knowledge.
+
+3. **Relevance and Practicality**: Adults need to see the relevance of what they are learning. They are more motivated to learn when the content is applicable to their personal and professional lives. Practical, problem-solving approaches often resonate more with adult learners.
+
+4. **Goal-Oriented**: Many adults enter learning experiences with specific goals in mind. They appreciate clearly defined objectives and outcomes that align with their personal or career aspirations.
+
+5. **Problem-Centered**: Unlike children, who may learn content for content's sake, adults often prefer learning that is organized around real-life problems or tasks. They appreciate learning that helps them solve issues they face in their daily lives or work.
+
+6. **Motivation**: While external motivators (like promotions or raises) can influence adults, they are often more driven by internal factors such as personal growth, satisfaction, and the desire to improve their quality of life.
+
+7. **Need for Respect**: Adults expect to be treated with respect and as equals in the learning process. They appreciate when their opinions and contributions are valued and when they are actively involved in the learning process.
+
+8. **Learning Styles**: Adults often have established preferences for how they learn best, whether it be visual, auditory, or kinesthetic methods, and they benefit from having a variety of learning options to choose from.
+
+These principles suggest that effective adult education should be flexible, practical, and tailored to the unique needs and motivations of adult learners.","{""textLength"":2303}",1132414
+87696,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":4617,""charsDelta"":2303,""insertedText"":""Adult learning, often referred to as andragogy, differs from children's learning (pedagogy) in several key ways due to the unique characteristics and needs of adults. Here are some of the unique needs and principles associated with adult learning:\n\n1. **Self-Direction**: Adults typically prefer to take charge of their own learning. They like to have a say in what, how, and when they learn, and they appreciate being treated as capable of self-direction.\n\n2. **Experience**: Adults bring a wealth of personal and professional experiences to the learning environment. These experiences can be a rich resource for learning, and adults often prefer learning methods that acknowledge and leverage their prior knowledge.\n\n3. **Relevance and Practicality**: Adults need to see the relevance of what they are learning. They are more motivated to learn when the content is applicable to their personal and professional lives. Practical, problem-solving approaches often resonate more with adult learners.\n\n4. **Goal-Oriented**: Many adults enter learning experiences with specific goals in mind. They appreciate clearly defined objectives and outcomes that align with their personal or career aspirations.\n\n5. **Problem-Centered**: Unlike children, who may learn content for content's sake, adults often prefer learning that is organized around real-life problems or tasks. They appreciate learning that helps them solve issues they face in their daily lives or work.\n\n6. **Motivation**: While external motivators (like promotions or raises) can influence adults, they are often more driven by internal factors such as personal growth, satisfaction, and the desire to improve their quality of life.\n\n7. **Need for Respect**: Adults expect to be treated with respect and as equals in the learning process. They appreciate when their opinions and contributions are valued and when they are actively involved in the learning process.\n\n8. **Learning Styles**: Adults often have established preferences for how they learn best, whether it be visual, auditory, or kinesthetic methods, and they benefit from having a variety of learning options to choose from.\n\nThese principles suggest that effective adult education should be flexible, practical, and tailored to the unique needs and motivations of adult learners."",""previousLength"":2314}",1132417
+87697,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":2404}",,"{""clientHeight"":498,""scrollHeight"":2921,""scrollDirection"":""down""}",1132425
+87698,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",1132689
+87699,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":4618,""charsDelta"":1,""insertedText"":""\n"",""previousLength"":4617}",1132691
+87700,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":2427}",,"{""clientHeight"":498,""scrollHeight"":2944,""scrollDirection"":""down""}",1132699
+87701,test01_1764821293482,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",1132828
+87702,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":4619,""charsDelta"":1,""insertedText"":""\n"",""previousLength"":4618}",1132830
+87703,test01_1764821293482,keyboard,keyboard_shortcut,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""v"",""altKey"":false,""ctrlKey"":false,""metaKey"":true,""shiftKey"":false,""shortcut"":""Cmd+V""}",1133387
+87704,test01_1764821293482,keyboard,paste,"[data-testid=""writing-textarea""]",writing,,"Adult learning, often referred to as andragogy, differs from children's learning (pedagogy) in several key ways due to the unique characteristics and needs of adults. Here are some of the unique needs and principles associated with adult learning:
+
+1. **Self-Direction**: Adults typically prefer to take charge of their own learning. They like to have a say in what, how, and when they learn, and they appreciate being treated as capable of self-direction.
+
+2. **Experience**: Adults bring a wealth of personal and professional experiences to the learning environment. These experiences can be a rich resource for learning, and adults often prefer learning methods that acknowledge and leverage their prior knowledge.
+
+3. **Relevance and Practicality**: Adults need to see the relevance of what they are learning. They are more motivated to learn when the content is applicable to their personal and professional lives. Practical, problem-solving approaches often resonate more with adult learners.
+
+4. **Goal-Oriented**: Many adults enter learning experiences with specific goals in mind. They appreciate clearly defined objectives and outcomes that align with their personal or career aspirations.
+
+5. **Problem-Centered**: Unlike children, who may learn content for content's sake, adults often prefer learning that is organized around real-life problems or tasks. They appreciate learning that helps them solve issues they face in their daily lives or work.
+
+6. **Motivation**: While external motivators (like promotions or raises) can influence adults, they are often more driven by internal factors such as personal growth, satisfaction, and the desire to improve their quality of life.
+
+7. **Need for Respect**: Adults expect to be treated with respect and as equals in the learning process. They appreciate when their opinions and contributions are valued and when they are actively involved in the learning process.
+
+8. **Learning Styles**: Adults often have established preferences for how they learn best, whether it be visual, auditory, or kinesthetic methods, and they benefit from having a variety of learning options to choose from.
+
+These principles suggest that effective adult education should be flexible, practical, and tailored to the unique needs and motivations of adult learners.","{""textLength"":2303}",1133392
+87705,test01_1764821293482,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":6922,""charsDelta"":2303,""insertedText"":""Adult learning, often referred to as andragogy, differs from children's learning (pedagogy) in several key ways due to the unique characteristics and needs of adults. Here are some of the unique needs and principles associated with adult learning:\n\n1. **Self-Direction**: Adults typically prefer to take charge of their own learning. They like to have a say in what, how, and when they learn, and they appreciate being treated as capable of self-direction.\n\n2. **Experience**: Adults bring a wealth of personal and professional experiences to the learning environment. These experiences can be a rich resource for learning, and adults often prefer learning methods that acknowledge and leverage their prior knowledge.\n\n3. **Relevance and Practicality**: Adults need to see the relevance of what they are learning. They are more motivated to learn when the content is applicable to their personal and professional lives. Practical, problem-solving approaches often resonate more with adult learners.\n\n4. **Goal-Oriented**: Many adults enter learning experiences with specific goals in mind. They appreciate clearly defined objectives and outcomes that align with their personal or career aspirations.\n\n5. **Problem-Centered**: Unlike children, who may learn content for content's sake, adults often prefer learning that is organized around real-life problems or tasks. They appreciate learning that helps them solve issues they face in their daily lives or work.\n\n6. **Motivation**: While external motivators (like promotions or raises) can influence adults, they are often more driven by internal factors such as personal growth, satisfaction, and the desire to improve their quality of life.\n\n7. **Need for Respect**: Adults expect to be treated with respect and as equals in the learning process. They appreciate when their opinions and contributions are valued and when they are actively involved in the learning process.\n\n8. **Learning Styles**: Adults often have established preferences for how they learn best, whether it be visual, auditory, or kinesthetic methods, and they benefit from having a variety of learning options to choose from.\n\nThese principles suggest that effective adult education should be flexible, practical, and tailored to the unique needs and motivations of adult learners."",""previousLength"":4619}",1133394
+87706,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":691,""y"":224}",,,1133751
+87707,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":797,""y"":286}",,,1133853
+87708,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":823,""y"":310}",,,1133957
+87709,test01_1764821293482,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":823,""y"":313}",,{},1134129
+87710,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":3833.5}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1134367
+87711,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":1150.5}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""up""}",1134566
+87712,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":830,""y"":305}",,,1135709
+87713,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,1135768
+87714,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1137303
+87715,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1138087
+87716,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1139214
+87717,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1144008
+87718,test01_1764821293482,mouse,cursor_move,,,"{""x"":943,""y"":419}",,,1202468
+87719,test01_1764821293482,mouse,cursor_move,,,"{""x"":850,""y"":532}",,,1202582
+87720,test01_1764821293482,mouse,cursor_move,,,"{""x"":795,""y"":586}",,,1202690
+87721,test01_1764821293482,mouse,cursor_move,,,"{""x"":756,""y"":661}",,,1202946
+87722,test01_1764821293482,mouse,cursor_move,,,"{""x"":702,""y"":619}",,,1203048
+87723,test01_1764821293482,mouse,cursor_move,,,"{""x"":650,""y"":562}",,,1203152
+87724,test01_1764821293482,mouse,cursor_move,,,"{""x"":629,""y"":536}",,,1203255
+87725,test01_1764821293482,mouse,cursor_move,,,"{""x"":623,""y"":524}",,,1203358
+87726,test01_1764821293482,mouse,cursor_move,,,"{""x"":621,""y"":510}",,,1203463
+87727,test01_1764821293482,mouse,cursor_move,,,"{""x"":620,""y"":509}",,,1203582
+87728,test01_1764821293482,mouse,hover_start,button,,"{""x"":624,""y"":527}",,,1203636
+87729,test01_1764821293482,mouse,cursor_move,,,"{""x"":620,""y"":511}",,,1203695
+87730,test01_1764821293482,mouse,cursor_move,,,"{""x"":620,""y"":513}",,,1203823
+87731,test01_1764821293482,mouse,cursor_move,,,"{""x"":620,""y"":513}",,,1203944
+87732,test01_1764821293482,mouse,cursor_move,,,"{""x"":619,""y"":513}",,,1204336
+87733,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1213206
+87734,test01_1764821293482,mouse,click,button,,"{""x"":619,""y"":513}",,"{""buttonText"":""Continue"",""buttonType"":""submit""}",1213378
+87735,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":620,""y"":513}",,,1213976
+87736,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":654,""y"":524}",,,1214077
+87737,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":664,""y"":530}",,,1214180
+87738,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1214199
+87739,test01_1764821293482,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":664,""y"":530}",,{},1214316
+87740,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":664,""y"":530}",,,1214589
+87741,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1216666
+87742,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1256588
+87743,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":915,""y"":223}",,,1257263
+87744,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":764,""y"":382}",,,1257367
+87745,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":9}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""up""}",1257785
+87746,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":1300}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1258001
+87747,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":760,""y"":388}",,,1258065
+87748,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":708,""y"":705}",,,1258167
+87749,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":698,""y"":796}",,,1258271
+87750,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":696,""y"":818}",,,1258380
+87751,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":696,""y"":835}",,,1258550
+87752,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1258672
+87753,test01_1764821293482,mouse,click,button,writing,"{""x"":696,""y"":832}",,"{""buttonText"":""Submit Final Work"",""buttonType"":""submit""}",1258739
+87754,test01_1764821293482,mouse,hover_end,button,writing,,,,1258740
+87755,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":696,""y"":832}",,,1259040
+87756,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":512,""y"":717}",,,1259143
+87757,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":445,""y"":643}",,,1259246
+87758,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":434,""y"":592}",,,1259351
+87759,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":427,""y"":577}",,,1259455
+87760,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":423,""y"":566}",,,1259567
+87761,test01_1764821293482,mouse,click,button,,"{""x"":423,""y"":566}",,"{""buttonText"":""Cancel"",""buttonType"":""submit""}",1259686
+87762,test01_1764821293482,mouse,cursor_move,,prompting,"{""x"":423,""y"":566}",,,1259920
+87763,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":932,""y"":231}",,,1310546
+87764,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":825,""y"":345}",,,1310652
+87765,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":1385}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1310952
+87766,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":1729}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1311152
+87767,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":1489}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""up""}",1311352
+87768,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":523}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""up""}",1311571
+87769,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":135}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""up""}",1311786
+87770,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":15}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""up""}",1311986
+87771,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":821,""y"":347}",,,1336159
+87772,test01_1764821293482,mouse,cursor_move,,transcript,"{""x"":903,""y"":36}",,,1336264
+87773,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":912,""y"":139}",,,1336991
+87774,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":745,""y"":442}",,,1337108
+87775,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":725,""y"":473}",,,1337214
+87776,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1337240
+87777,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":855,""y"":243}",,,1337312
+87778,test01_1764821293482,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":725,""y"":473}",,{},1337340
+87779,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":725,""y"":473}",,,1337536
+87780,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":719,""y"":543}",,,1337639
+87781,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":723,""y"":552}",,,1343433
+87782,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,1343540
+87783,test01_1764821293482,mouse,cursor_move,,,"{""x"":970,""y"":178}",,,1343540
+87784,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1344469
+87785,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1348077
+87786,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1368485
+87787,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1369193
+87788,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":819,""y"":336}",,,1369715
+87789,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":20}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1369920
+87790,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":1998}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1370119
+87791,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":3234}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1370320
+87792,test01_1764821293482,mouse,scroll,,writing,"{""x"":0,""y"":3837}",,"{""clientHeight"":498,""scrollHeight"":4355,""scrollDirection"":""down""}",1370520
+87793,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":821,""y"":318}",,,1430074
+87794,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":928,""y"":266}",,,1430996
+87795,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":777,""y"":465}",,,1431108
+87796,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":928,""y"":266}",,,1431297
+87797,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":781,""y"":460}",,,1440040
+87798,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":822,""y"":440}",,,1440143
+87799,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":760,""y"":497}",,,1440249
+87800,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":767,""y"":544}",,,1440352
+87801,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,1440410
+87802,test01_1764821293482,mouse,cursor_move,,,"{""x"":966,""y"":558}",,,1466305
+87803,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":873,""y"":142}",,,1467931
+87804,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":677,""y"":317}",,,1468036
+87805,test01_1764821293482,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":788,""y"":212}",,,1468248
+87806,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":665,""y"":327}",,,1489221
+87807,test01_1764821293482,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,1489316
+87808,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":626,""y"":146}",,,1489317
+87809,test01_1764821293482,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1490573
+87810,test01_1764821293482,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":6922,""currentWordCount"":1030}",1493296
+87811,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":928,""y"":187}",,,1493834
+87812,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":770,""y"":362}",,,1493937
+87813,test01_1764821293482,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":769,""y"":371}",,{},1494454
+87814,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":769,""y"":371}",,,1494883
+87815,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":797,""y"":394}",,,1494984
+87816,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":801,""y"":398}",,,1495136
+87817,test01_1764821293482,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":801,""y"":398}",,{},1495269
+87818,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":799,""y"":398}",,,1501566
+87819,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":653,""y"":447}",,,1501667
+87820,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":586,""y"":462}",,,1501771
+87821,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":549,""y"":442}",,,1501877
+87822,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":525,""y"":361}",,,1501978
+87823,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":531,""y"":340}",,,1502083
+87824,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":535,""y"":338}",,,1502189
+87825,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":546,""y"":437}",,,1502290
+87826,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":547,""y"":499}",,,1502394
+87827,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":548,""y"":505}",,,1502811
+87828,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":555,""y"":521}",,,1502916
+87829,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":562,""y"":547}",,,1503017
+87830,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":563,""y"":551}",,,1503154
+87831,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":562,""y"":552}",,,1503267
+87832,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":561,""y"":551}",,,1503369
+87833,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":561,""y"":536}",,,1503473
+87834,test01_1764821293482,mouse,cursor_move,,writing,"{""x"":560,""y"":505}",,,1503578

@@ -1,0 +1,1073 @@
+[
+  {
+    "text": "Peace.",
+    "timestamp": 2366,
+    "receiveTimestamp": 4228,
+    "itemId": "item_CiuvZij4Udw94w0VMvyDp",
+    "speechOrder": 0
+  },
+  {
+    "text": "Ok, czek, czek, czek.",
+    "timestamp": 7806,
+    "receiveTimestamp": 11570,
+    "itemId": "item_Ciuver85jtJPFWr7NsDSd",
+    "speechOrder": 1
+  },
+  {
+    "text": "All right, this looks wow",
+    "timestamp": 11243,
+    "receiveTimestamp": 14467,
+    "itemId": "item_CiuvhZuILro5jocN0u03R",
+    "speechOrder": 2
+  },
+  {
+    "text": "test01",
+    "timestamp": 14039,
+    "receiveTimestamp": 17795,
+    "itemId": "item_Ciuvk1ZQnhfEIhsqLvBmp",
+    "speechOrder": 3
+  },
+  {
+    "text": "I am doing test 01",
+    "timestamp": 20306,
+    "receiveTimestamp": 22771,
+    "itemId": "item_Ciuvrlhu9TQdBI4cLNgka",
+    "speechOrder": 4
+  },
+  {
+    "text": "Okay, so I will just leave the local test here. Let me open another shell.",
+    "timestamp": 29344,
+    "receiveTimestamp": 38666,
+    "itemId": "item_Ciuw0A95GGpunHfDEZGHa",
+    "speechOrder": 5
+  },
+  {
+    "text": "git status",
+    "timestamp": 48226,
+    "receiveTimestamp": 50575,
+    "itemId": "item_CiuwI3NUw1Sek4wATdHSn",
+    "speechOrder": 6
+  },
+  {
+    "text": "These ads.",
+    "timestamp": 50291,
+    "receiveTimestamp": 53429,
+    "itemId": "item_CiuwLrZqqT784SFuY4H9W",
+    "speechOrder": 7
+  },
+  {
+    "text": "good commute",
+    "timestamp": 52913,
+    "receiveTimestamp": 56833,
+    "itemId": "item_CiuwNYJJoBywZ70FMpWHU",
+    "speechOrder": 8
+  },
+  {
+    "text": "Change file.",
+    "timestamp": 62600,
+    "receiveTimestamp": 65315,
+    "itemId": "item_CiuwXZWrqWhw8380WCwKK",
+    "speechOrder": 9
+  },
+  {
+    "text": "Size, limit, and...",
+    "timestamp": 64706,
+    "receiveTimestamp": 68563,
+    "itemId": "item_CiuwZX3RQOUzGSHlB0bn1",
+    "speechOrder": 10
+  },
+  {
+    "text": "Maximum time.",
+    "timestamp": 69416,
+    "receiveTimestamp": 72038,
+    "itemId": "item_CiuwegbbZ56JV8PgNDvDw",
+    "speechOrder": 11
+  },
+  {
+    "text": "git push origin simple",
+    "timestamp": 74658,
+    "receiveTimestamp": 78152,
+    "itemId": "item_Ciuwj7zsmn5tB1pjeSwFG",
+    "speechOrder": 12
+  },
+  {
+    "text": "version",
+    "timestamp": 78001,
+    "receiveTimestamp": 79772,
+    "itemId": "item_CiuwmDVOjnn0DGIDpELiU",
+    "speechOrder": 13
+  },
+  {
+    "text": "OK.",
+    "timestamp": 82507,
+    "receiveTimestamp": 82885,
+    "itemId": "item_Ciuwq7suAtaWnpZg9NWOs",
+    "speechOrder": 14
+  },
+  {
+    "text": "All right, thank you, I think we need to update what is...",
+    "timestamp": 83047,
+    "receiveTimestamp": 89471,
+    "itemId": "item_CiuwrQey0nj6YdtfCitIO",
+    "speechOrder": 15
+  },
+  {
+    "text": "We need to update what is...",
+    "timestamp": 89147,
+    "receiveTimestamp": 92861,
+    "itemId": "item_CiuwxNg2cTRLn8i8a3N5a",
+    "speechOrder": 16
+  },
+  {
+    "text": "in the cloud.",
+    "timestamp": 92131,
+    "receiveTimestamp": 95286,
+    "itemId": "item_Ciux0aKWJBAEBsWYpohvY",
+    "speechOrder": 17
+  },
+  {
+    "text": "What?",
+    "timestamp": 96677,
+    "receiveTimestamp": 98263,
+    "itemId": "item_Ciux5pHLIbcKUaizFGbHy",
+    "speechOrder": 18
+  },
+  {
+    "text": "future maintainers.",
+    "timestamp": 157159,
+    "receiveTimestamp": 160270,
+    "itemId": "item_Ciuy3BZA1NYhw52qen2yJ",
+    "speechOrder": 19
+  },
+  {
+    "text": "Good boy.",
+    "timestamp": 213597,
+    "receiveTimestamp": 214662,
+    "itemId": "item_Ciuyyvc8WMkewZLypYRXY",
+    "speechOrder": 20
+  },
+  {
+    "text": "Rage it.",
+    "timestamp": 215542,
+    "receiveTimestamp": 217267,
+    "itemId": "item_Ciuz0tDKTQUK82j7AbdCd",
+    "speechOrder": 21
+  },
+  {
+    "text": "Okay, uh",
+    "timestamp": 221467,
+    "receiveTimestamp": 223056,
+    "itemId": "item_Ciuz6wEQH70X936UQwdST",
+    "speechOrder": 22
+  },
+  {
+    "text": "All four minutes and seven seconds so far.",
+    "timestamp": 248200,
+    "receiveTimestamp": 252986,
+    "itemId": "item_CiuzWLyGHzcOGQB9Hg3AH",
+    "speechOrder": 23
+  },
+  {
+    "text": "Chug, chug, chug.",
+    "timestamp": 352772,
+    "receiveTimestamp": 354530,
+    "itemId": "item_Civ1DVqRJL5kuWNbDH3Ob",
+    "speechOrder": 24
+  },
+  {
+    "text": "Cześć, cześć, cześć!",
+    "timestamp": 354893,
+    "receiveTimestamp": 357807,
+    "itemId": "item_Civ1FySQ9d7z4rMqPkcCy",
+    "speechOrder": 25
+  },
+  {
+    "text": "Working, working.",
+    "timestamp": 356914,
+    "receiveTimestamp": 360065,
+    "itemId": "item_Civ1HVPHiuH1hqsHLnqxV",
+    "speechOrder": 26
+  },
+  {
+    "text": "okay",
+    "timestamp": 398674,
+    "receiveTimestamp": 400027,
+    "itemId": "item_Civ1xOrHzypjaUJXG0Cn7",
+    "speechOrder": 27
+  },
+  {
+    "text": "Yeah, so this is the time that I need to check the 25 minute bar.",
+    "timestamp": 399588,
+    "receiveTimestamp": 405494,
+    "itemId": "item_Civ1yFdNDAeyOJUYbkI2U",
+    "speechOrder": 28
+  },
+  {
+    "text": "",
+    "timestamp": 404966,
+    "receiveTimestamp": 406777,
+    "itemId": "item_Civ23qpZ6GuZczTLXcYUz",
+    "speechOrder": 29
+  },
+  {
+    "text": "Right",
+    "timestamp": 406183,
+    "receiveTimestamp": 408121,
+    "itemId": "item_Civ24xHcoL8GRzYTTrJBQ",
+    "speechOrder": 30
+  },
+  {
+    "text": "I need to put a charger.",
+    "timestamp": 408870,
+    "receiveTimestamp": 411781,
+    "itemId": "item_Civ27VPvgtvSnsf37rMSN",
+    "speechOrder": 31
+  },
+  {
+    "text": "Okay?",
+    "timestamp": 490470,
+    "receiveTimestamp": 491680,
+    "itemId": "item_Civ3RFBPm1eECO1LAlUUy",
+    "speechOrder": 32
+  },
+  {
+    "text": "I can see it's working now. Let me just check what is the current.",
+    "timestamp": 493251,
+    "receiveTimestamp": 502799,
+    "itemId": "item_Civ3TdigqX5jtlAfqri3n",
+    "speechOrder": 33
+  },
+  {
+    "text": "Now, what are...",
+    "timestamp": 501118,
+    "receiveTimestamp": 503861,
+    "itemId": "item_Civ3bA3mBSyDwSvYfiqOp",
+    "speechOrder": 34
+  },
+  {
+    "text": "쏘옥",
+    "timestamp": 502858,
+    "receiveTimestamp": 505371,
+    "itemId": "item_Civ3de67uJa3seRxkQUtm",
+    "speechOrder": 35
+  },
+  {
+    "text": "Um...",
+    "timestamp": 504589,
+    "receiveTimestamp": 505638,
+    "itemId": "item_Civ3fAzHA9jHE8by21OVu",
+    "speechOrder": 36
+  },
+  {
+    "text": "Unique features, no, I think I should start with what are some of the",
+    "timestamp": 506360,
+    "receiveTimestamp": 514226,
+    "itemId": "item_Civ3h4vDkxG5kQaIaMiij",
+    "speechOrder": 37
+  },
+  {
+    "text": "Unique ideas.",
+    "timestamp": 515075,
+    "receiveTimestamp": 517402,
+    "itemId": "item_Civ3pPocCxAcssGwNs4Mw",
+    "speechOrder": 38
+  },
+  {
+    "text": "Unique Knees",
+    "timestamp": 517751,
+    "receiveTimestamp": 520172,
+    "itemId": "item_Civ3sRYFZjvWIsdCTHr0w",
+    "speechOrder": 39
+  },
+  {
+    "text": "for adult learning.",
+    "timestamp": 519991,
+    "receiveTimestamp": 523170,
+    "itemId": "item_Civ3uwzGL4GQWCafOBkMe",
+    "speechOrder": 40
+  },
+  {
+    "text": "compared to children learning.",
+    "timestamp": 522800,
+    "receiveTimestamp": 526155,
+    "itemId": "item_Civ3xcRsMasXmIY4oVRVh",
+    "speechOrder": 41
+  },
+  {
+    "text": "そいつ",
+    "timestamp": 529436,
+    "receiveTimestamp": 531005,
+    "itemId": "item_Civ439aQwlPMaTWYn6U0M",
+    "speechOrder": 42
+  },
+  {
+    "text": "Generating some results.",
+    "timestamp": 531006,
+    "receiveTimestamp": 534483,
+    "itemId": "item_Civ45BtIAdakt6fgmch2y",
+    "speechOrder": 43
+  },
+  {
+    "text": "All right.",
+    "timestamp": 534482,
+    "receiveTimestamp": 536580,
+    "itemId": "item_Civ498OabWOJtw29xcOdp",
+    "speechOrder": 44
+  },
+  {
+    "text": "Yeah, I'm just going to copy here. So this is my test01, all right?",
+    "timestamp": 535431,
+    "receiveTimestamp": 541859,
+    "itemId": "item_Civ4Aisz8j4GV6XMcdvQz",
+    "speechOrder": 45
+  },
+  {
+    "text": "10-01.",
+    "timestamp": 543560,
+    "receiveTimestamp": 545606,
+    "itemId": "item_Civ4ItEufgQdNvuyjMyJl",
+    "speechOrder": 46
+  },
+  {
+    "text": "Okay.",
+    "timestamp": 555352,
+    "receiveTimestamp": 557321,
+    "itemId": "item_Civ4UylD1FZgSg1ZacxJk",
+    "speechOrder": 47
+  },
+  {
+    "text": "All right.",
+    "timestamp": 557549,
+    "receiveTimestamp": 558423,
+    "itemId": "item_Civ4Wsd1hTnIghAych2lv",
+    "speechOrder": 48
+  },
+  {
+    "text": "我就需要一直的说话,一直的说话,一直说20分钟到37分钟",
+    "timestamp": 558111,
+    "receiveTimestamp": 569119,
+    "itemId": "item_Civ4WSY2BlNWdqg9P9mrI",
+    "speechOrder": 49
+  },
+  {
+    "text": "对吗 到37 到37之后再等5分钟 那就是42",
+    "timestamp": 568292,
+    "receiveTimestamp": 577314,
+    "itemId": "item_Civ4hZnzEtl0rEqgJCEX9",
+    "speechOrder": 50
+  },
+  {
+    "text": "Okay, um, yeah, 42.",
+    "timestamp": 575673,
+    "receiveTimestamp": 580354,
+    "itemId": "item_Civ4o7e6fKHNBRvnaQkNg",
+    "speechOrder": 51
+  },
+  {
+    "text": "哎呀我觉得我要不来过一遍 现在既然改了就怎么还了我的这个",
+    "timestamp": 604743,
+    "receiveTimestamp": 612446,
+    "itemId": "item_Civ5Hrz4vHmcci8QCzXkh",
+    "speechOrder": 52
+  },
+  {
+    "text": "Experiment instruction 是不是要有一些变动",
+    "timestamp": 611395,
+    "receiveTimestamp": 615476,
+    "itemId": "item_Civ5OA4Ub8dRz3Q0oVfSD",
+    "speechOrder": 53
+  },
+  {
+    "text": "The instruction, experiment instruction.",
+    "timestamp": 627475,
+    "receiveTimestamp": 632280,
+    "itemId": "item_Civ5eDsCaH2PWUrpzn0gZ",
+    "speechOrder": 54
+  },
+  {
+    "text": "反正我现在主要变动的就是时间上了 时间从原本不限时长变成了现在最多25分钟 我把它弄一下然后把它打印出来 这样子待会儿就不用看ipad了 就直接看我的打印出来的文件",
+    "timestamp": 632004,
+    "receiveTimestamp": 652511,
+    "itemId": "item_Civ5i4RvwBsMrMEm9kY4j",
+    "speechOrder": 55
+  },
+  {
+    "text": "So okay welcome everyone and thank you for participating in our study today. In this experiment you will be designing a product and write and",
+    "timestamp": 661079,
+    "receiveTimestamp": 672054,
+    "itemId": "item_Civ6Bylduj5jF7HKObgmo",
+    "speechOrder": 56
+  },
+  {
+    "text": "designing a product and writing a product design proposal. You will work together with an AI chatbot that will help you brainstorm ideas throughout the design process. And a very important part of this study is the think-aloud protocol. This means you need to verbalize every thought that comes to your mind during the design process. Speak out loud what you are thinking.",
+    "timestamp": 671577,
+    "receiveTimestamp": 695167,
+    "itemId": "item_Civ6MenTTtjS6T1lpZzLh",
+    "speechOrder": 57
+  },
+  {
+    "text": "which are thinking, considering, or deciding and don't worry about something perfect or organized we want to hear your natural thinking process and there is definitely no right or wrong thoughts okay or ideas here",
+    "timestamp": 695256,
+    "receiveTimestamp": 713626,
+    "itemId": "item_Civ6jGq6FKvEUtggik3bz",
+    "speechOrder": 58
+  },
+  {
+    "text": "应该都是 现在下午的三个人应该也都是",
+    "timestamp": 717997,
+    "receiveTimestamp": 724682,
+    "itemId": "item_Civ76yzjJaghoBP2q0Nny",
+    "speechOrder": 59
+  },
+  {
+    "text": "今天下午是谁啊",
+    "timestamp": 724809,
+    "receiveTimestamp": 727434,
+    "itemId": "item_Civ7DvoCcguIhdT8LAlXd",
+    "speechOrder": 60
+  },
+  {
+    "text": "It should be exact, uh.",
+    "timestamp": 726907,
+    "receiveTimestamp": 729415,
+    "itemId": "item_Civ7FJiKxG3Q5X9sxs5sa",
+    "speechOrder": 61
+  },
+  {
+    "text": "还是看一眼吧",
+    "timestamp": 728673,
+    "receiveTimestamp": 730683,
+    "itemId": "item_Civ7HOpcPU3KvO26Du7Hu",
+    "speechOrder": 62
+  },
+  {
+    "text": "Maxine 有一個Maxine",
+    "timestamp": 731798,
+    "receiveTimestamp": 735098,
+    "itemId": "item_Civ7KsmpYuqADYEavvh6a",
+    "speechOrder": 63
+  },
+  {
+    "text": "Okay, this one definitely he should speak in English bar Vika",
+    "timestamp": 734944,
+    "receiveTimestamp": 740541,
+    "itemId": "item_Civ7NCqLe8noNzXKkjo4f",
+    "speechOrder": 64
+  },
+  {
+    "text": "John Lee. John Lee. Yeah, English, English.",
+    "timestamp": 740055,
+    "receiveTimestamp": 744736,
+    "itemId": "item_Civ7SvOfbD06mfdWhLfRo",
+    "speechOrder": 65
+  },
+  {
+    "text": "Uh...",
+    "timestamp": 744757,
+    "receiveTimestamp": 745925,
+    "itemId": "item_Civ7XMMhW7M0JbSlWmF7c",
+    "speechOrder": 66
+  },
+  {
+    "text": "okay bye okay yes john d yes uh what else",
+    "timestamp": 747418,
+    "receiveTimestamp": 752073,
+    "itemId": "item_Civ7aygLuBvbnJAN9m9LW",
+    "speechOrder": 67
+  },
+  {
+    "text": "Thanks. Bye. Bye. ",
+    "timestamp": 751743,
+    "receiveTimestamp": 753936,
+    "itemId": "item_Civ7e0Tfrt28AM88QT0gX",
+    "speechOrder": 68
+  },
+  {
+    "text": "Maxine.",
+    "timestamp": 754171,
+    "receiveTimestamp": 757514,
+    "itemId": "item_Civ7gSJjv5iRhlSjXSbDN",
+    "speechOrder": 69
+  },
+  {
+    "text": "Yes, all right",
+    "timestamp": 756835,
+    "receiveTimestamp": 759694,
+    "itemId": "item_Civ7jkqYZ9hjLREBbIrDt",
+    "speechOrder": 70
+  },
+  {
+    "text": "Okay, um...",
+    "timestamp": 759956,
+    "receiveTimestamp": 763083,
+    "itemId": "item_Civ7mZuh5iEfcd2x96KXq",
+    "speechOrder": 71
+  },
+  {
+    "text": "Hey.",
+    "timestamp": 772374,
+    "receiveTimestamp": 774206,
+    "itemId": "item_Civ7zmFZqrKRYdq5jOJvB",
+    "speechOrder": 72
+  },
+  {
+    "text": "Then, later we will assign you to breakout room each. You will start with a practice task to help you become familiar with the platform and the think-aloud method.",
+    "timestamp": 773474,
+    "receiveTimestamp": 787431,
+    "itemId": "item_Civ80cHHMGmOw01RjtHTE",
+    "speechOrder": 73
+  },
+  {
+    "text": "and think aloud method and the think aloud method i've think a lot",
+    "timestamp": 789475,
+    "receiveTimestamp": 797385,
+    "itemId": "item_Civ8GN3P4b7n4l3xrHLKY",
+    "speechOrder": 74
+  },
+  {
+    "text": "think-aloud protocol. After that, we will give you the password, and you will move on to the main design task. Before we begin, let me show you a video that demonstrates what this will look like in practice. Can you hear the video clearly? All right, so any questions?",
+    "timestamp": 796638,
+    "receiveTimestamp": 820232,
+    "itemId": "item_Civ8N1QpPnpSmCptDC1FS",
+    "speechOrder": 75
+  },
+  {
+    "text": "Before we start",
+    "timestamp": 817975,
+    "receiveTimestamp": 819988,
+    "itemId": "item_Civ8iB5rIGL2dNXcJaTrE",
+    "speechOrder": 76
+  },
+  {
+    "text": "All right. OK, so now I'm going to share the platform link in the Zoom chat. Please click on the platform. Please click the link and open the platform, but do not proceed yet. Just wait on the initial page until we assign you a user ID. Give me a thumbs up if you successfully open the platform.",
+    "timestamp": 820403,
+    "receiveTimestamp": 841969,
+    "itemId": "item_Civ8lOLoGf1OnefUGuob2",
+    "speechOrder": 77
+  },
+  {
+    "text": "Hey, great! Now we are going to assign each of you to an individual breakout room. Once you are in your breakout room, you need to do two things. First of all, you need to share your screen and then please start the video recording on your computer.",
+    "timestamp": 840157,
+    "receiveTimestamp": 856004,
+    "itemId": "item_Civ94BSP2j5OU6pADyLNJ",
+    "speechOrder": 78
+  },
+  {
+    "text": "Please start the video recording on your computer. After the experiment, we need a video recording uploaded to the Google Drive.",
+    "timestamp": 858899,
+    "receiveTimestamp": 869066,
+    "itemId": "item_Civ9NrnSeVtG0T6LfhptK",
+    "speechOrder": 79
+  },
+  {
+    "text": "Okay.",
+    "timestamp": 868020,
+    "receiveTimestamp": 869246,
+    "itemId": "item_Civ9WA3PD03HzZ513bvo3",
+    "speechOrder": 80
+  },
+  {
+    "text": "Then, after you join the HP code room, the researcher will join one by one to distribute the user ID. So please wait for the researcher to join you before starting anything.",
+    "timestamp": 868991,
+    "receiveTimestamp": 883930,
+    "itemId": "item_Civ9X7JUhbMTBoYqzStm0",
+    "speechOrder": 81
+  },
+  {
+    "text": "OK. Before starting anything, your waiting time will count as.",
+    "timestamp": 883417,
+    "receiveTimestamp": 887753,
+    "itemId": "item_Civ9m9UbpFUxQZkOuBb1O",
+    "speechOrder": 82
+  },
+  {
+    "text": "Your waiting time will be counted as the participation time.",
+    "timestamp": 896425,
+    "receiveTimestamp": 900607,
+    "itemId": "item_Civ9z9sLvwtO17tYl2V2i",
+    "speechOrder": 83
+  },
+  {
+    "text": "Oh, hello. OK, can you share screen?",
+    "timestamp": 901145,
+    "receiveTimestamp": 905366,
+    "itemId": "item_CivA3RtmgrLumx8WKJE6c",
+    "speechOrder": 84
+  },
+  {
+    "text": "Can you share your screen so I can see the platform? Okay, now please start the Zoom recording.",
+    "timestamp": 903881,
+    "receiveTimestamp": 912180,
+    "itemId": "item_CivA6GWPpmdcATl2qG7aH",
+    "speechOrder": 85
+  },
+  {
+    "text": "hey so let me give you your user so let me give you your your side so it's all all small letter well it's all small letter user zero three it's all small letter user zero three",
+    "timestamp": 910085,
+    "receiveTimestamp": 924045,
+    "itemId": "item_CivACcZg08pZKSUgeMrad",
+    "speechOrder": 86
+  },
+  {
+    "text": "So it's all small letter, user 03.",
+    "timestamp": 928268,
+    "receiveTimestamp": 931390,
+    "itemId": "item_CivAUaKncqJqjglzUzUuq",
+    "speechOrder": 87
+  },
+  {
+    "text": "Okay, so now you can proceed to the practice task, read the requirement carefully, and remember to think aloud, verbalization. Okay, then when you finish the practice, okay, when you finish your practice test, you can either raise your hand using the zoom react function or what's, or you can",
+    "timestamp": 933859,
+    "receiveTimestamp": 955503,
+    "itemId": "item_CivAaGT3nC4m0BoC1KgcK",
+    "speechOrder": 88
+  },
+  {
+    "text": "using the zoom react function or you can.",
+    "timestamp": 955583,
+    "receiveTimestamp": 959887,
+    "itemId": "item_CivAwHeGDmaJp80qZgrhB",
+    "speechOrder": 89
+  },
+  {
+    "text": "ask a question, or you can ask a question using the Zoom function, or you can use your phone and inform me through WhatsApp.",
+    "timestamp": 959375,
+    "receiveTimestamp": 969220,
+    "itemId": "item_CivB0VC4APwzkFtr2QxMo",
+    "speechOrder": 90
+  },
+  {
+    "text": "Hey.",
+    "timestamp": 967863,
+    "receiveTimestamp": 969657,
+    "itemId": "item_CivB8RH6ocQcmokxHff4b",
+    "speechOrder": 91
+  },
+  {
+    "text": "Yeah, after you finish the practice task.",
+    "timestamp": 969270,
+    "receiveTimestamp": 973024,
+    "itemId": "item_CivB9yXNc0PWK33yuaniV",
+    "speechOrder": 92
+  },
+  {
+    "text": "OK, yeah, I see you've completed the practice set. Great job. So yeah, great job. And it's a great job. OK, so you are already familiar with the ThinkAloud. Can you right-click the platform and click Inspect? Then click the Console button at the top. Just want to check if everything works well.",
+    "timestamp": 977561,
+    "receiveTimestamp": 1000741,
+    "itemId": "item_CivBIG1yHJNri9aDPIVjQ",
+    "speechOrder": 93
+  },
+  {
+    "text": "All right. Yeah, yeah. OK, so yeah, so the recording works well. Now, OK, OK, so the recording works well. Now, here is a password to continue to the main task. So the password is continue with the first letter capital, with the first letter being the capital letter, with the first letter being the capital.",
+    "timestamp": 1001141,
+    "receiveTimestamp": 1026283,
+    "itemId": "item_CivBfnDCQphMvpxMkG8Dz",
+    "speechOrder": 94
+  },
+  {
+    "text": "Hey.",
+    "timestamp": 1024764,
+    "receiveTimestamp": 1026815,
+    "itemId": "item_CivC3EBxMwtcgrCFJiktl",
+    "speechOrder": 95
+  },
+  {
+    "text": "okay so the password to continue the main task is you know the first letter is a capital letter c then all small letter continue",
+    "timestamp": 1026977,
+    "receiveTimestamp": 1036637,
+    "itemId": "item_CivC5Uh66UCZ60lq0gcSe",
+    "speechOrder": 96
+  },
+  {
+    "text": "Okay, now please go through the main task requirement carefully. Remember to continue thinking aloud anything goes out you have throughout the entire process and when you finish please raise your hand or ask a question through the Zoom or you can use your phone to WhatsApp me or you can use your phone to WhatsApp me.",
+    "timestamp": 1038520,
+    "receiveTimestamp": 1062134,
+    "itemId": "item_CivCH6LcEhB0g2z9T0QU8",
+    "speechOrder": 97
+  },
+  {
+    "text": "Okay.",
+    "timestamp": 1095136,
+    "receiveTimestamp": 1097488,
+    "itemId": "item_CivDBEwuw1SB2jVssvvxB",
+    "speechOrder": 98
+  },
+  {
+    "text": "Okay, okay",
+    "timestamp": 1105708,
+    "receiveTimestamp": 1108931,
+    "itemId": "item_CivDM1bKWLEXR138R5M4F",
+    "speechOrder": 99
+  },
+  {
+    "text": "三十七 现在二十六",
+    "timestamp": 1108883,
+    "receiveTimestamp": 1111753,
+    "itemId": "item_CivDPh7MoI7JyZPkj47LR",
+    "speechOrder": 100
+  },
+  {
+    "text": "我刚刚是什么时候开始的这个呀 我觉得我应该是",
+    "timestamp": 1111221,
+    "receiveTimestamp": 1116166,
+    "itemId": "item_CivDRriQAaEAwF9EGgoPK",
+    "speechOrder": 101
+  },
+  {
+    "text": "37 至少在30了吧 30的时候才会有那个pop up",
+    "timestamp": 1116461,
+    "receiveTimestamp": 1123869,
+    "itemId": "item_CivDXvxLvq4LLwjiXK2uU",
+    "speechOrder": 102
+  },
+  {
+    "text": "Right",
+    "timestamp": 1123603,
+    "receiveTimestamp": 1126117,
+    "itemId": "item_CivDeUMvXvoplypk9Jz0M",
+    "speechOrder": 103
+  },
+  {
+    "text": "Yeah.",
+    "timestamp": 1125019,
+    "receiveTimestamp": 1126673,
+    "itemId": "item_CivDfoTYoDU1abPNquzsK",
+    "speechOrder": 104
+  },
+  {
+    "text": "Okay. Okay, lol. So just, um...",
+    "timestamp": 1126595,
+    "receiveTimestamp": 1130781,
+    "itemId": "item_CivDhCwqGycHFTLJrygaw",
+    "speechOrder": 105
+  },
+  {
+    "text": "Yeah, just checking here.",
+    "timestamp": 1130383,
+    "receiveTimestamp": 1134539,
+    "itemId": "item_CivDld4TmAoK1r9HU9LD9",
+    "speechOrder": 106
+  },
+  {
+    "text": "Ok.",
+    "timestamp": 1134483,
+    "receiveTimestamp": 1137696,
+    "itemId": "item_CivDpAVgI1EnN17jNmDZT",
+    "speechOrder": 107
+  },
+  {
+    "text": "Okay, I'll just wait oh",
+    "timestamp": 1138783,
+    "receiveTimestamp": 1141716,
+    "itemId": "item_CivDtJWOcJjDSgUpxSp9R",
+    "speechOrder": 108
+  },
+  {
+    "text": "oh yeah i need to down i need to print out print out",
+    "timestamp": 1146743,
+    "receiveTimestamp": 1153283,
+    "itemId": "item_CivE1XNybqISdewfg3Mvx",
+    "speechOrder": 109
+  },
+  {
+    "text": "print out",
+    "timestamp": 1151768,
+    "receiveTimestamp": 1153165,
+    "itemId": "item_CivE6iYnTbgRADznuOkNP",
+    "speechOrder": 110
+  },
+  {
+    "text": "print out.",
+    "timestamp": 1152984,
+    "receiveTimestamp": 1155862,
+    "itemId": "item_CivE7V6nkrJYfJuYdwW7F",
+    "speechOrder": 111
+  },
+  {
+    "text": "Brains out Brains out Brains out",
+    "timestamp": 1156065,
+    "receiveTimestamp": 1160714,
+    "itemId": "item_CivEAaQr2yiL2oxCKMGlI",
+    "speechOrder": 112
+  },
+  {
+    "text": "Okay.",
+    "timestamp": 1159764,
+    "receiveTimestamp": 1163343,
+    "itemId": "item_CivEEdpEztIfK3nnoeERQ",
+    "speechOrder": 113
+  },
+  {
+    "text": "我需要只printout前四页就好了 对吧",
+    "timestamp": 1165227,
+    "receiveTimestamp": 1170991,
+    "itemId": "item_CivEJf7Mmd50NKIGU1xgR",
+    "speechOrder": 114
+  },
+  {
+    "text": "Enable editing the document.",
+    "timestamp": 1173625,
+    "receiveTimestamp": 1177429,
+    "itemId": "item_CivESQLfIqLylM8BqM0YJ",
+    "speechOrder": 115
+  },
+  {
+    "text": "Ugh.",
+    "timestamp": 1177077,
+    "receiveTimestamp": 1179571,
+    "itemId": "item_CivEVo2CLKq43znzOMp6U",
+    "speechOrder": 116
+  },
+  {
+    "text": "把后面所有的最原始的experiment去消掉",
+    "timestamp": 1182224,
+    "receiveTimestamp": 1188576,
+    "itemId": "item_CivEabpGbhXLEZJZfa5sr",
+    "speechOrder": 117
+  },
+  {
+    "text": "然後呢",
+    "timestamp": 1196405,
+    "receiveTimestamp": 1199302,
+    "itemId": "item_CivEp0TeFDOBovRtpsykm",
+    "speechOrder": 118
+  },
+  {
+    "text": "딱 1.",
+    "timestamp": 1198324,
+    "receiveTimestamp": 1200392,
+    "itemId": "item_CivErZfZcjrmPnYLVWBSg",
+    "speechOrder": 119
+  },
+  {
+    "text": "Oh, you have five minutes remaining to complete your task.",
+    "timestamp": 1201572,
+    "receiveTimestamp": 1206842,
+    "itemId": "item_CivEuYrF1uQ2ZdfsevgGB",
+    "speechOrder": 120
+  },
+  {
+    "text": "Okay, and the recording is...",
+    "timestamp": 1206842,
+    "receiveTimestamp": 1211567,
+    "itemId": "item_CivEzy0QuYOLv6ZzUZLg9",
+    "speechOrder": 121
+  },
+  {
+    "text": "Still going on, yes. Correct.",
+    "timestamp": 1210382,
+    "receiveTimestamp": 1216088,
+    "itemId": "item_CivF3F3KCm4hyasJb85n0",
+    "speechOrder": 122
+  },
+  {
+    "text": "5 minutes, 5 minutes, 5 minutes, 5 minutes. So 5 minutes, 32. After 5 minutes, 32. Um and yeah 33. Okay I think generally it should be fine. Should be fine.",
+    "timestamp": 1215570,
+    "receiveTimestamp": 1240398,
+    "itemId": "item_CivF8Q1CWZUyO7j3P3e2G",
+    "speechOrder": 123
+  },
+  {
+    "text": "Just...",
+    "timestamp": 1233705,
+    "receiveTimestamp": 1236701,
+    "itemId": "item_CivFQ3mPdiPLH523ljIrG",
+    "speechOrder": 124
+  },
+  {
+    "text": "No.",
+    "timestamp": 1237235,
+    "receiveTimestamp": 1238282,
+    "itemId": "item_CivFTBNl4MOTn8kBAuA3C",
+    "speechOrder": 125
+  },
+  {
+    "text": "I should remove the comment section.",
+    "timestamp": 1238445,
+    "receiveTimestamp": 1242834,
+    "itemId": "item_CivFVDUesvwcJt04xWtG6",
+    "speechOrder": 126
+  },
+  {
+    "text": "and print.",
+    "timestamp": 1243185,
+    "receiveTimestamp": 1246081,
+    "itemId": "item_CivFZpTWmw6JKY3VJE1K4",
+    "speechOrder": 127
+  },
+  {
+    "text": "Great.",
+    "timestamp": 1248145,
+    "receiveTimestamp": 1249858,
+    "itemId": "item_CivFeuybFRsO3X9bMdT9X",
+    "speechOrder": 128
+  },
+  {
+    "text": "friend",
+    "timestamp": 1266421,
+    "receiveTimestamp": 1267735,
+    "itemId": "item_CivFx8h1d49rlUETk1jXz",
+    "speechOrder": 129
+  },
+  {
+    "text": "OK 我現在把這個給它",
+    "timestamp": 1267472,
+    "receiveTimestamp": 1270986,
+    "itemId": "item_CivFyHYNBiG6gFxejVbGq",
+    "speechOrder": 130
+  },
+  {
+    "text": "我现在就画这个",
+    "timestamp": 1295459,
+    "receiveTimestamp": 1298226,
+    "itemId": "item_CivGPnekLI347BgvfNxdF",
+    "speechOrder": 131
+  },
+  {
+    "text": "OK,然后东西到了,我先打印好了,我去拿一些",
+    "timestamp": 1307533,
+    "receiveTimestamp": 1313100,
+    "itemId": "item_CivGcmfIDaIT0D3LW7qZD",
+    "speechOrder": 132
+  },
+  {
+    "text": "OK 我应该大概率就只剩一两分钟就可以去检查",
+    "timestamp": 1336026,
+    "receiveTimestamp": 1342650,
+    "itemId": "item_CivH4GqKqKUXXFeVlwHRd",
+    "speechOrder": 133
+  },
+  {
+    "text": "这个 local 这里是否 ok 了",
+    "timestamp": 1341599,
+    "receiveTimestamp": 1345800,
+    "itemId": "item_CivH9g8FMyuOvSJ5brAnh",
+    "speechOrder": 134
+  },
+  {
+    "text": "这边还没有到二十分钟",
+    "timestamp": 1345269,
+    "receiveTimestamp": 1349040,
+    "itemId": "item_CivHDX07HijHLB9sIA2rz",
+    "speechOrder": 135
+  },
+  {
+    "text": "等待25分钟的到来 能不能成功呢 我希望它可以成功 我觉得应该不会有问题吧 这些改动应该都是比较小的改动 所以我觉得应该还是OK啦 不会有很大的问题",
+    "timestamp": 1370964,
+    "receiveTimestamp": 1388700,
+    "itemId": "item_CivHdm2ZFhpMohOZtwrUl",
+    "speechOrder": 136
+  },
+  {
+    "text": "但是我们还是要持续地看一下",
+    "timestamp": 1389388,
+    "receiveTimestamp": 1395152,
+    "itemId": "item_CivHwSaqSieVVIuyaBu9U",
+    "speechOrder": 137
+  },
+  {
+    "text": "持续地看一下是否到25分钟就会有结束",
+    "timestamp": 1397410,
+    "receiveTimestamp": 1404955,
+    "itemId": "item_CivI4niFMrAbZFfruccqK",
+    "speechOrder": 138
+  },
+  {
+    "text": "Yep.",
+    "timestamp": 1403491,
+    "receiveTimestamp": 1404487,
+    "itemId": "item_CivIAyNDDC6zz1jB4nSmC",
+    "speechOrder": 139
+  },
+  {
+    "text": "最后做一遍检查25分钟到了吗 可能快到了 马上就要到了",
+    "timestamp": 1427572,
+    "receiveTimestamp": 1433403,
+    "itemId": "item_CivIYWi6n8kUx24NxwKyv",
+    "speechOrder": 140
+  },
+  {
+    "text": "讓我們拭目以待",
+    "timestamp": 1432927,
+    "receiveTimestamp": 1436140,
+    "itemId": "item_CivIdy0zU8l6iyXRteV4L",
+    "speechOrder": 141
+  },
+  {
+    "text": "Huh?",
+    "timestamp": 1439267,
+    "receiveTimestamp": 1441416,
+    "itemId": "item_CivIjU85KOCfkugB1qhzQ",
+    "speechOrder": 142
+  },
+  {
+    "text": "不回来啊 我跟你说了 我下午要跟老师开会啊",
+    "timestamp": 1444889,
+    "receiveTimestamp": 1448475,
+    "itemId": "item_CivIpHBWnZ3J3AftEHKcx",
+    "speechOrder": 143
+  },
+  {
+    "text": "那你要下午要我去那饭店吗 你要让我去的话我开完会我可以过去",
+    "timestamp": 1453613,
+    "receiveTimestamp": 1460235,
+    "itemId": "item_CivIyYpTUm9Iz2o1cG4pY",
+    "speechOrder": 144
+  },
+  {
+    "text": "行,我估计我是四点之后过去了。",
+    "timestamp": 1462415,
+    "receiveTimestamp": 1468045,
+    "itemId": "item_CivJ7dyPBZDZPwH6CuH56",
+    "speechOrder": 145
+  },
+  {
+    "text": "Uh-huh.",
+    "timestamp": 1470040,
+    "receiveTimestamp": 1471609,
+    "itemId": "item_CivJE9a7QYDeQY15DkfO7",
+    "speechOrder": 146
+  },
+  {
+    "text": "反正我走,我出发的时候给你打个电话,你把地址给我发过来吧",
+    "timestamp": 1471108,
+    "receiveTimestamp": 1477094,
+    "itemId": "item_CivJFbeXQCdMjUM6x1Vls",
+    "speechOrder": 147
+  },
+  {
+    "text": "好 拜拜",
+    "timestamp": 1485615,
+    "receiveTimestamp": 1488083,
+    "itemId": "item_CivJUKHPuDNBUaS9CEgFK",
+    "speechOrder": 148
+  },
+  {
+    "text": "到25分钟了吗 到25分钟 还没有到诶",
+    "timestamp": 1489788,
+    "receiveTimestamp": 1494851,
+    "itemId": "item_CivJYnBXWMeznzVikvEfG",
+    "speechOrder": 149
+  },
+  {
+    "text": "這五分鐘很漫長欸 怎麼回事",
+    "timestamp": 1494680,
+    "receiveTimestamp": 1499000,
+    "itemId": "item_CivJdcFAtENbPwhs2lgGI",
+    "speechOrder": 150
+  },
+  {
+    "text": "Oh.",
+    "timestamp": 1500069,
+    "receiveTimestamp": 1501358,
+    "itemId": "item_CivJihErGgV2oe1oHArka",
+    "speechOrder": 151
+  },
+  {
+    "text": "Time's up!",
+    "timestamp": 1501362,
+    "receiveTimestamp": 1503559,
+    "itemId": "item_CivJkWv07QuXoDuCrNhak",
+    "speechOrder": 152
+  }
+]

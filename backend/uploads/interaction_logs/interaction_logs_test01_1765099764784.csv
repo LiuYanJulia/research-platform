@@ -1,0 +1,296 @@
+id,session_id,event_type,action,target_element,target_section,coordinates,text_content,metadata,timestamp
+88089,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":477,""y"":778}",,,574
+88090,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":547,""y"":573}",,,674
+88091,test01_1765099764784,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":535,""y"":629}",,,957
+88092,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":557,""y"":502}",,,7162
+88093,test01_1765099764784,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,7259
+88094,test01_1765099764784,mouse,cursor_move,,,"{""x"":490,""y"":235}",,,7267
+88095,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":470,""y"":41}",,,7374
+88096,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":562,""y"":129}",,,9617
+88097,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":590,""y"":247}",,,9725
+88098,test01_1765099764784,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":579,""y"":195}",,,9968
+88099,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":593,""y"":258}",,,18588
+88100,test01_1765099764784,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,18648
+88101,test01_1765099764784,mouse,cursor_move,,,"{""x"":975,""y"":113}",,,118092
+88102,test01_1765099764784,mouse,cursor_move,,transcript,"{""x"":887,""y"":22}",,,118394
+88103,test01_1765099764784,mouse,cursor_move,,,"{""x"":975,""y"":509}",,,325839
+88104,test01_1765099764784,mouse,cursor_move,,,"{""x"":975,""y"":514}",,,326308
+88105,test01_1765099764784,mouse,cursor_move,,,"{""x"":969,""y"":84}",,,335063
+88106,test01_1765099764784,mouse,cursor_move,,,"{""x"":974,""y"":284}",,,388063
+88107,test01_1765099764784,mouse,cursor_move,,,"{""x"":963,""y"":0}",,,388338
+88108,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":743,""y"":658}",,,628400
+88109,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":731,""y"":670}",,,628624
+88110,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":731,""y"":670}",,,628906
+88111,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":680,""y"":510}",,,629010
+88112,test01_1765099764784,ui,input_focus,writing-textarea,writing,,,"{""currentCharCount"":0,""currentWordCount"":0}",629470
+88113,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":673,""y"":484}",,,629484
+88114,test01_1765099764784,mouse,click,"[data-testid=""writing-textarea""]",writing,"{""x"":673,""y"":484}",,{},629598
+88115,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",630240
+88116,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":1,""charsDelta"":1,""insertedText"":""t"",""previousLength"":0}",630246
+88117,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",630365
+88118,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":2,""charsDelta"":1,""insertedText"":""e"",""previousLength"":1}",630381
+88119,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",630546
+88120,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":3,""charsDelta"":1,""insertedText"":""s"",""previousLength"":2}",630553
+88121,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",630608
+88122,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":4,""charsDelta"":1,""insertedText"":""t"",""previousLength"":3}",630610
+88123,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",630693
+88124,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":5,""charsDelta"":1,""insertedText"":"" "",""previousLength"":4}",630698
+88125,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631077
+88126,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":6,""charsDelta"":1,""insertedText"":""t"",""previousLength"":5}",631088
+88127,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631122
+88128,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":7,""charsDelta"":1,""insertedText"":""e"",""previousLength"":6}",631125
+88129,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631153
+88130,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":8,""charsDelta"":1,""insertedText"":""s"",""previousLength"":7}",631154
+88131,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631204
+88132,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":9,""charsDelta"":1,""insertedText"":""t"",""previousLength"":8}",631206
+88133,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631274
+88134,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":10,""charsDelta"":1,""insertedText"":"" "",""previousLength"":9}",631275
+88135,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631432
+88136,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":11,""charsDelta"":1,""insertedText"":""t"",""previousLength"":10}",631433
+88137,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631586
+88138,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":12,""charsDelta"":1,""insertedText"":""e"",""previousLength"":11}",631592
+88139,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631787
+88140,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":13,""charsDelta"":1,""insertedText"":""s"",""previousLength"":12}",631789
+88141,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631866
+88142,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":14,""charsDelta"":1,""insertedText"":""t"",""previousLength"":13}",631870
+88143,test01_1765099764784,keyboard,key_press,"[data-testid=""writing-textarea""]",writing,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",631945
+88144,test01_1765099764784,keyboard,text_insert,"[data-testid=""writing-textarea""]",writing,,,"{""newLength"":15,""charsDelta"":1,""insertedText"":"" "",""previousLength"":14}",631952
+88145,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":658,""y"":499}",,,632382
+88146,test01_1765099764784,mouse,cursor_move,,,"{""x"":0,""y"":917}",,,632666
+88147,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":32,""y"":861}",,,632770
+88148,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":38,""y"":840}",,,632873
+88149,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":41,""y"":820}",,,632988
+88150,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":74,""y"":802}",,,633089
+88151,test01_1765099764784,ui,input_blur,writing-textarea,writing,,,"{""currentCharCount"":15,""currentWordCount"":3}",633172
+88152,test01_1765099764784,mouse,click,"[placeholder=""Ask anything""]",prompting,"{""x"":79,""y"":798}",,{},633297
+88153,test01_1765099764784,mouse,hover_start,"[placeholder=""Ask anything""]",prompting,"{""x"":56,""y"":808}",,,633328
+88154,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",633698
+88155,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":1,""charsDelta"":1,""insertedText"":""h"",""previousLength"":0}",633704
+88156,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",633763
+88157,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":2,""charsDelta"":1,""insertedText"":""i"",""previousLength"":1}",633765
+88158,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"","",""code"":""Comma"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634005
+88159,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":3,""charsDelta"":1,""insertedText"":"","",""previousLength"":2}",634006
+88160,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634223
+88161,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":4,""charsDelta"":1,""insertedText"":"" "",""previousLength"":3}",634226
+88162,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""w"",""code"":""KeyW"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634439
+88163,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":5,""charsDelta"":1,""insertedText"":""w"",""previousLength"":4}",634442
+88164,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634549
+88165,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":6,""charsDelta"":1,""insertedText"":""h"",""previousLength"":5}",634561
+88166,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634681
+88167,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":7,""charsDelta"":1,""insertedText"":""a"",""previousLength"":6}",634683
+88168,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634793
+88169,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":8,""charsDelta"":1,""insertedText"":""t"",""previousLength"":7}",634797
+88170,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634904
+88171,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":9,""charsDelta"":1,""insertedText"":"" "",""previousLength"":8}",634906
+88172,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",634994
+88173,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":10,""charsDelta"":1,""insertedText"":""a"",""previousLength"":9}",634996
+88174,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""r"",""code"":""KeyR"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",635185
+88175,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":11,""charsDelta"":1,""insertedText"":""r"",""previousLength"":10}",635189
+88176,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",635230
+88177,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":12,""charsDelta"":1,""insertedText"":""e"",""previousLength"":11}",635235
+88178,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",635430
+88179,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":13,""charsDelta"":1,""insertedText"":"" "",""previousLength"":12}",635435
+88180,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",635472
+88181,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":14,""charsDelta"":1,""insertedText"":""t"",""previousLength"":13}",635474
+88182,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",635620
+88183,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":15,""charsDelta"":1,""insertedText"":""h"",""previousLength"":14}",635621
+88184,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",635740
+88185,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":16,""charsDelta"":1,""insertedText"":""e"",""previousLength"":15}",635741
+88186,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",635875
+88187,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":17,""charsDelta"":1,""insertedText"":"" "",""previousLength"":16}",635876
+88188,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""p"",""code"":""KeyP"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",636795
+88189,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":18,""charsDelta"":1,""insertedText"":""p"",""previousLength"":17}",636798
+88190,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""o"",""code"":""KeyO"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",636845
+88191,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":19,""charsDelta"":1,""insertedText"":""o"",""previousLength"":18}",636847
+88192,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",636980
+88193,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":20,""charsDelta"":1,""insertedText"":""s"",""previousLength"":19}",636981
+88194,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""s"",""code"":""KeyS"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",637174
+88195,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":21,""charsDelta"":1,""insertedText"":""s"",""previousLength"":20}",637175
+88196,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",637254
+88197,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":22,""charsDelta"":1,""insertedText"":""i"",""previousLength"":21}",637255
+88198,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""b"",""code"":""KeyB"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",637431
+88199,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":23,""charsDelta"":1,""insertedText"":""b"",""previousLength"":22}",637433
+88200,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""l"",""code"":""KeyL"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",637618
+88201,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":24,""charsDelta"":1,""insertedText"":""l"",""previousLength"":23}",637620
+88202,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",637754
+88203,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":25,""charsDelta"":1,""insertedText"":""e"",""previousLength"":24}",637757
+88204,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",637882
+88205,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":26,""charsDelta"":1,""insertedText"":"" "",""previousLength"":25}",637885
+88206,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":84,""y"":785}",,,639441
+88207,test01_1765099764784,mouse,hover_end,"[placeholder=""Ask anything""]",prompting,,,,639447
+88208,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":360,""y"":263}",,,639541
+88209,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":370,""y"":255}",,,639644
+88210,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":408,""y"":255}",,,639749
+88211,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":693,""y"":171}",,,639853
+88212,test01_1765099764784,mouse,cursor_move,,transcript,"{""x"":785,""y"":64}",,,640156
+88213,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":734,""y"":334}",,,641759
+88214,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":420,""y"":599}",,,642003
+88215,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":380,""y"":768}",,,642109
+88216,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":337,""y"":827}",,,642210
+88217,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":320,""y"":796}",,,642314
+88218,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":303,""y"":788}",,,642516
+88219,test01_1765099764784,mouse,hover_start,"[placeholder=""Ask anything""]",prompting,"{""x"":327,""y"":807}",,,642568
+88220,test01_1765099764784,mouse,click,"[placeholder=""Ask anything""]",prompting,"{""x"":302,""y"":786}",,{},642673
+88221,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",644748
+88222,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":27,""charsDelta"":1,""insertedText"":""a"",""previousLength"":26}",644751
+88223,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""d"",""code"":""KeyD"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",644931
+88224,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":28,""charsDelta"":1,""insertedText"":""d"",""previousLength"":27}",644932
+88225,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""u"",""code"":""KeyU"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645023
+88226,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":29,""charsDelta"":1,""insertedText"":""u"",""previousLength"":28}",645024
+88227,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""l"",""code"":""KeyL"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645087
+88228,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":30,""charsDelta"":1,""insertedText"":""l"",""previousLength"":29}",645088
+88229,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645285
+88230,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":31,""charsDelta"":1,""insertedText"":""t"",""previousLength"":30}",645286
+88231,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645326
+88232,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":32,""charsDelta"":1,""insertedText"":"" "",""previousLength"":31}",645327
+88233,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""l"",""code"":""KeyL"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645486
+88234,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":33,""charsDelta"":1,""insertedText"":""l"",""previousLength"":32}",645487
+88235,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645599
+88236,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":34,""charsDelta"":1,""insertedText"":""e"",""previousLength"":33}",645601
+88237,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645773
+88238,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":35,""charsDelta"":1,""insertedText"":""a"",""previousLength"":34}",645775
+88239,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""r"",""code"":""KeyR"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645854
+88240,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":36,""charsDelta"":1,""insertedText"":""r"",""previousLength"":35}",645855
+88241,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""n"",""code"":""KeyN"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",645948
+88242,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":37,""charsDelta"":1,""insertedText"":""n"",""previousLength"":36}",645950
+88243,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646114
+88244,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":38,""charsDelta"":1,""insertedText"":""i"",""previousLength"":37}",646115
+88245,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""n"",""code"":""KeyN"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646243
+88246,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":39,""charsDelta"":1,""insertedText"":""n"",""previousLength"":38}",646244
+88247,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""g"",""code"":""KeyG"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646406
+88248,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":40,""charsDelta"":1,""insertedText"":""g"",""previousLength"":39}",646408
+88249,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646480
+88250,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":41,""charsDelta"":1,""insertedText"":"" "",""previousLength"":40}",646482
+88251,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""p"",""code"":""KeyP"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646622
+88252,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":42,""charsDelta"":1,""insertedText"":""p"",""previousLength"":41}",646623
+88253,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""l"",""code"":""KeyL"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646789
+88254,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":43,""charsDelta"":1,""insertedText"":""l"",""previousLength"":42}",646791
+88255,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646877
+88256,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":44,""charsDelta"":1,""insertedText"":""a"",""previousLength"":43}",646878
+88257,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",646988
+88258,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":45,""charsDelta"":1,""insertedText"":""t"",""previousLength"":44}",646990
+88259,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""f"",""code"":""KeyF"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647098
+88260,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":46,""charsDelta"":1,""insertedText"":""f"",""previousLength"":45}",647099
+88261,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""o"",""code"":""KeyO"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647201
+88262,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":47,""charsDelta"":1,""insertedText"":""o"",""previousLength"":46}",647202
+88263,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""r"",""code"":""KeyR"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647304
+88264,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":48,""charsDelta"":1,""insertedText"":""r"",""previousLength"":47}",647307
+88265,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""m"",""code"":""KeyM"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647382
+88266,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":49,""charsDelta"":1,""insertedText"":""m"",""previousLength"":48}",647385
+88267,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647535
+88268,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":50,""charsDelta"":1,""insertedText"":"" "",""previousLength"":49}",647537
+88269,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647674
+88270,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":51,""charsDelta"":1,""insertedText"":""i"",""previousLength"":50}",647675
+88271,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""n"",""code"":""KeyN"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647847
+88272,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":52,""charsDelta"":1,""insertedText"":""n"",""previousLength"":51}",647852
+88273,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",647915
+88274,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":53,""charsDelta"":1,""insertedText"":"" "",""previousLength"":52}",647918
+88275,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",648157
+88276,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":54,""charsDelta"":1,""insertedText"":""t"",""previousLength"":53}",648160
+88277,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""t""}",648779
+88278,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":53,""charsDelta"":1,""deletedText"":""t"",""previousLength"":54}",648781
+88279,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",649555
+88280,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":54,""charsDelta"":1,""insertedText"":""t"",""previousLength"":53}",649557
+88281,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",649778
+88282,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":55,""charsDelta"":1,""insertedText"":""h"",""previousLength"":54}",649781
+88283,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",650124
+88284,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":56,""charsDelta"":1,""insertedText"":""e"",""previousLength"":55}",650127
+88285,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",650218
+88286,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":57,""charsDelta"":1,""insertedText"":"" "",""previousLength"":56}",650219
+88287,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""r"",""code"":""KeyR"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",650376
+88288,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":58,""charsDelta"":1,""insertedText"":""r"",""previousLength"":57}",650378
+88289,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",650447
+88290,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":59,""charsDelta"":1,""insertedText"":""e"",""previousLength"":58}",650448
+88291,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",650721
+88292,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":60,""charsDelta"":1,""insertedText"":""a"",""previousLength"":59}",650723
+88293,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""d"",""code"":""KeyD"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",650867
+88294,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":61,""charsDelta"":1,""insertedText"":""d"",""previousLength"":60}",650870
+88295,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""d""}",651148
+88296,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":60,""charsDelta"":1,""deletedText"":""d"",""previousLength"":61}",651150
+88297,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""l"",""code"":""KeyL"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",651340
+88298,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":61,""charsDelta"":1,""insertedText"":""l"",""previousLength"":60}",651345
+88299,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""-"",""code"":""Minus"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",651906
+88300,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":62,""charsDelta"":1,""insertedText"":""-"",""previousLength"":61}",651908
+88301,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""w"",""code"":""KeyW"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",652111
+88302,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":63,""charsDelta"":1,""insertedText"":""w"",""previousLength"":62}",652113
+88303,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""o"",""code"":""KeyO"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",652208
+88304,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":64,""charsDelta"":1,""insertedText"":""o"",""previousLength"":63}",652211
+88305,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""r"",""code"":""KeyR"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",652349
+88306,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":65,""charsDelta"":1,""insertedText"":""r"",""previousLength"":64}",652350
+88307,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""r""}",652799
+88308,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":64,""charsDelta"":1,""deletedText"":""r"",""previousLength"":65}",652806
+88309,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""o""}",653296
+88310,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":63,""charsDelta"":1,""deletedText"":""o"",""previousLength"":64}",653297
+88311,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""w""}",653377
+88312,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":62,""charsDelta"":1,""deletedText"":""w"",""previousLength"":63}",653379
+88313,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""-""}",653460
+88314,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":61,""charsDelta"":1,""deletedText"":""-"",""previousLength"":62}",653462
+88315,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""l""}",653547
+88316,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":60,""charsDelta"":1,""deletedText"":""l"",""previousLength"":61}",653548
+88317,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""a""}",653628
+88318,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":59,""charsDelta"":1,""deletedText"":""a"",""previousLength"":60}",653630
+88319,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""e""}",653712
+88320,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":58,""charsDelta"":1,""deletedText"":""e"",""previousLength"":59}",653713
+88321,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""r""}",653795
+88322,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":57,""charsDelta"":1,""deletedText"":""r"",""previousLength"":58}",653797
+88323,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":"" ""}",653880
+88324,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":56,""charsDelta"":1,""deletedText"":"" "",""previousLength"":57}",653881
+88325,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""e""}",653964
+88326,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":55,""charsDelta"":1,""deletedText"":""e"",""previousLength"":56}",653966
+88327,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""h""}",654047
+88328,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":54,""charsDelta"":1,""deletedText"":""h"",""previousLength"":55}",654048
+88329,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""t""}",654131
+88330,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":53,""charsDelta"":1,""deletedText"":""t"",""previousLength"":54}",654133
+88331,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":"" ""}",654218
+88332,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":52,""charsDelta"":1,""deletedText"":"" "",""previousLength"":53}",654219
+88333,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""n""}",654298
+88334,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":51,""charsDelta"":1,""deletedText"":""n"",""previousLength"":52}",654299
+88335,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Backspace"",""code"":""Backspace"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false,""deletedChar"":""i""}",654382
+88336,test01_1765099764784,keyboard,text_delete,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":50,""charsDelta"":1,""deletedText"":""i"",""previousLength"":51}",654383
+88337,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""i"",""code"":""KeyI"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",654933
+88338,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":51,""charsDelta"":1,""insertedText"":""i"",""previousLength"":50}",654934
+88339,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""n"",""code"":""KeyN"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655098
+88340,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":52,""charsDelta"":1,""insertedText"":""n"",""previousLength"":51}",655100
+88341,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655193
+88342,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":53,""charsDelta"":1,""insertedText"":"" "",""previousLength"":52}",655194
+88343,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655318
+88344,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":54,""charsDelta"":1,""insertedText"":""t"",""previousLength"":53}",655323
+88345,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""h"",""code"":""KeyH"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655469
+88346,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":55,""charsDelta"":1,""insertedText"":""h"",""previousLength"":54}",655471
+88347,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655572
+88348,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":56,""charsDelta"":1,""insertedText"":""e"",""previousLength"":55}",655577
+88349,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":"" "",""code"":""Space"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655579
+88350,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":57,""charsDelta"":1,""insertedText"":"" "",""previousLength"":56}",655581
+88351,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""m"",""code"":""KeyM"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655735
+88352,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":58,""charsDelta"":1,""insertedText"":""m"",""previousLength"":57}",655736
+88353,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""a"",""code"":""KeyA"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655807
+88354,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":59,""charsDelta"":1,""insertedText"":""a"",""previousLength"":58}",655808
+88355,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""r"",""code"":""KeyR"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655887
+88356,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":60,""charsDelta"":1,""insertedText"":""r"",""previousLength"":59}",655888
+88357,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""k"",""code"":""KeyK"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",655985
+88358,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":61,""charsDelta"":1,""insertedText"":""k"",""previousLength"":60}",655986
+88359,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""e"",""code"":""KeyE"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",656112
+88360,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":62,""charsDelta"":1,""insertedText"":""e"",""previousLength"":61}",656113
+88361,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""t"",""code"":""KeyT"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",656213
+88362,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":63,""charsDelta"":1,""insertedText"":""t"",""previousLength"":62}",656214
+88363,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""?"",""code"":""Slash"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":true}",656584
+88364,test01_1765099764784,keyboard,text_insert,"[placeholder=""Ask anything""]",prompting,,,"{""newLength"":64,""charsDelta"":1,""insertedText"":""?"",""previousLength"":63}",656585
+88365,test01_1765099764784,ui,composer_interaction,send-button,prompting,,,"{""hasContext"":false,""promptLength"":64,""isCustomPrompt"":false}",656811
+88366,test01_1765099764784,keyboard,key_press,"[placeholder=""Ask anything""]",prompting,,,"{""key"":""Enter"",""code"":""Enter"",""altKey"":false,""ctrlKey"":false,""metaKey"":false,""shiftKey"":false}",656820
+88367,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":302,""y"":784}",,,657163
+88368,test01_1765099764784,mouse,hover_end,"[placeholder=""Ask anything""]",prompting,,,,657181
+88369,test01_1765099764784,mouse,cursor_move,,prompting,"{""x"":455,""y"":387}",,,657269
+88370,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":772,""y"":193}",,,657371
+88371,test01_1765099764784,mouse,hover_start,"[data-testid=""writing-textarea""]",writing,"{""x"":506,""y"":318}",,,657584
+88372,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":834,""y"":207}",,,657635
+88373,test01_1765099764784,mouse,hover_end,"[data-testid=""writing-textarea""]",writing,,,,657676
+88374,test01_1765099764784,mouse,cursor_move,,transcript,"{""x"":923,""y"":92}",,,657742
+88375,test01_1765099764784,mouse,cursor_move,,transcript,"{""x"":1446,""y"":19}",,,664609
+88376,test01_1765099764784,mouse,cursor_move,,transcript,"{""x"":1446,""y"":19}",,,665091
+88377,test01_1765099764784,mouse,cursor_move,,transcript,"{""x"":1411,""y"":59}",,,665191
+88378,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":1348,""y"":136}",,,665308
+88379,test01_1765099764784,mouse,cursor_move,,transcript,"{""x"":1059,""y"":72}",,,720816
+88380,test01_1765099764784,mouse,cursor_move,,response,"{""x"":590,""y"":113}",,,816895
+88381,test01_1765099764784,mouse,cursor_move,,response,"{""x"":492,""y"":401}",,,817485
+88382,test01_1765099764784,mouse,cursor_move,,writing,"{""x"":782,""y"":136}",,,831265
+88383,test01_1765099764784,mouse,cursor_move,,,"{""x"":748,""y"":0}",,,831392

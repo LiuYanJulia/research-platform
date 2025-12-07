@@ -309,16 +309,17 @@ const WebRTCTranscript = forwardRef<WebRTCTranscriptRef, WebRTCTranscriptProps>(
       const offer = await peerConnection.createOffer();
       await peerConnection.setLocalDescription(offer);
 
-      // Step 7: Connect to OpenAI Realtime API via WebRTC
-      const realtimeUrl = `https://api.openai.com/v1/realtime?model=${model || 'gpt-realtime'}`;
-
-      const connectResponse = await fetch(realtimeUrl, {
+      // Step 7: Connect to OpenAI Realtime API via backend proxy (CORS fix)
+      const connectResponse = await fetch('/api/transcript/realtime-connect', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${session.client_secret.value}`,
-          'Content-Type': 'application/sdp',
+          'Content-Type': 'application/json',
         },
-        body: offer.sdp,
+        body: JSON.stringify({
+          sdp: offer.sdp,
+          model: model || 'gpt-realtime',
+          clientSecret: session.client_secret.value
+        }),
       });
 
       if (!connectResponse.ok) {
